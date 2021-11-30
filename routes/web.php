@@ -14,5 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+});
+
+Route::get('/test', function () {
+    return view('test-pg', [
+        "name" => "oni",
+        "email" => "oni@oni.com"
+    ]);
 });

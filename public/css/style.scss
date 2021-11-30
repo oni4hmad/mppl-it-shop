@@ -1,0 +1,13 @@
+$primary: #0B6AB0;
+$secondary: #999999;
+
+$theme-colors: (
+  "primary": $primary,
+  "secondary":  $secondary,
+);
+
+.fas:hover, .fab:hover {
+  color: $primary;
+}
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
