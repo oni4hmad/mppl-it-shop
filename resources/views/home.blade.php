@@ -15,11 +15,14 @@
 
   <!-- font awesome -->
   <script src="https://kit.fontawesome.com/662e3d0d32.js" crossorigin="anonymous"></script>
+
+  <!-- navbar fix -->
+  <script src="js/navbar-fix.js"></script>
 </head>
 
 <body>
   <!-- navbar -->
-  <nav class="border border-1 border-end">
+  <nav id="navbar_top" class="border border-1 border-end">
     <div class="container d-flex justify-content-between bg-white p-3">
       <div>
         <a class="navbar-brand ps-3" href="#">
