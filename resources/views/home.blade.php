@@ -9,8 +9,8 @@
 
   <!-- bootstrap 5 css -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  
-  <!-- customize bootstrap css -->
+
+  <!-- customized bootstrap css -->
   <link rel="stylesheet" href="css/style.css">
 
   <!-- font awesome -->
@@ -22,7 +22,7 @@
 
 <body>
   <!-- navbar -->
-  <nav id="navbar_top" class="border border-1 border-end">
+  <nav id="navbar_top" class="border-1 border-bottom">
     <div class="container d-flex justify-content-between bg-white p-3">
       <div>
         <a class="navbar-brand ps-3" href="#">
@@ -31,8 +31,7 @@
       </div>
       <div class="col-6">
         <div class="input-group rounded">
-          <input type="search" class="form-control rounded-end rounded-pill" placeholder="Cari produk elektronikmu" aria-label="Search"
-          aria-describedby="search-addon" />
+          <input type="search" class="form-control rounded-end rounded-pill" placeholder="Cari produk elektronikmu" aria-label="Search" aria-describedby="search-addon" />
           <button type="button" class="btn btn-secondary rounded-start rounded-pill px-3">
             <i class="fas fa-search text-white"></i>
           </button>
@@ -46,7 +45,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fw-bold" href="#">Login</a>
+            <a class="nav-link fw-bold" data-bs-toggle="modal" data-bs-target="#login-modal" role="button">Login</a>
           </li>
           <li class="nav-item bg-primary rounded-pill">
             <a class="btn btn-primary nav-link fw-bold text-white rounded-pill" href="#register" role="button">Register</a>
@@ -55,6 +54,38 @@
       </div>
     </div>
   </nav>
+
+  <!-- login-modal -->
+  <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="exampleModalLabel">Login</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label fw-bold">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">Contoh: email@gmail.com</div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label fw-bold">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <!-- carousel promo -->
   <div class="container">
@@ -66,7 +97,7 @@
             <button type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide-to="2" aria-label="Slide 3"></button>
           </div>
-          <div class="carousel-inner" >
+          <div class="carousel-inner">
             <div class="carousel-item active">
               <a href="#promo"><img src="img/promo/promo1.jpg" class="d-block w-100" alt="banner promo"></a>
             </div>
@@ -144,40 +175,50 @@
       </div>
     </div>
   </div>
-  
+
   <!-- category: grid -->
   <div class="container">
     <div class="d-flex justify-content-between mt-2" style="height: 180px;">
-        <div class="w-100 me-3 position-relative bg-image rounded-3" style="background-image: url('img/category/proci.png'); background-size: cover;">
-          <div class="position-absolute w-100 h-100 rounded-3" style="background: linear-gradient(to top, rgba(0, 0, 0, 1.0), rgba(255, 255, 255, 0));"></div>
-          <div class="position-absolute start-0 bottom-0 mb-0 ms-3 pb-1">
-            <a href="#kategori"><h2 class="text-white fw-bold">Processor</h2></a>
-          </div>
+      <div class="w-100 me-3 position-relative bg-image rounded-3" style="background-image: url('img/category/proci.png'); background-size: cover;">
+        <div class="position-absolute w-100 h-100 rounded-3" style="background: linear-gradient(to top, rgba(0, 0, 0, 1.0), rgba(255, 255, 255, 0));"></div>
+        <div class="position-absolute start-0 bottom-0 mb-0 ms-3 pb-1">
+          <a href="#kategori">
+            <h2 class="text-white fw-bold">Processor</h2>
+          </a>
         </div>
-        <div class="w-100 me-3 position-relative bg-image rounded-3" style="background-image: url('img/category/gpu.png'); background-size: cover;">
-          <div class="position-absolute w-100 h-100 rounded-3" style="background: linear-gradient(to top, rgba(0, 0, 0, 1.0), rgba(255, 255, 255, 0));"></div>
-          <div class="position-absolute start-0 bottom-0 mb-0 ms-3 pb-1">
-            <a href="#kategori"><h2 class="text-white fw-bold">Graphics Card</h2></a>
-          </div>
+      </div>
+      <div class="w-100 me-3 position-relative bg-image rounded-3" style="background-image: url('img/category/gpu.png'); background-size: cover;">
+        <div class="position-absolute w-100 h-100 rounded-3" style="background: linear-gradient(to top, rgba(0, 0, 0, 1.0), rgba(255, 255, 255, 0));"></div>
+        <div class="position-absolute start-0 bottom-0 mb-0 ms-3 pb-1">
+          <a href="#kategori">
+            <h2 class="text-white fw-bold">Graphics Card</h2>
+          </a>
         </div>
-        <div class="w-100 me-3 position-relative bg-image rounded-3" style="background-image: url('img/category/ram.png'); background-size: cover;">
-          <div class="position-absolute w-100 h-100 rounded-3" style="background: linear-gradient(to top, rgba(0, 0, 0, 1.0), rgba(255, 255, 255, 0));"></div>
-          <div class="position-absolute start-0 bottom-0 mb-0 ms-3 pb-1">
-            <a href="#kategori"><h2 class="text-white fw-bold">Memory</h2></a>
-          </div>
+      </div>
+      <div class="w-100 me-3 position-relative bg-image rounded-3" style="background-image: url('img/category/ram.png'); background-size: cover;">
+        <div class="position-absolute w-100 h-100 rounded-3" style="background: linear-gradient(to top, rgba(0, 0, 0, 1.0), rgba(255, 255, 255, 0));"></div>
+        <div class="position-absolute start-0 bottom-0 mb-0 ms-3 pb-1">
+          <a href="#kategori">
+            <h2 class="text-white fw-bold">Memory</h2>
+          </a>
         </div>
-        <div class="w-100 me-3 position-relative bg-image rounded-3" style="background-image: url('img/category/storage.png'); background-size: cover;">
-          <div class="position-absolute w-100 h-100 rounded-3" style="background: linear-gradient(to top, rgba(0, 0, 0, 1.0), rgba(255, 255, 255, 0));"></div>
-          <div class="position-absolute start-0 bottom-0 mb-0 ms-3 pb-1">
-            <a href="#kategori"><h2 class="text-white fw-bold">Storage</h2></a>
-          </div>
+      </div>
+      <div class="w-100 me-3 position-relative bg-image rounded-3" style="background-image: url('img/category/storage.png'); background-size: cover;">
+        <div class="position-absolute w-100 h-100 rounded-3" style="background: linear-gradient(to top, rgba(0, 0, 0, 1.0), rgba(255, 255, 255, 0));"></div>
+        <div class="position-absolute start-0 bottom-0 mb-0 ms-3 pb-1">
+          <a href="#kategori">
+            <h2 class="text-white fw-bold">Storage</h2>
+          </a>
         </div>
-        <div class="w-100 position-relative bg-image rounded-3" style="background-image: url('img/category/monitor.png'); background-size: cover;">
-          <div class="position-absolute w-100 h-100 rounded-3" style="background: linear-gradient(to top, rgba(0, 0, 0, 1.0), rgba(255, 255, 255, 0));"></div>
-          <div class="position-absolute start-0 bottom-0 mb-0 pb-1 ms-3">
-            <a href="#kategori"><h2 class="text-white fw-bold">Monitor</h2></a>
-          </div>
+      </div>
+      <div class="w-100 position-relative bg-image rounded-3" style="background-image: url('img/category/monitor.png'); background-size: cover;">
+        <div class="position-absolute w-100 h-100 rounded-3" style="background: linear-gradient(to top, rgba(0, 0, 0, 1.0), rgba(255, 255, 255, 0));"></div>
+        <div class="position-absolute start-0 bottom-0 mb-0 pb-1 ms-3">
+          <a href="#kategori">
+            <h2 class="text-white fw-bold">Monitor</h2>
+          </a>
         </div>
+      </div>
     </div>
   </div>
 
