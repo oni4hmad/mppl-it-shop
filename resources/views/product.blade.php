@@ -118,13 +118,29 @@
 
             {{-- bintang --}}
             <div class="row">
-              <div class="col-12 mb-2">
+              <div class="col mb-2">
                 @for ($i = 0; $i < 4; $i++)
                   <i class="fas fa-star text-warning me-1"></i> {{-- kuning --}}
                 @endfor
                 @for ($i = 0; $i < 1; $i++)
                   <i class="fas fa-star text-secondary me-1"></i> {{-- abu-abu --}}
                 @endfor
+              </div>
+
+              {{-- option dropdown --}}
+              <div class="col text-end">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split text-white py-0" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-lg-end">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                  </ul>
+                </div>
               </div>
             </div>
 
