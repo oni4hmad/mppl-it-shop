@@ -135,7 +135,7 @@
           <div class="container pb-5">
             <div class="row">
               <div class="col-12">
-                <a class="btn btn-primary w-50 fw-bold btn-lg rounded-pill" href="#produk-elektronik" role="button">Cari Produk</a>
+                <a class="btn btn-primary w-50 fw-bold btn-lg rounded-pill" href="search" role="button">Cari Produk</a>
               </div>
             </div>
           </div>

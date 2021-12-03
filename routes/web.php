@@ -17,6 +17,17 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/search', function () {
+    return view('search');
+});
+
+
+Route::get('/product', function () {
+    return view('product');
+});
+
+
+
 Route::get('/test', function () {
     return view('test-pg', [
         "name" => "oni",
