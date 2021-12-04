@@ -32,8 +32,8 @@
       <div class="col-sm-12 col-md-7 col-lg-5 col-xl-4 pt-4">
           <div class="card shadow mb-5 bg-body rounded">
             <div class="card-header bg-primary">
-              <h5 class="fw-bold text-white">BNI Virtual Account</h5>
               <p class="mb-0 fw-normal text-white">Metode Pembayaran</p>
+              <h5 class="fw-bold text-white">BNI Virtual Account</h5>
             </div>
             <div class="card-body py-4">
               <p class="card-text mb-0 fw-bold">Nomor Virtual Account</p>
