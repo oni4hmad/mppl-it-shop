@@ -21,9 +21,20 @@ Route::get('/search', function () {
     return view('search');
 });
 
-
 Route::get('/product', function () {
     return view('product');
+});
+
+Route::get('/checkout', function () {
+    return view('checkout');
+});
+
+Route::get('/payment', function () {
+    return view('payment');
+});
+
+Route::get('/pay', function () {
+    return view('pay');
 });
 
 
