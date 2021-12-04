@@ -15,6 +15,7 @@
     input[type=number] {
       -moz-appearance: textfield;
     }
+
   </style>
 
   <!-- sticky content fix -->
@@ -26,33 +27,18 @@
 
   <div class="container mb-4">
     <div class="row">
-
-      {{-- checkout list --}}
       <div class="col-lg-8 col-xl-9 py-4">
+
+        {{-- checkout list --}}
         <div class="card">
           <div class="card-header">
-            <h5 class="fw-bolder text-primary">Keranjang</h5>
+            <h5 class="fw-bolder text-primary">Check Out</h5>
           </div>
-          <div class="card-body container-fluid pb-0">
-            <div class="row form-check pb-2 mx-0 border-bottom">
-              <div class="d-flex justify-content-between">
-                <div>
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                  <label class="form-check-label" for="flexCheckDefault">
-                    Pilih Semua
-                  </label>
-                </div>
-                <a href="#" class="text-decoration-none"><p class="mb-0 fw-bold text-primary">Hapus Terpilih</p></a>
-              </div>
-            </div>
 
+          <div class="card-body container-fluid py-0">
             {{-- checkout item --}}
             @for ($i = 0; $i < 5; $i++)
               <div class="row mx-0 border-bottom py-3">
-                {{-- checkbox --}}
-                <div class="col-auto">
-                  <input class="form-check-input mt-0" type="checkbox" value="" id="flexCheckDefault">
-                </div>
                 {{-- image --}}
                 <div class="col-auto px-0 rounded-3">
                   <div class="p-0 me-1">
@@ -61,32 +47,98 @@
                     </div>
                   </div>
                 </div>
+                {{-- item checkout info --}}
                 <div class="col d-flex flex-column justify-content-between">
                   <div class="row justify-content-between">
                     <div class="col-auto">
-                      <p class="mb-0">VGA MSI GT1030 AERO ITX 2G OC | GT 1030</p>
-                      <p class="px-0 fw-bolder">Rp1.500.000</p>
-                    </div>
-                    {{-- delete item --}}
-                    <div class="col-auto">
-                      <a href="#" class="text-secondary"><i class="fas fa-trash" aria-hidden="true"></i></a>
+                      <p class="mb-0 fw-bolder">VGA MSI GT1030 AERO ITX 2G OC | GT 1030</p>
+                      <p class="my-0 px-0 text-secondary">Quantity: 3</p>
+                      <p class="my-0 px-0 fw-bolder fs-5">Rp3.000.000</p>
+                      <p class="my-0 px-0 text-secondary">Rp1.000.000 per item</p>
                     </div>
                   </div>
-                  {{-- increment decrement --}}
-                  <div class="row mx-0 justify-content-end">
-                    <div class="col-2 px-0">
-                      <div class="d-flex flex-row align-items-center px-0 input-group">
-                        <span class="input-group-btn">
-                          <button type="button" class="quantity-left-minus btn btn-primary btn-number p-0 px-1" data-type="minus" data-field="">
-                            <i class="fas fa-minus text-white" aria-hidden="true"></i>
-                          </button>
-                        </span>
-                        <input type="number" id="quantity" name="quantity" class="form-control input-number p-0 text-center" value="1" min="1" max="11">
-                        <span class="input-group-btn">
-                          <button type="button" class="quantity-right-plus btn btn-primary btn-number p-0 px-1" data-type="plus" data-field="">
-                            <i class="fas fa-plus text-white" aria-hidden="true"></i>
-                          </button>
-                        </span>
+                </div>
+              </div>
+            @endfor
+
+          </div>
+        </div>
+
+        {{-- pengiriman dan pembayaran --}}
+        <div class="card mt-4">
+          <div class="card-header">
+            <h5 class="fw-bolder text-primary">Pengiriman dan Pembayaran</h5>
+          </div>
+
+          <div class="card-body container-fluid p-0 py-3">
+            {{-- checkout item --}}
+            @for ($i = 0; $i < 1; $i++)
+              <div class="container px-0">
+                <div class="row px-3 mx-0">
+                  <div class="col me-4">
+                    <div class="p-0">
+                      {{-- nama penerima, nomor hp, alamat --}}
+                      <div class="row">
+                        <div class="col me-2 px-0">
+                          <p class="text-break p-0 mb-0 fw-bold">Nama Penerima</p>
+                          <div class="input-group input-group-sm mb-3">
+                            <input type="text" value="{{ 'Oni Ahmad' }}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                          </div>
+                        </div>
+                        <div class="col px-0">
+                          <p class="text-break p-0 mb-0 fw-bold">Nomor HP</p>
+                          <div class="input-group input-group-sm mb-3">
+                            <input type="number" value="{{ '0891275835' }}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-auto ps-0">
+                          <p class="text-break p-0 mb-0 fw-bold">Alamat</p>
+                        </div>
+                        <div class="col-auto ps-0">
+                          <a href="#"><p class="text-break p-0 mb-0 fw-bold">Edit Alamat</p></a>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="input-group px-0" style="height: 8rem;">
+                          <textarea class="form-control" aria-label="With textarea" disabled>Jl. Manukan Indah II 19C/8, Kec. Tandes,&#13;&#10;Kota Surabaya, Jawa Timur, 60185</textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="p-0">
+                      {{-- pengiriman, kurir, metode bayar --}}
+                      <div class="row">
+                        <div class="col me-2 px-0">
+                          <p class="text-break p-0 mb-0 fw-bold">Pilih Pengiriman</p>
+                          <div class="input-group input-group-sm mb-3">
+                            <select class="form-select" id="inputGroupSelect01">
+                              <option value="0">Next Day</option>
+                              <option value="1" selected>Regular</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col px-0">
+                          <p class="text-break p-0 mb-0 fw-bold">Pilih Kurir</p>
+                          <div class="input-group input-group-sm mb-3">
+                            <select class="form-select" id="inputGroupSelect01">
+                              <option value="0">JNE</option>
+                              <option value="1" selected>AnterAja</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <p class="text-break p-0 mb-0 fw-bold">Metode Pembayaran</p>
+                        <div class="input-group input-group-sm px-0 mb-3">
+                          <select class="form-select" id="inputGroupSelect01">
+                            <option value="0">Mandiri Virtual Account</option>
+                            <option value="1" selected>BNI Virtual Account</option>
+                            <option value="2">BCA Virtual Account</option>
+                          </select>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -107,10 +159,16 @@
             </div>
             <div class="card-body">
               <p class="card-text mb-0 fw-normal">Subtotal (5 barang)</p>
-              <p class="card-text text-primary fw-bold fs-4">Rp7.500.000</p>
+              <p class="card-text text-primary fw-bold fs-4">Rp16.500.000</p>
+              <p class="card-text mb-0 fw-normal">Ongkos Kirim</p>
+              <p class="card-text text-primary fw-bold fs-4">Rp15.000</p>
+            </div>
+            <div class="card-footer bg-transparent">
+              <p class="card-text mb-0 fw-bold">Total Bayar</p>
+              <p class="card-text text-dark fw-bold fs-4">Rp7.015.000</p>
 
-              {{-- checkout --}}
-              <button type="button" class="btn btn-primary w-100 mb-2 fw-bold" onclick="{{ "location.href = 'payment';" }}">Checkout (5)</button>
+              {{-- konfirmasi & bayar --}}
+              <button type="button" class="btn btn-primary w-100 mb-2 fw-bold" onclick="{{ "location.href = 'payment';" }}">Konfirmasi & Bayar</button>
             </div>
           </div>
         </div>

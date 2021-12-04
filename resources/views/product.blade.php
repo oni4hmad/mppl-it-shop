@@ -197,7 +197,7 @@
 
               {{-- masukkan keranjang / checkout --}}
               <button type="button" class="btn btn-primary w-100 mb-2 fw-bold">Masukkan Keranjang</button>
-              <button type="button" class="btn btn-outline-primary w-100 fw-bold" onclick="{{ "location.href = 'checkout';" }}">Checkout</button>
+              <button type="button" class="btn btn-outline-primary w-100 fw-bold" onclick="{{ "location.href = 'cart';" }}">Checkout</button>
             </div>
           </div>
         </div>
