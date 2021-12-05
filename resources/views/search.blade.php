@@ -13,11 +13,11 @@
       <div class="ps-4 py-4 border-end border-1" style="width: 200px;">
         <div class="sticky-top" id="sticky-fix">
           <h5 class="text-primary fw-bold mb-3">Categories</h5>
-          <a href="#" class="text-decoration-none"><p class="fw-bold ps-3 text-dark text-decoration-underline">All Products</p></a>
-          <a href="#" class="text-decoration-none"><p class="fw-bold ps-3 text-secondary">Processor</p></a>
-          <a href="#" class="text-decoration-none"><p class="fw-bold ps-3 text-secondary">Graphics Card</p></a>
-          <a href="#" class="text-decoration-none"><p class="fw-bold ps-3 text-secondary">Storage</p></a>
-          <a href="#" class="text-decoration-none"><p class="fw-bold ps-3 text-secondary">Monitor</p></a>
+          <a href="#" class="text-decoration-none"><p class="fw-bold ps-3 text-break text-dark text-decoration-underline">All Products</p></a>
+          <a href="#" class="text-decoration-none"><p class="fw-bold ps-3 text-break text-secondary">Processor</p></a>
+          <a href="#" class="text-decoration-none"><p class="fw-bold ps-3 text-break text-secondary">Graphics Card</p></a>
+          <a href="#" class="text-decoration-none"><p class="fw-bold ps-3 text-break text-secondary">Storage</p></a>
+          <a href="#" class="text-decoration-none"><p class="fw-bold ps-3 text-break text-secondary">Monitor</p></a>
         </div>
       </div>
 
@@ -48,7 +48,6 @@
           </div>
 
           {{-- pagination --}}
-
           <div class="row mt-3">
             <nav aria-label="...">
               <ul class="pagination m-0 p-0 my-1 d-flex justify-content-center">

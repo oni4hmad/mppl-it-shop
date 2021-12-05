@@ -37,6 +37,22 @@ Route::get('/payment', function () {
     return view('payment');
 });
 
+Route::get('/order-history', function () {
+    return view('order-history');
+});
+
+Route::get('/track', function () {
+    return view('track');
+});
+
+Route::get('/register-oni', function () {
+    return view('register-oni');
+});
+
+Route::get('/account-settings', function () {
+    return view('account-settings');
+});
+
 
 
 Route::get('/test', function () {

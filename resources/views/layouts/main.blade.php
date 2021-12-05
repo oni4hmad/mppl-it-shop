@@ -97,7 +97,7 @@
         <div class="d-flex justify-content-between">
           <div class="d-block w-100 me-5">
             <h4 class="border-start border-primary border-5 ps-2 pb-2 text-white">Follow Us</h4>
-            <p class="ps-3 text-white">Infomrasi seputar produk baru, restock, review, promo, dan lain-lain.</p>
+            <p class="ps-3 text-white">Dapatkan infomrasi terbaru seputar produk, restock, review, promo, dan lain-lain.</p>
             <div class="ps-3 d-flex justify-content-start">
               <div class="d-block me-3">
                 <a href="#sosmed" class="text-white">

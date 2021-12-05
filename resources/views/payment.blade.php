@@ -30,27 +30,27 @@
 
       {{-- card: informasi pembayaran --}}
       <div class="col-sm-12 col-md-7 col-lg-5 col-xl-4 pt-4">
-          <div class="card shadow mb-5 bg-body rounded">
-            <div class="card-header bg-primary">
-              <p class="mb-0 fw-normal text-white">Metode Pembayaran</p>
-              <h5 class="fw-bold text-white">BNI Virtual Account</h5>
-            </div>
-            <div class="card-body py-4">
-              <p class="card-text mb-0 fw-bold">Nomor Virtual Account</p>
-              <div class="d-flex mb-4 justify-content-between">
-                <p class="card-text fw-bold fs-4 mb-0 me-4">{{ '827708912341234' }}</p>
-                <button id="copy-kode-pembayaran" data-clipboard-text="{{ '827708912341234' }}" type="button" class="btn btn-outline-primary fw-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-trigger="manual" title="Copied!">
-                  <i class="fas fa-copy me-1"></i>Salin
-                </button>
-              </div>
-              <p class="card-text mb-0 fw-bold">Total Pembayaran</p>
-              <p class="card-text fw-bold fs-4">Rp7.015.000</p>
-            </div>
-            <div class="card-footer bg-transparent">
-              {{-- cek status --}}
-              <button type="button" class="btn btn-primary w-100 mb-2 fw-bold" onclick="{{ "location.href = '/';" }}">Cek Status</button>
-            </div>
+        <div class="card shadow mb-5 bg-body rounded">
+          <div class="card-header bg-primary">
+            <p class="mb-0 fw-normal text-white">Metode Pembayaran</p>
+            <h5 class="fw-bold text-white">BNI Virtual Account</h5>
           </div>
+          <div class="card-body py-4">
+            <p class="card-text mb-0 fw-bold">Nomor Virtual Account</p>
+            <div class="d-flex mb-4 justify-content-between">
+              <p class="card-text fw-bold fs-4 mb-0 me-4">{{ '827708912341234' }}</p>
+              <button id="copy-kode-pembayaran" data-clipboard-text="{{ '827708912341234' }}" type="button" class="btn btn-outline-primary fw-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-trigger="manual" title="Copied!">
+                <i class="fas fa-copy me-1"></i>Salin
+              </button>
+            </div>
+            <p class="card-text mb-0 fw-bold">Total Pembayaran</p>
+            <p class="card-text fw-bold fs-4">Rp7.015.000</p>
+          </div>
+          <div class="card-footer bg-transparent">
+            {{-- cek status --}}
+            <button type="button" class="btn btn-primary w-100 mb-2 fw-bold" onclick="{{ "location.href = '/';" }}">Cek Status</button>
+          </div>
+        </div>
       </div>
 
     </div>

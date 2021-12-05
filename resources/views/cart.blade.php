@@ -64,8 +64,8 @@
                 <div class="col d-flex flex-column justify-content-between">
                   <div class="row justify-content-between">
                     <div class="col-auto">
-                      <p class="mb-0">VGA MSI GT1030 AERO ITX 2G OC | GT 1030</p>
-                      <p class="px-0 fw-bolder">Rp1.500.000</p>
+                      <p class="mb-0 text-break">VGA MSI GT1030 AERO ITX 2G OC | GT 1030</p>
+                      <p class="px-0 fw-bolder text-break">Rp1.500.000</p>
                     </div>
                     {{-- delete item --}}
                     <div class="col-auto">

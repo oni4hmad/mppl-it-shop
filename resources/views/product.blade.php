@@ -100,7 +100,7 @@
         {{-- ulasan pengguna --}}
         <div class="row pb-3 mb-3 border-bottom">
           <div class="col" style="max-width: 250px;">
-            <div class="row row-cols-auto">
+            <div class="row">
               <div class="col" style="max-width: 80px;">
                 <div style="width: 60px; height: 60px;">
                   <div class="w-100 h-100 bg-image rounded-circle border" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
@@ -149,7 +149,7 @@
               <p class="p-0 pe-3 m-0 text-break">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo accusantium reprehenderit possimus laborum nemo, cumque nostrum veniam assumenda! Aut veniam amet quis? Hic fugit cumque sapiente? Tenetur corrupti dignissimos est dolor harum. Debitis sint tenetur incidunt nam molestias ratione illum, aperiam consequuntur adipisci vel rerum autem excepturi? Cum, et. Quasi accusamus magnam dolorum quisquam alias ut fuga aliquam! Eos doloribus architecto dolores? Iusto ullam omnis adipisci! Deleniti quam provident, atque soluta molestias ullam facere deserunt modi sunt aspernatur. Incidunt, dolor voluptatum provident perspiciatis nulla aspernatur, magnam labore quae adipisci eos ab illo deleniti perferendis asperiores quas. Necessitatibus blanditiis a facere?</p>
 
               {{-- reply admin --}}
-              <div class="row m-0 mt-3 py-2 rounded-3" style="background-color: #F5F5F5">
+              <div class="row m-0 mt-3 py-2 rounded-3 bg-light">
                 <div class="col" style="max-width: 80px;">
                   <div style="width: 60px; height: 60px;">
                     <div class="w-100 h-100 bg-image rounded-circle border border-2 border-primary" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
