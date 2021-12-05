@@ -94,8 +94,9 @@
                   <div class="col d-flex flex-column justify-content-between">
                     <div class="row justify-content-between">
                       <div class="col-auto">
-                        <p class="mb-0 text-break">VGA MSI GT1030 AERO ITX 2G OC | GT 1030</p>
-                        <p class="px-0 fw-bolder text-break">Rp1.500.000</p>
+                        <p class="mb-0 fw-bolder text-break">VGA MSI GT1030 AERO ITX 2G OC | GT 1030</p>
+                        <p class="mb-0 px-0 text-break">1 barang x Rp4.000.000</p>
+                        <p class="mb-0 text-secondary text-break">3 Juni 2021</p>
                       </div>
                     </div>
                   </div>
