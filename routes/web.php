@@ -56,7 +56,7 @@ Route::get('/account-settings', function () {
 
 
 Route::get('/test', function () {
-    return view('test-pg', [
+    return view('_test-pg', [
         "name" => "oni",
         "email" => "oni@oni.com"
     ]);
