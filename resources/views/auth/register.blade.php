@@ -63,6 +63,11 @@
                     </span>
                   @enderror
                 </div>
+
+                <p class="card-text mb-0 fw-bold">Confirm Password</p>
+                <div class="input-group input-group-md">
+                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
+                </div>
               </div>
             </div>
             <div class="row py-2">

@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Home</title>
 
   <!-- bootstrap 5 css -->
@@ -44,12 +45,36 @@
               <i class="fas fa-shopping-cart"></i>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link fw-bold" data-bs-toggle="modal" data-bs-target="#login-modal" role="button">Login</a>
+          @guest
+          @if (Route::has('login'))
+            <li class="nav-item"> 
+              <a class="nav-link fw-bold" data-bs-toggle="modal" data-bs-target="#login-modal" role="button">Login</a>
+            </li>
+          @endif
+          @if (Route::has('register'))
+            <li class="nav-item bg-primary rounded-pill">
+              <a class="btn btn-primary nav-link fw-bold text-white rounded-pill" href="{{ route('register') }}" role="button">Register</a>
+            </li>
+          @endif
+          @else
+          <li class="nav-item dropdown">
+            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                {{ Auth::user()->name }}
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </div>
           </li>
-          <li class="nav-item bg-primary rounded-pill">
-            <a class="btn btn-primary nav-link fw-bold text-white rounded-pill" href="#register" role="button">Register</a>
-          </li>
+          @endguest
         </ul>
       </div>
     </div>
@@ -63,26 +88,84 @@
           <h5 class="modal-title fw-bold" id="exampleModalLabel">Login</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action>
+        <div class="modal-body">
+          <form method="POST" action="{{ route('login') }}">
+            @csrf
+
+            <div class="mb-3">
+              <label for="email" class="form-label fw-bold">Email Address</label>
+              <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label fw-bold">Password</label>
+                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+              <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary w-100 fw-bold">
+                  {{ __('Login') }}
+              </button>
+
+              @if (Route::has('password.request'))
+                  <a class="btn btn-link" href="{{ route('password.request') }}">
+                      {{ __('Forgot Your Password?') }}
+                  </a>
+              @endif
+            </div>
+        </form>
+      </div>
+        {{-- <form method="POST" action="{{ route('login') }}" >
           <div class="modal-body">
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label fw-bold">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+              @error('email')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+              @enderror
               <div id="emailHelp" class="form-text">Contoh: email@gmail.com</div>
             </div>
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label fw-bold">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
+              <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+              @error('password')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+              @enderror
             </div>
             <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
               <label class="form-check-label" for="exampleCheck1">Remember Me</label>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary w-100 fw-bold">Login</button>
+            <button type="submit" class="btn btn-primary">
+              {{ __('Login') }}
+          </button>
+            @if (Route::has('password.request'))
+              <a class="btn btn-link" href="{{ route('password.request') }}">
+                  {{ __('Forgot Your Password?') }}
+              </a>
+            @endif
           </div>
-        </form>
+        </form> --}}
       </div>
     </div>
   </div>
