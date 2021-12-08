@@ -72,79 +72,77 @@
 
           <div class="card-body container-fluid p-0 py-3">
             {{-- checkout item --}}
-            @for ($i = 0; $i < 1; $i++)
-              <div class="container px-0">
-                <div class="row px-3 mx-0">
-                  <div class="col me-4">
-                    <div class="p-0">
-                      {{-- nama penerima, nomor hp, alamat --}}
-                      <div class="row">
-                        <div class="col me-2 px-0">
-                          <p class="text-break p-0 mb-0 fw-bold">Nama Penerima</p>
-                          <div class="input-group input-group-sm mb-3">
-                            <input type="text" value="{{ 'Oni Ahmad' }}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                          </div>
-                        </div>
-                        <div class="col px-0">
-                          <p class="text-break p-0 mb-0 fw-bold">Nomor HP</p>
-                          <div class="input-group input-group-sm mb-3">
-                            <input type="number" value="{{ '0891275835' }}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                          </div>
+            <div class="container px-0">
+              <div class="row px-3 mx-0">
+                <div class="col me-4">
+                  <div class="p-0">
+                    {{-- nama penerima, nomor hp, alamat --}}
+                    <div class="row">
+                      <div class="col me-2 px-0">
+                        <p class="text-break p-0 mb-0 fw-bold">Nama Penerima</p>
+                        <div class="input-group input-group-sm mb-3">
+                          <input type="text" value="{{ 'Oni Ahmad' }}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                         </div>
                       </div>
-                      <div class="row">
-                        <div class="col-auto ps-0">
-                          <p class="text-break p-0 mb-0 fw-bold">Alamat</p>
-                        </div>
-                        <div class="col-auto ps-0">
-                          <a href="#"><p class="text-break p-0 mb-0 fw-bold">Edit Alamat</p></a>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="input-group px-0" style="height: 8rem;">
-                          <textarea class="form-control" aria-label="With textarea" disabled>Jl. Manukan Indah II 19C/8, Kec. Tandes,&#13;&#10;Kota Surabaya, Jawa Timur, 60185</textarea>
+                      <div class="col px-0">
+                        <p class="text-break p-0 mb-0 fw-bold">Nomor HP</p>
+                        <div class="input-group input-group-sm mb-3">
+                          <input type="number" value="{{ '0891275835' }}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="col">
-                    <div class="p-0">
-                      {{-- pengiriman, kurir, metode bayar --}}
-                      <div class="row">
-                        <div class="col me-2 px-0">
-                          <p class="text-break p-0 mb-0 fw-bold">Pilih Pengiriman</p>
-                          <div class="input-group input-group-sm mb-3">
-                            <select class="form-select" id="inputGroupSelect01">
-                              <option value="0">Next Day</option>
-                              <option value="1" selected>Regular</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col px-0">
-                          <p class="text-break p-0 mb-0 fw-bold">Pilih Kurir</p>
-                          <div class="input-group input-group-sm mb-3">
-                            <select class="form-select" id="inputGroupSelect01">
-                              <option value="0">JNE</option>
-                              <option value="1" selected>AnterAja</option>
-                            </select>
-                          </div>
-                        </div>
+                    <div class="row">
+                      <div class="col-auto ps-0">
+                        <p class="text-break p-0 mb-0 fw-bold">Alamat</p>
                       </div>
-                      <div class="row">
-                        <p class="text-break p-0 mb-0 fw-bold">Metode Pembayaran</p>
-                        <div class="input-group input-group-sm px-0 mb-3">
+                      <div class="col-auto ps-0">
+                        <a href="#"><p class="text-break p-0 mb-0 fw-bold">Edit Alamat</p></a>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="input-group px-0" style="height: 8rem;">
+                        <textarea class="form-control" aria-label="With textarea" disabled>Jl. Manukan Indah II 19C/8, Kec. Tandes,&#13;&#10;Kota Surabaya, Jawa Timur, 60185</textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="p-0">
+                    {{-- pengiriman, kurir, metode bayar --}}
+                    <div class="row">
+                      <div class="col me-2 px-0">
+                        <p class="text-break p-0 mb-0 fw-bold">Pilih Pengiriman</p>
+                        <div class="input-group input-group-sm mb-3">
                           <select class="form-select" id="inputGroupSelect01">
-                            <option value="0">Mandiri Virtual Account</option>
-                            <option value="1" selected>BNI Virtual Account</option>
-                            <option value="2">BCA Virtual Account</option>
+                            <option value="0">Next Day</option>
+                            <option value="1" selected>Regular</option>
                           </select>
                         </div>
+                      </div>
+                      <div class="col px-0">
+                        <p class="text-break p-0 mb-0 fw-bold">Pilih Kurir</p>
+                        <div class="input-group input-group-sm mb-3">
+                          <select class="form-select" id="inputGroupSelect01">
+                            <option value="0">JNE</option>
+                            <option value="1" selected>AnterAja</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <p class="text-break p-0 mb-0 fw-bold">Metode Pembayaran</p>
+                      <div class="input-group input-group-sm px-0 mb-3">
+                        <select class="form-select" id="inputGroupSelect01">
+                          <option value="0">Mandiri Virtual Account</option>
+                          <option value="1" selected>BNI Virtual Account</option>
+                          <option value="2">BCA Virtual Account</option>
+                        </select>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            @endfor
+            </div>
 
           </div>
         </div>

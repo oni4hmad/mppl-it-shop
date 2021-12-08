@@ -39,8 +39,12 @@ Route::get('/payment', function () {
     return view('payment');
 });
 
-Route::get('/order-history', function () {
-    return view('order-history');
+Route::get('/order-history-product', function () {
+    return view('order-history-product');
+});
+
+Route::get('/order-history-service', function () {
+    return view('order-history-service');
 });
 
 Route::get('/track', function () {
@@ -55,6 +59,15 @@ Route::get('/account-settings', function () {
     return view('account-settings');
 });
 
+Route::get('/service-order', function () {
+    return view('service-order');
+});
+
+
+// admin
+Route::get('/manage-product', function () {
+    return view('admin/manage-product');
+});
 
 
 Route::get('/test', function () {

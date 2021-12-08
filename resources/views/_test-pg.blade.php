@@ -18,41 +18,9 @@
 <body>
 
   {{-- js: copy kode pembayaran --}}
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="js/copy-kode-pembayaran.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.0.1/air-datepicker.min.js"></script>
 
-  <div class="container">
-    <h3>Tooltip Methods</h3>
-    <div>
-      <p>Click on the buttons to manually control the tooltip above:</p>
-      <button type="button" class="btn btn-primary">Show</button>
-      <button type="button" class="btn btn-warning">Hide</button>
-      <button type="button" class="btn btn-success">Toggle</button>
-      <button type="button" class="btn btn-danger">Destroy</button>
-    </div>
-  </div>
-
-
-  <button id="copy-kode-pembayaran" type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-trigger="manual" title="Tooltip on top">
-    Tooltip on top
-  </button>
-
-  <script>
-  $(document).ready(function(){
-    $(".btn-primary").click(function(){
-      $("[data-toggle='tooltip']").tooltip('show');
-    });
-    $(".btn-warning").click(function(){
-      $("[data-toggle='tooltip']").tooltip('hide');
-    });
-    $(".btn-success").click(function(){
-      $("[data-toggle='tooltip']").tooltip('toggle');
-    });
-    $(".btn-danger").click(function(){
-     $("[data-toggle='tooltip']").tooltip('destroy');
-    });
-  });
-  </script>
+  <input type="date" id="input">
 
   <!-- bootstrap 5 css -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
