@@ -23,28 +23,34 @@
             </a>
             <ul class="dropdown-menu py-0" aria-labelledby="navbarDropdown0" style="min-width: 300px;">
               <div class="container-fluid">
+
                 {{-- notification items --}}
                 {{-- notif-1 --}}
-                <div class="row py-2">
-                  <div class="col-auto">
-                    <i class="fas fa-cog text-secondary"></i>
+                <a href="#" class="text-decoration-none text-black">
+                  <div class="row py-2">
+                    <div class="col-auto">
+                      <i class="fas fa-cog text-secondary"></i>
+                    </div>
+                    <div class="col ps-0">
+                      <p class="mb-0 text-break"><b>Oni Ahmad</b> memesan <b>jasa servis</b></p>
+                      <p class="mb-0 text-secondary text-break">3 jam yang lalu</p>
+                    </div>
                   </div>
-                  <div class="col ps-0">
-                    <p class="mb-0 text-break"><b>Oni Ahmad</b> memesan <b>jasa servis</b></p>
-                    <p class="mb-0 text-secondary text-break">3 jam yang lalu</p>
-                  </div>
-                </div>
+                </a>
                 <li><hr class="dropdown-divider my-0"></li>
+
                 {{-- notif-2 --}}
-                <div class="row py-2">
-                  <div class="col-auto">
-                    <i class="fas fa-server text-secondary"></i>
+                <a href="#" class="text-decoration-none text-black">
+                  <div class="row py-2">
+                    <div class="col-auto">
+                      <i class="fas fa-server text-secondary"></i>
+                    </div>
+                    <div class="col ps-0">
+                      <p class="mb-0 text-break"><b>Oni Ahmad</b> memesan <b>4 barang elektronik</b></p>
+                      <p class="mb-0 text-secondary text-break">3 Juli 2021 09:00</p>
+                    </div>
                   </div>
-                  <div class="col ps-0">
-                    <p class="mb-0 text-break"><b>Oni Ahmad</b> memesan <b>4 barang elektronik</b></p>
-                    <p class="mb-0 text-secondary text-break">3 Juli 2021 09:00</p>
-                  </div>
-                </div>
+                </a>
                 <li><hr class="dropdown-divider my-0"></li>
 
               </div>
