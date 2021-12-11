@@ -24,7 +24,8 @@
   <!-- navbar -->
   {{-- @include('partials.guest-navbar') --}}
   {{-- @include('partials.user-navbar') --}}
-  @include('partials.admin-navbar')
+  {{-- @include('partials.admin-navbar') --}}
+  @include('partials.technician-navbar')
 
   <!-- login-modal -->
   <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

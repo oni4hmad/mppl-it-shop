@@ -81,6 +81,14 @@ Route::get('/manage-product-order', function () {
     return view('admin/manage-product-order');
 });
 
+Route::get('/manage-service-order', function () {
+    return view('admin/manage-service-order');
+});
+
+Route::get('/confirm-service-availability', function () {
+    return view('technician/confirm-service-availability');
+});
+
 
 Route::get('/test', function () {
     return view('_test-pg', [

@@ -65,7 +65,7 @@
                 <p class="card-text mb-0">4 produk dijual</p>
               </div>
               <div class="card-footer bg-transparent">
-                <button type="button" class="btn btn-primary w-100 mb-2 fw-bold">Kelola Produk</button>
+                <button type="button" class="btn btn-primary w-100 mb-2 fw-bold" onclick="{{ "location.href = 'manage-product'" }}">Kelola Produk</button>
               </div>
             </div>
           </div>
@@ -83,7 +83,7 @@
                 </ul>
               </div>
               <div class="card-footer bg-transparent">
-                <button type="button" class="btn btn-primary w-100 mb-2 fw-bold">Kelola Teknisi</button>
+                <button type="button" class="btn btn-primary w-100 mb-2 fw-bold" onclick="{{ "location.href = 'manage-technician'" }}">Kelola Teknisi</button>
               </div>
             </div>
           </div>
@@ -114,7 +114,7 @@
                 </div>
               </div>
               <div class="card-footer bg-transparent">
-                <button type="button" class="btn btn-primary w-100 mb-2 fw-bold">Kelola Orderan</button>
+                <button type="button" class="btn btn-primary w-100 mb-2 fw-bold" onclick="{{ "location.href = 'manage-product-order'" }}">Kelola Orderan</button>
               </div>
             </div>
           </div>

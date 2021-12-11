@@ -21,7 +21,7 @@
     <div class="row py-4 justify-content-center">
 
       {{-- form persan jasa service --}}
-      <div class="col-sm-12 col-md-7 col-lg-6">
+      <div id="form-pesan-servis" class="col-sm-12 col-md-7 col-lg-6">
         <div class="card bg-body rounded">
           <div class="card-header">
             <h5 class="fw-bold text-primary">Pesan Jasa Servis</h5>
@@ -84,13 +84,13 @@
           </div>
           <div class="card-footer bg-transparent">
             {{-- btn: buat pesanan --}}
-            <button type="button" class="btn btn-primary w-100 fw-bold">Buat Pesanan</button>
+            <button type="button" class="btn btn-primary w-100 fw-bold" onclick="pesananBerhasil()">Buat Pesanan</button>
           </div>
         </div>
       </div>
 
       {{-- form pesanan berhasil: hapus d-none --}}
-      <div class="d-none col-sm-12 col-md-7 col-lg-6">
+      <div id="order-berhasil" class="d-none col-sm-12 col-md-7 col-lg-6">
         <div class="card bg-body rounded">
           <div class="card-header">
             <h5 class="fw-bold text-primary">Pesan Jasa Servis</h5>
@@ -102,11 +102,24 @@
           </div>
           <div class="card-footer bg-transparent">
             {{-- btn: cek status pesanan --}}
-            <button type="button" class="btn btn-primary w-100 fw-bold">Cek Status Pesanan</button>
+            <button type="button" class="btn btn-primary w-100 fw-bold" onclick="window.location='/order-history-service'">Cek Status Pesanan</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <script>
+    // buat demo aja yo
+    // kalau diklik 'Cek Status Pesanan'
+    function pesananBerhasil() {
+      let form_pesan_servis = document.querySelector('#form-pesan-servis');
+      form_pesan_servis.classList.add("d-none");
+      let card_order_berhasil = document.querySelector('#order-berhasil');
+      card_order_berhasil.classList.remove("d-none");
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+  </script>
 
 @endsection
