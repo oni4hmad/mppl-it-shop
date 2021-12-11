@@ -11,7 +11,6 @@
     <div class="row">
 
       {{-- sidebar --}}
-
       <div class="col-auto ps-4 py-4 border-end border-1" style="width: 200px;">
         <div class="sticky-top" id="sticky-fix">
           {{-- sidebar: profile --}}
@@ -27,8 +26,8 @@
             </div>
           </div>
           {{-- sidebar: menu --}}
-          <a href="#" class="text-decoration-none"><p class="fw-bold text-break text-secondary">Produk Elektronik</p></a>
-          <a href="#" class="text-decoration-none"><p class="fw-bold text-break text-dark text-decoration-underline">Servis Komputer</p></a>
+          <a href="/order-history-product" class="text-decoration-none"><p class="fw-bold text-break text-secondary">Produk Elektronik</p></a>
+          <a href="/order-history-service" class="text-decoration-none"><p class="fw-bold text-break text-dark text-decoration-underline">Servis Komputer</p></a>
         </div>
       </div>
 

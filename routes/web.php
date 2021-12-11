@@ -65,8 +65,20 @@ Route::get('/service-order', function () {
 
 
 // admin
+Route::get('/dashboard', function () {
+    return view('admin/dashboard');
+});
+
 Route::get('/manage-product', function () {
     return view('admin/manage-product');
+});
+
+Route::get('/manage-technician', function () {
+    return view('admin/manage-technician');
+});
+
+Route::get('/manage-product-order', function () {
+    return view('admin/manage-product-order');
 });
 
 

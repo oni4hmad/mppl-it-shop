@@ -27,8 +27,8 @@
             </div>
           </div>
           {{-- sidebar: menu --}}
-          <a href="#" class="text-decoration-none"><p class="fw-bold text-break text-dark text-decoration-underline">Produk Elektronik</p></a>
-          <a href="#" class="text-decoration-none"><p class="fw-bold text-break text-secondary">Servis Komputer</p></a>
+          <a href="/order-history-product" class="text-decoration-none"><p class="fw-bold text-break text-dark text-decoration-underline">Produk Elektronik</p></a>
+          <a href="/order-history-service" class="text-decoration-none"><p class="fw-bold text-break text-secondary">Servis Komputer</p></a>
         </div>
       </div>
 
