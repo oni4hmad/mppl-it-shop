@@ -111,18 +111,18 @@
                     </span>
                 @enderror
             </div>
-            <div class="form-check">
+            <div class="form-check mb-3">
               <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
               <label class="form-check-label" for="exampleCheck1">Remember Me</label>
             </div>
 
-            <div class="modal-footer">
+            <div class="modal-footer justify-content-center pb-0">
               <button type="submit" class="btn btn-primary w-100 fw-bold">
                   {{ __('Login') }}
               </button>
 
               @if (Route::has('password.request'))
-                  <a class="btn btn-link" href="{{ route('password.request') }}">
+                  <a class="btn btn-link p-0 m-0" href="{{ route('password.request') }}">
                       {{ __('Forgot Your Password?') }}
                   </a>
               @endif
