@@ -73,21 +73,102 @@
             </div>
           </div>
 
-          {{-- button action --}}
+          {{-- button action : terima / tolak servis --}}
           <div class="col pt-4">
             <div class="--sticky-table-item row px-3 sticky-top" id="sticky-fix" style="z-index: 1;">
-              <button type="button" class="btn btn-primary py-3 fw-bold mb-3" onclick="{{ "location.href = '#';" }}">
+              <button type="button" class="btn btn-primary py-3 fw-bold mb-3" data-bs-toggle="modal" data-bs-target="#modal-terima-permintaan">
                 <p class="mb-0">Terima</p>
               </button>
-              <button type="button" class="btn bg-danger py-3 fw-bold" onclick="{{ "location.href = '#';" }}">
+              <button type="button" class="btn bg-danger py-3 fw-bold"  data-bs-toggle="modal" data-bs-target="#modal-tolak-permintaan">
                 <p class="text-white mb-0">Tolak</p>
               </button>
               <p class="mt-2 text-center text-secondary">ORDER ID: 12000</p>
             </div>
           </div>
+
+          {{-- button action : konfirmasi selesai (invisible: hapus d-none) --}}
+          <div class="col pt-4 d-none">
+            <div class="--sticky-table-item row px-3 sticky-top" id="sticky-fix" style="z-index: 1;">
+              <p class="text-secondary text-center">Apabila servis selesai, maka tekan tombol dibawah ini:</p>
+              <button type="button" class="btn bg-primary py-3 fw-bold"  data-bs-toggle="modal" data-bs-target="#modal-catatan-selesai">
+                <p class="text-white mb-0">Konfirmasi Selesai</p>
+              </button>
+              <p class="mt-2 text-center text-secondary">ORDER ID: 12000</p>
+            </div>
+          </div>
+
         </div>
       </div>
 
+    </div>
+  </div>
+
+
+  <!--------------------------------------->
+  <!---------------- MODAL ---------------->
+  <!--------------------------------------->
+  {{-- data-bs-toggle="modal" data-bs-target="#modal-" --}}
+
+  <!-- modal: tolak permintaan -->
+  <div class="modal fade" id="modal-tolak-permintaan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title w-100 text-center" id="staticBackdropLabel">Tolak Permintaan?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-0 text-center">Konfirmasi penolakan permintaan servis.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-sm p-1 fw-bold w-100">Ya</button>
+          <button type="button" class="btn btn-secondary btn-sm p-1 text-white fw-bold w-100" data-bs-dismiss="modal">Tidak</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal: terima permintaan -->
+  <div class="modal fade" id="modal-terima-permintaan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title w-100 text-center" id="staticBackdropLabel">Terima Permintaan?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-0 text-center">Konfirmasi penerimaan permintaan servis.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-sm p-1 fw-bold w-100">Ya</button>
+          <button type="button" class="btn btn-secondary btn-sm p-1 text-white fw-bold w-100" data-bs-dismiss="modal">Tidak</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal: catatan selesai -->
+  <div class="modal fade" id="modal-catatan-selesai" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="row">
+            <h5 class="modal-title" id="staticBackdropLabel">Konfirmasi Selesai (Order ID: 9001)</h5>
+            <p class="mb-0 text-secondary">Diservis oleh: Atta Halilintar</p>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-0 fw-bold">Total Biaya</p>
+          <input id="" type="text" class="form-control mb-3" required autocomplete="name" autofocus placeholder="Total biaya">
+          <p class="mb-0 fw-bold">Rincian Servis</p>
+          <textarea id="" type="text" class="form-control" name="name" rows="3" required autocomplete="name" autofocus placeholder="Rincian servis"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
+          <button type="button" class="btn btn-primary btn-sm px-3 fw-bold">Konfirmasi</button>
+        </div>
+      </div>
     </div>
   </div>
 
