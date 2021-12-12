@@ -242,7 +242,6 @@
     </div>
   </div>
 
-
   <!-- modal: catatan teknisi -->
   <div class="modal fade" id="modal-catatan-teknisi" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -265,5 +264,6 @@
         </div>
       </div>
     </div>
+  </div>
 
 @endsection
