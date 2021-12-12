@@ -96,7 +96,7 @@
                         <p class="text-break p-0 mb-0 fw-bold">Alamat</p>
                       </div>
                       <div class="col-auto ps-0">
-                        <a href="#"><p class="text-break p-0 mb-0 fw-bold">Edit Alamat</p></a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#modal-edit-alamat"><p class="text-break p-0 mb-0 fw-bold">Edit Alamat</p></a>
                       </div>
                     </div>
                     <div class="row">
@@ -169,6 +169,45 @@
               <button type="button" class="btn btn-primary w-100 mb-2 fw-bold" onclick="{{ "location.href = 'payment';" }}">Konfirmasi & Bayar</button>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--------------------------------------->
+  <!---------------- MODAL ---------------->
+  <!--------------------------------------->
+  {{-- data-bs-toggle="modal" data-bs-target="#modal-editxxx" --}}
+
+  <!-- modal: edit alamat -->
+  <div class="modal fade" id="modal-edit-alamat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Edit Alamat</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-2">
+            <div class="col-9">
+              <p class="mb-0 fw-bold">Kabupaten / Kota</p>
+              <input id="nama" type="text" class="form-control" required autocomplete="name" autofocus placeholder="Kabupaten / Kota">
+            </div>
+            <div class="col">
+              <p class="mb-0 fw-bold">Kode Pos</p>
+              <input id="nama" type="text" class="form-control" required autocomplete="name" autofocus placeholder="Kode Pos">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p class="mb-0 fw-bold">Alamat</p>
+              <input id="nama" type="text" class="form-control" required autocomplete="name" autofocus placeholder="Alamat">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
+          <button type="button" class="btn btn-primary btn-sm px-3 fw-bold">Simpan</button>
         </div>
       </div>
     </div>
