@@ -189,8 +189,22 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p class="mb-0 fw-bold">Alamat</p>
-          <textarea id="alamat" type="text" class="form-control" name="name" rows="3" required autocomplete="name" autofocus placeholder="Alamat">{{ 'Ini_Alamat_Lama' }}</textarea>
+          <div class="row mb-2">
+            <div class="col-9">
+              <p class="mb-0 fw-bold">Kabupaten / Kota</p>
+              <input id="nama" type="text" class="form-control" value="{{ 'kota_lama' }}" required autocomplete="name" autofocus placeholder="Kabupaten / Kota">
+            </div>
+            <div class="col">
+              <p class="mb-0 fw-bold">Kode Pos</p>
+              <input id="nama" type="text" class="form-control" value="{{ 'kodepos_lama' }}" required autocomplete="name" autofocus placeholder="Kode Pos">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p class="mb-0 fw-bold">Alamat</p>
+              <input id="nama" type="text" class="form-control" value="{{ 'alamat_lama' }}" required autocomplete="name" autofocus placeholder="Alamat">
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
