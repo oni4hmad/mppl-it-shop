@@ -42,7 +42,7 @@
                     Pilih Semua
                   </label>
                 </div>
-                <a href="#" class="text-decoration-none"><p class="mb-0 fw-bold text-primary">Hapus Terpilih</p></a>
+                <a href="#" class="text-decoration-none"><p class="mb-0 fw-bold text-primary" data-bs-toggle="modal" data-bs-target="#modal-hapus-barang">Hapus Terpilih</p></a>
               </div>
             </div>
 
@@ -69,7 +69,7 @@
                     </div>
                     {{-- delete item --}}
                     <div class="col-auto">
-                      <a href="#" class="text-secondary"><i class="fas fa-trash" aria-hidden="true"></i></a>
+                      <a href="#" class="text-secondary"><i class="fas fa-trash" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#modal-hapus-barang"></i></a>
                     </div>
                   </div>
                   {{-- increment decrement --}}
@@ -113,6 +113,30 @@
               <button type="button" class="btn btn-primary w-100 mb-2 fw-bold" onclick="{{ "location.href = 'checkout';" }}">Checkout (5)</button>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--------------------------------------->
+  <!---------------- MODAL ---------------->
+  <!--------------------------------------->
+  {{-- data-bs-toggle="modal" data-bs-target="#modal-editxxx" --}}
+
+  <!-- modal: hapus barang -->
+  <div class="modal fade" id="modal-hapus-barang" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title w-100 text-center" id="staticBackdropLabel">Hapus 5 Barang?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-0 text-center">Barang yang kamu pilih akan dihapus dari keranjang.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-sm p-1 fw-bold w-100">Hapus</button>
+          <button type="button" class="btn btn-secondary btn-sm p-1 text-white fw-bold w-100" data-bs-dismiss="modal">Batal</button>
         </div>
       </div>
     </div>
