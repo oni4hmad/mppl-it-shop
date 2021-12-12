@@ -99,6 +99,7 @@
 
         {{-- ulasan pengguna --}}
         <div class="row pb-3 mb-3 border-bottom">
+          {{-- profile --}}
           <div class="col" style="max-width: 250px;">
             <div class="row">
               <div class="col" style="max-width: 80px;">
@@ -134,11 +135,10 @@
                     <span class="visually-hidden">Toggle Dropdown</span>
                   </button>
                   <ul class="dropdown-menu dropdown-menu-lg-end">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><a class="dropdown-item" href="#">Balas</a></li>
+                    <li><a class="dropdown-item" href="#">Ubah</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                    <li><a class="dropdown-item" href="#">Hapus</a></li>
                   </ul>
                 </div>
               </div>
@@ -195,13 +195,40 @@
               </div>
 
               {{-- masukkan keranjang / checkout --}}
-              <button type="button" class="btn btn-primary w-100 mb-2 fw-bold">Masukkan Keranjang</button>
+              <button type="button" class="btn btn-primary w-100 mb-2 fw-bold" data-bs-toggle="modal" data-bs-target="#modal-berhasil-masuk-keranjang">Masukkan Keranjang</button>
               <button type="button" class="btn btn-outline-primary w-100 fw-bold" onclick="{{ "location.href = 'cart';" }}">Checkout</button>
             </div>
           </div>
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <!--------------------------------------->
+  <!---------------- MODAL ---------------->
+  <!--------------------------------------->
+  {{-- data-bs-toggle="modal" data-bs-target="#modal-editxxx" --}}
+
+  <!-- modal: berhasil ditambahkan ke keranjang -->
+  <div class="modal fade" id="modal-berhasil-masuk-keranjang" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title w-100 text-center" id="staticBackdropLabel">Berhasil Ditambahkan</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-2">
+            <div class="col">
+              <p class="mb-0 text-center">Item berhasil ditambahkan ke keranjang.</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-sm p-2 fw-bold w-100" onclick="{{ "location.href = 'cart';" }}">Lihat Keranjang</button>
+        </div>
+      </div>
     </div>
   </div>
 
