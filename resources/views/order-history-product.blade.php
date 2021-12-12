@@ -73,53 +73,151 @@
           </div>
         </div>
 
-        {{-- table --}}
-        @for ($j = 0; $j < 3; $j++)
-          {{-- table row --}}
-          <div class="row border-bottom border-end bg-white">
-            <div class="col-5">
+        {{-------------------- table --------------------}}
 
-              {{-- order item --}}
-              @for ($i = 0; $i < 2; $i++)
-                <div class="row mx-0 py-3">
-                  {{-- image --}}
-                  <div class="col-auto px-0 rounded-3">
-                    <div class="p-0 me-1">
-                      <div style="width: 6.5rem; height: 6.5rem;">
-                        <div class="w-100 h-100 rounded-3 border border-secondary" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
-                      </div>
-                    </div>
-                  </div>
-                  {{-- product name --}}
-                  <div class="col d-flex flex-column justify-content-between">
-                    <div class="row justify-content-between">
-                      <div class="col-auto">
-                        <p class="mb-0 fw-bolder text-break">VGA MSI GT1030 AERO ITX 2G OC | GT 1030</p>
-                        <p class="mb-0 px-0 text-break">1 barang x Rp4.000.000</p>
-                        <p class="mb-0 text-secondary text-break">3 Juni 2021</p>
-                      </div>
+        {{-- baris order 1 --}}
+        <div class="row border-bottom border-end bg-white">
+          <div class="col-5">
+
+            {{-- order item --}}
+            @for ($i = 0; $i < 2; $i++)
+              <div class="row mx-0 py-3">
+                {{-- image --}}
+                <div class="col-auto px-0 rounded-3">
+                  <div class="p-0 me-1">
+                    <div style="width: 6.5rem; height: 6.5rem;">
+                      <div class="w-100 h-100 rounded-3 border border-secondary" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
                     </div>
                   </div>
                 </div>
-              @endfor
-
-            </div>
-            {{-- status --}}
-            <div class="col-2 py-3">
-              <p class="--sticky-table-item mb-0 fw-bold text-warning" style="z-index: 1;">Menunggu Pembayaran</p>
-            </div>
-            {{-- total bayar --}}
-            <div class="col-2 py-3">
-              <p class="--sticky-table-item mb-0 fw-bold" style="z-index: 1;">Rp15.050.000</p>
-            </div>
-            {{-- action --}}
-            <div class="col-3 py-3">
-              <div class="--sticky-table-item" style="z-index: 1;">
-                <button type="button" class="btn btn-primary btn-sm rounded-pill w-100 fw-bold">Action</button>
+                {{-- product name --}}
+                <div class="col d-flex flex-column justify-content-between">
+                  <div class="row justify-content-between">
+                    <div class="col-auto">
+                      <p class="mb-0 fw-bolder text-break">VGA MSI GT1030 AERO ITX 2G OC | GT 1030</p>
+                      <p class="mb-0 px-0 text-break">1 barang x Rp4.000.000</p>
+                      <p class="mb-0 text-secondary text-break">3 Juni 2021</p>
+                    </div>
+                  </div>
+                </div>
               </div>
+            @endfor
+
+          </div>
+          {{-- status --}}
+          <div class="col-2 py-3">
+            <p class="--sticky-table-item mb-0 fw-bold text-warning" style="z-index: 1;">Sedang Dikrim</p>
+          </div>
+          {{-- total bayar --}}
+          <div class="col-2 py-3">
+            <p class="--sticky-table-item mb-0 fw-bold" style="z-index: 1;">Rp15.050.000</p>
+          </div>
+          {{-- action --}}
+          <div class="col-3 py-3">
+            <div class="--sticky-table-item" style="z-index: 1;">
+              <button type="button" class="btn btn-primary btn-sm rounded-pill w-100 fw-bold" onclick="{{ "location.href = 'track';" }}">Lacak</button>
+              <p class="--sticky-table-item mb-0 text-secondary w-100 text-center">Order ID: 12000</p>
             </div>
           </div>
-        @endfor
+        </div>
+
+        {{-- baris order 2 --}}
+        <div class="row border-bottom border-end bg-white">
+          <div class="col-5">
+
+            {{-------- order item --------}}
+
+            {{---- item 1 ----}}
+            <div class="row mx-0 py-3">
+              {{-- image --}}
+              <div class="col-auto px-0 rounded-3">
+                <div class="p-0 me-1">
+                  <div style="width: 6.5rem; height: 6.5rem;">
+                    <div class="w-100 h-100 rounded-3 border border-secondary" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
+                  </div>
+                </div>
+              </div>
+              {{-- product name --}}
+              <div class="col d-flex flex-column justify-content-between">
+                <div class="row justify-content-between">
+                  <div class="col-auto">
+                    <p class="mb-0 fw-bolder text-break">VGA MSI GT1030 AERO ITX 2G OC | GT 1030</p>
+                    <p class="mb-0 px-0 text-break">1 barang x Rp4.000.000</p>
+                    <p class="mb-0 text-secondary text-break">3 Juni 2021</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {{-------- endof: order item --------}}
+
+          </div>
+          {{-- status --}}
+          <div class="col-2 py-3">
+            <p class="--sticky-table-item mb-0 fw-bold text-warning" style="z-index: 1;">Menunggu Pembayaran</p>
+          </div>
+          {{-- total bayar --}}
+          <div class="col-2 py-3">
+            <p class="--sticky-table-item mb-0 fw-bold" style="z-index: 1;">Rp15.050.000</p>
+          </div>
+          {{-- action --}}
+          <div class="col-3 py-3">
+            <div class="--sticky-table-item" style="z-index: 1;">
+              <button type="button" class="btn btn-primary btn-sm rounded-pill w-100 fw-bold" onclick="{{ "location.href = 'payment';" }}">Cek Kode Pembayaran</button>
+              <p class="--sticky-table-item mb-0 text-secondary w-100 text-center">Order ID: 11999</p>
+            </div>
+          </div>
+        </div>
+
+        {{-- baris order 2 --}}
+        <div class="row border-bottom border-end bg-white">
+          <div class="col-5">
+
+            {{-------- order item --------}}
+
+            {{---- item 1 ----}}
+            <div class="row mx-0 py-3">
+              {{-- image --}}
+              <div class="col-auto px-0 rounded-3">
+                <div class="p-0 me-1">
+                  <div style="width: 6.5rem; height: 6.5rem;">
+                    <div class="w-100 h-100 rounded-3 border border-secondary" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
+                  </div>
+                </div>
+              </div>
+              {{-- product name --}}
+              <div class="col d-flex flex-column justify-content-between">
+                <div class="row justify-content-between">
+                  <div class="col-auto">
+                    <p class="mb-0 fw-bolder text-break">VGA MSI GT1030 AERO ITX 2G OC | GT 1030</p>
+                    <p class="mb-0 px-0 text-break">1 barang x Rp4.000.000</p>
+                    <p class="mb-0 text-secondary text-break">3 Juni 2021</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {{-------- endof: order item --------}}
+
+          </div>
+          {{-- status --}}
+          <div class="col-2 py-3">
+            <p class="--sticky-table-item mb-0 fw-bold text-primary" style="z-index: 1;">Selesai</p>
+          </div>
+          {{-- total bayar --}}
+          <div class="col-2 py-3">
+            <p class="--sticky-table-item mb-0 fw-bold" style="z-index: 1;">Rp15.050.000</p>
+          </div>
+          {{-- action --}}
+          <div class="col-3 py-3">
+            <div class="--sticky-table-item" style="z-index: 1;">
+              <button type="button" class="btn btn-primary btn-sm rounded-pill w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#modal-nilai-produk">Beri Rating</button>
+              <p class="--sticky-table-item mb-0 text-secondary w-100 text-center">Order ID: 11998</p>
+            </div>
+          </div>
+        </div>
+
+        {{-------------------- endof: table --------------------}}
 
         {{-- pagination --}}
         <div class="row border-end bg-light py-3">
@@ -144,4 +242,53 @@
     </div>
   </div>
 
+
+  <!--------------------------------------->
+  <!---------------- MODAL ---------------->
+  <!--------------------------------------->
+  {{-- data-bs-toggle="modal" data-bs-target="#modal-editxxx" --}}
+
+  <!-- modal: nilai produk -->
+  <div class="modal fade" id="modal-nilai-produk" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Nilai Produk</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {{-- produknya --}}
+          <div class="row mx-0 py-3">
+            {{-- image --}}
+            <div class="col-auto px-0 rounded-3">
+              <div class="p-0 me-1">
+                <div style="width: 6.5rem; height: 6.5rem;">
+                  <div class="w-100 h-100 rounded-3 border border-secondary" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
+                </div>
+              </div>
+            </div>
+            {{-- product name --}}
+            <div class="col d-flex flex-column justify-content-between">
+              <div class="row justify-content-between">
+                <div class="col-auto">
+                  <p class="mb-0 fw-bolder text-break">VGA MSI GT1030 AERO ITX 2G OC | GT 1030</p>
+                  <p class="mb-0 px-0 text-break">1 barang x Rp4.000.000</p>
+                  <p class="mb-0 text-secondary text-break">3 Juni 2021</p>
+                  <div class="d-flex flex-row align-items-center">
+                    <p class="mb-0 me-2 text-primary fw-bold">Rating (1-5):</p>
+                    <input type="number" name="" id="" min="1" max="5" value="5">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <textarea id="" type="text" class="form-control" name="name" rows="3" required autocomplete="name" autofocus placeholder="Tambahkan review"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
+          <button type="button" class="btn btn-primary btn-sm px-3 fw-bold">Kirim</button>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
