@@ -128,11 +128,31 @@
                       <div style="width: 6.5rem; height: 6.5rem;">
                         <div class="w-100 h-100 rounded-3 border border-secondary" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
                       </div>
+<<<<<<< HEAD
+                    </div>
+                    <div class="col ms-2 ps-0">
+                      <p class="mb-0 fw-bold text-break">VGA MSI GT1030 AERO ITX 2G OC | GT 1030</p>
+                      <p class="mb-0 px-0 text-break">1 barang x Rp4.000.000</p>
+=======
+>>>>>>> origin
                     </div>
                     <div class="col ms-2 ps-0">
                       <p class="mb-0 fw-bold text-break">VGA MSI GT1030 AERO ITX 2G OC | GT 1030</p>
                       <p class="mb-0 px-0 text-break">1 barang x Rp4.000.000</p>
                     </div>
+                  </div>
+                </div>
+                <div class="col-4 border-end">
+                  <div class="row">
+                    <p class="mb-0 fw-bold text-break">Alamat</p>
+                    <p class="mb-0 text-break">Oni Ahmad (089512341234)<br>Jl. Manukan Indah II 19C/8, Kec. Tandes, Kota Surabaya, Jawa Timur, 60185</p>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="row">
+                    <p class="mb-0 fw-bold text-break">Kurir</p>
+                    <p class="mb-0 text-break">JNE Regular</p>
+                    <p class="mb-0 text-break text-secondary">(2 - 4 hari) - Rp50.000</p>
                   </div>
                 </div>
                 <div class="col-4 border-end">
@@ -158,6 +178,18 @@
                   <p class="mb-0 px-0 fw-bold text-break">Rp15.050.000</p>
                 </div>
               </div>
+<<<<<<< HEAD
+=======
+            </div>
+            <div class="row mx-0">
+              <div class="col px-3 py-1 rounded-3 border bg-light">
+                <div class="d-flex flex-row align-items-center h-100">
+                  <p class="mb-0 me-1 px-0 fw-bold text-break">Total Harga</p>
+                  <p class="mb-0 me-2 px-0 fw-bold text-break text-secondary">(4 Barang):</p>
+                  <p class="mb-0 px-0 fw-bold text-break">Rp15.050.000</p>
+                </div>
+              </div>
+>>>>>>> origin
               <div class="col-auto ps-2 pe-0">
                 <button type="button" class="btn btn-sm bg-danger text-white rounded-3 px-5 h-100 fw-bold" style="min-width: 200px;" data-bs-toggle="modal" data-bs-target="#modal-tolak-order">Tolak Order</button>
               </div>

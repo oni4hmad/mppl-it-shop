@@ -81,6 +81,50 @@
               <div class="col d-flex flex-column justify-content-between">
                 <div class="row justify-content-between">
                   <div class="col-auto">
+                    <p class="mb-0 fw-bolder text-break">Servis: terkena virus</p>
+                    <p class="mb-0 px-0 text-break">Teknisi: (sedang dicari)</p>
+                    <p class="mb-0 text-secondary text-break">2 Juni 2021</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          {{-- status --}}
+          <div class="col-2 py-3">
+            <p class="--sticky-table-item mb-0 fw-bold text-warning" style="z-index: 1;">Mencari Teknisi</p>
+          </div>
+          {{-- total bayar --}}
+          <div class="col-2 py-3">
+            <p class="--sticky-table-item mb-0 fw-bold" style="z-index: 1;">-</p>
+          </div>
+          {{-- action --}}
+          <div class="col-3 py-3">
+            <div class="--sticky-table-item" style="z-index: 1;">
+              <button type="button" class="btn btn-primary btn-sm rounded-pill w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#modal-batalkan-pesanan">Batalkan Pesanan</button>
+              <p class="--sticky-table-item mb-0 text-secondary w-100 text-center">Order ID: 9001</p>
+            </div>
+          </div>
+        </div>
+
+        {{-- table row --}}
+        <div class="row border-bottom border-end bg-white">
+          <div class="col-5">
+
+            {{-- service item --}}
+            <div class="row mx-0 py-3">
+              {{-- foto teknisi --}}
+              <div class="col-auto px-0 rounded-3">
+                <div class="p-0 me-1">
+                  <div style="width: 6.5rem; height: 6.5rem;">
+                    <div class="w-100 h-100 rounded-circle border border-secondary" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
+                  </div>
+                </div>
+              </div>
+              {{-- service name --}}
+              <div class="col d-flex flex-column justify-content-between">
+                <div class="row justify-content-between">
+                  <div class="col-auto">
                     <p class="mb-0 fw-bolder text-break">Servis: komputer tidak bisa menyala</p>
                     <p class="mb-0 px-0 text-break">Teknisi: Budi Ramadhan</p>
                     <p class="mb-0 text-secondary text-break">3 Juni 2021</p>
@@ -102,6 +146,10 @@
           <div class="col-3 py-3">
             <div class="--sticky-table-item" style="z-index: 1;">
               <button type="button" class="btn btn-primary btn-sm rounded-pill w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#modal-batalkan-pesanan">Batalkan Pesanan</button>
+<<<<<<< HEAD
+=======
+              <p class="--sticky-table-item mb-0 text-secondary w-100 text-center">Order ID: 9000</p>
+>>>>>>> origin
             </div>
           </div>
         </div>
@@ -145,6 +193,10 @@
           <div class="col-3 py-3">
             <div class="--sticky-table-item" style="z-index: 1;">
               <button type="button" class="btn btn-outline-primary btn-sm rounded-pill w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#modal-catatan-teknisi">Catatan Teknisi</button>
+<<<<<<< HEAD
+=======
+              <p class="--sticky-table-item mb-0 text-secondary w-100 text-center">Order ID: 8999</p>
+>>>>>>> origin
             </div>
           </div>
         </div>
