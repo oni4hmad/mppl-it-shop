@@ -24,11 +24,11 @@
           <div class="row border-bottom pb-4 mb-4">
             <div class="col px-0 pe-1" style="max-width: 50px; max-height: 50px;">
               <div style="width: 50px; height: 50px;">
-                <div class="w-100 h-100 bg-image rounded-circle border" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
+                <div class="w-100 h-100 bg-image rounded-circle border" style="background-image: url('{{ asset('profile_pic') }}/{{ Auth::user()->profile_pic }}'); background-size: cover; background-position: center center;"></div>
               </div>
             </div>
             <div class="col">
-              <p class="m-0 p-0 fw-bold text-break">Atta Halilintar</p>
+              <p class="m-0 p-0 fw-bold text-break">{{ Auth::user()->name }}</p>
               <p class="m-0 p-0 text-primary text-break">Teknisi Servis</p>
             </div>
           </div>

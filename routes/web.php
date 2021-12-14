@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UpdateProfileInformationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +25,9 @@ Route::get('/search', function () {
     return view('search');
 });
 
-Route::get('/product', function () {
-    return view('product');
-});
+// Route::get('/product', function () {
+//     return view('product');
+// });
 
 Route::get('/cart', function () {
     return view('cart');
@@ -51,13 +53,16 @@ Route::get('/track', function () {
     return view('track');
 });
 
-Route::get('/register-oni', function () {
-    return view('register-oni');
-});
+Route::get('/account-settings', [UpdateProfileInformationController::class, 'edit'])->name('profile.edit');
 
-Route::get('/account-settings', function () {
-    return view('account-settings');
-});
+Route::put('/name-updates', [UpdateProfileInformationController::class, 'updateName'])->name('profile.updateName');
+Route::put('/email-updates', [UpdateProfileInformationController::class, 'updateEmail'])->name('profile.updateEmail');
+Route::put('/no_hp-updates', [UpdateProfileInformationController::class, 'updateNoHp'])->name('profile.updateNoHp');
+Route::put('/alamat-updates', [UpdateProfileInformationController::class, 'updateAlamat'])->name('profile.updateAlamat');
+Route::put('/password-updates', [UpdateProfileInformationController::class, 'updatePassword'])->name('profile.updatePassword');
+Route::put('/image-updates', [UpdateProfileInformationController::class, 'updateImage'])->name('profile.updateImage');
+
+
 
 Route::get('/service-order', function () {
     return view('service-order');
@@ -65,13 +70,13 @@ Route::get('/service-order', function () {
 
 
 // admin
-Route::get('/dashboard', function () {
-    return view('admin/dashboard');
-});
+// Route::get('/dashboard', function () {
+//     return view('admin/dashboard');
+// });
 
-Route::get('/manage-product', function () {
-    return view('admin/manage-product');
-});
+// Route::get('/manage-product', function () {
+//     return view('admin/manage-product');
+// })->miff;
 
 Route::get('/manage-technician', function () {
     return view('admin/manage-technician');
@@ -89,7 +94,7 @@ Route::get('/confirm-service-availability', function () {
     return view('technician/confirm-service-availability');
 });
 
-
+// test: coba blade
 Route::get('/test', function () {
     return view('test/_test-pg', [
         "name" => "oni",
@@ -98,8 +103,9 @@ Route::get('/test', function () {
 });
 
 Auth::routes();
+Route::get('/dashboard', [HomeController::class, 'adminHome'])->middleware('is_admin');
+Route::get('/manage-product', [ProductController::class, 'products'])->name('admin.home')->middleware('is_admin');
 
-Route::get('admin/home', [ProductController::class, 'products'])->name('admin.home')->middleware('is_admin');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
@@ -110,3 +116,6 @@ Route::get('/edit-product/{id}',[ProductController::class, 'editProduct'])->midd
 Route::put('/update-student',[ProductController::class, 'updateProduct'])->name('product.update')->middleware('is_admin');
 
 Route::get('/delete-product/{id}',[ProductController::class,'deleteProduct'])->middleware('is_admin');
+
+Route::get('/search', [ProductController::class, 'userProducts']);
+Route::get('/product/{id}', [ProductController::class, 'productDetail']);

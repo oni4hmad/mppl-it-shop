@@ -101,7 +101,7 @@
           {{-- action --}}
           <div class="col-3 py-3">
             <div class="--sticky-table-item" style="z-index: 1;">
-              <button type="button" class="btn btn-primary btn-sm rounded-pill w-100 fw-bold">Batalkan Pesanan</button>
+              <button type="button" class="btn btn-primary btn-sm rounded-pill w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#modal-batalkan-pesanan">Batalkan Pesanan</button>
             </div>
           </div>
         </div>
@@ -144,7 +144,7 @@
           {{-- action --}}
           <div class="col-3 py-3">
             <div class="--sticky-table-item" style="z-index: 1;">
-              <button type="button" class="btn btn-outline-primary btn-sm rounded-pill w-100 fw-bold">Catatan Teknisi</button>
+              <button type="button" class="btn btn-outline-primary btn-sm rounded-pill w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#modal-catatan-teknisi">Catatan Teknisi</button>
             </div>
           </div>
         </div>
@@ -169,6 +169,54 @@
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <!--------------------------------------->
+  <!---------------- MODAL ---------------->
+  <!--------------------------------------->
+  {{-- data-bs-toggle="modal" data-bs-target="#modal-" --}}
+
+  <!-- modal: batalkan pesanan -->
+  <div class="modal fade" id="modal-batalkan-pesanan" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title w-100 text-center" id="staticBackdropLabel">Batalkan Pesanan?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-0 text-center">Konfirmasi pembalasan pesanan Anda.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-sm p-1 fw-bold w-100">Ya</button>
+          <button type="button" class="btn btn-secondary btn-sm p-1 text-white fw-bold w-100" data-bs-dismiss="modal">Tidak</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal: catatan teknisi -->
+  <div class="modal fade" id="modal-catatan-teknisi" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="row">
+            <h5 class="modal-title" id="staticBackdropLabel">Catatan Teknisi (Order ID: 8999)</h5>
+            <p class="mb-0 text-secondary">Diservis oleh: Budi Ramadhan</p>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-0 fw-bold">Total Biaya</p>
+          <input id="" type="text" value="150000" class="form-control mb-3" required autocomplete="name" autofocus placeholder="Total biaya" disabled>
+          <p class="mb-0 fw-bold">Rincian Servis</p>
+          <textarea id="" type="text" class="form-control" name="name" rows="3" required autocomplete="name" autofocus placeholder="Rincian servis" disabled>tidak ada penggantian perangkat keras komputer, hanya pembersihan komputer, pembaruan thermal paste, dan install ulang windows (total Rp150.000)</textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-sm px-5 text-white fw-bold" data-bs-dismiss="modal">OK</button>
+        </div>
+      </div>
     </div>
   </div>
 

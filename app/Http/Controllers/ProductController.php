@@ -6,6 +6,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 
+
 class ProductController extends Controller
 {
     public function addProduct()
@@ -55,7 +56,7 @@ class ProductController extends Controller
             $product->foto4 = $filename4;
         }
         $product->save();
-        return redirect('/admin/home')->with('product_added','Produk Berhasil ditambahkan');
+        return redirect('/manage-product')->with('product_added','Produk Berhasil ditambahkan');
         // $name = $request->name;
         // $kategori = $request->kategori;
         // $harga = $request->harga;
@@ -92,8 +93,19 @@ class ProductController extends Controller
 
     public function products()
     {
-        $products = Product::all();
-        return view('adminHome',compact('products'));
+        $products = Product::paginate(10);
+        return view('admin.manage-product',compact('products'));
+    }
+
+    public function userProducts()
+    {
+        $products = Product::paginate(30);
+        return view('search', compact('products'));
+    }
+    public function productDetail($id)
+    {
+        $product = Product::find($id);
+        return view('product', compact('product'));
     }
 
     public function editProduct($id)
@@ -164,7 +176,7 @@ class ProductController extends Controller
             $product->foto4 = $filename4;
         }
         $product->update();
-        return redirect('/admin/home')->with('product_updated','Produk Berhasil diubah');
+        return redirect('/manage-product')->with('product_updated','Produk Berhasil diubah');
         // $name = $request->name;
         // $kategori = $request->kategori;
         // $harga = $request->harga;
@@ -199,13 +211,25 @@ class ProductController extends Controller
         // return back()->with('product_updated','Produk Berhasil diubah');
     }
 
-    public function deleteProduct($id)
+    public function deleteProduct(Request $request)
     {
-        $product = Product::find($id);
-        unlink(public_path('images').'/'.$product->foto1);
-        unlink(public_path('images').'/'.$product->foto2);
-        unlink(public_path('images').'/'.$product->foto3);
-        unlink(public_path('images').'/'.$product->foto4);
+        $product = Product::find($request->id);
+        if($request->hasFile('foto1'))
+        {
+            unlink(public_path('images').'/'.$product->foto1);
+        }
+        if($request->hasFile('foto2'))
+        {
+            unlink(public_path('images').'/'.$product->foto2);
+        }        
+        if($request->hasFile('foto3'))
+        {
+            unlink(public_path('images').'/'.$product->foto3);
+        }
+        if($request->hasFile('foto4'))
+        {
+            unlink(public_path('images').'/'.$product->foto4);
+        }
         $product->delete();
         return back()->with('product_deleted','Produk Berhasil Dihapus');
     }

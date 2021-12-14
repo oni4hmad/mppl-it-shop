@@ -18,41 +18,9 @@
     <div class="row">
 
       {{-- sidebar --}}
-      <div class="col-auto ps-4 py-4 border-end border-1" style="width: 200px;">
-        <div class="sticky-top" id="sticky-fix">
-          {{-- sidebar: profile --}}
-          <div class="row border-bottom pb-4 mb-4">
-            <div class="col px-0 pe-1" style="max-width: 50px; max-height: 50px;">
-              <div style="width: 50px; height: 50px;">
-                <div class="w-100 h-100 bg-image rounded-circle border" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
-              </div>
-            </div>
-            <div class="col">
-              <p class="m-0 p-0 fw-bold text-break">Pokimane</p>
-              <p class="m-0 p-0 text-primary text-break">Admin</p>
-            </div>
-          </div>
-          {{-- sidebar: menu --}}
-          <a href="#" class="text-decoration-none"><p id="side-nav" class="mb-0 p-2 fw-bold text-break text-secondary">
-            <i class="fas fa-home me-2"></i>Home</p>
-          </a>
-          <a href="#" class="text-decoration-none"><p id="side-nav" class="mb-0 p-2 fw-bold text-break text-decoration-underline">
-            <i class="fas fa-microchip me-2"></i>Produk</p>
-          </a>
-          <a href="#" class="text-decoration-none"><p id="side-nav" class="mb-0 p-2 fw-bold text-break text-secondary">
-            <i class="fas fa-user-cog me-2"></i>Teknisi</p>
-          </a>
-          <p class="my-3 p-2 py-3 border-top border-bottom fw-bold text-break text-secondary">Orderan</p>
-          <a href="#" class="text-decoration-none"><p id="side-nav" class="mb-0 p-2 fw-bold text-break text-secondary">
-            <i class="fas fa-server me-2"></i>Produk Elektronik</p>
-          </a>
-          <a href="#" class="text-decoration-none"><p id="side-nav" class="mb-0 p-2 fw-bold text-break text-secondary">
-            <i class="fas fa-cog me-2"></i>Jasa Servis</p>
-          </a>
-        </div>
-      </div>
+      @include('partials.admin-sidebar')
 
-      <div class="col">
+      <div class="col" style="min-height: 90vh;">
         {{-- header menu --}}
         <div class="row bg-light border-bottom border-end sticky-top" id="sticky-header-menu">
           <h5 class="fw-bold text-primary pt-4 pb-2">Kelola Produk</h5>
@@ -75,7 +43,7 @@
               <input type="search" class="form-control rounded-start rounded-pill border-start-0" placeholder="Cari produk" aria-label="Search" aria-describedby="search-addon" />
             </div>
             <button type="button" class="btn btn-sm btn-primary ms-3 rounded-pill fw-bold">+ Kategori</button>
-            <button type="button" class="btn btn-sm btn-primary ms-3 rounded-pill fw-bold">+ Produk</button>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#modal-tambah-produk"><button type="button" class="btn btn-sm btn-primary ms-3 rounded-pill fw-bold">+ Produk</button></a>
           </div>
           <div class="container-fluid border-top bg-white">
             <div class="row">
@@ -96,7 +64,7 @@
         </div>
 
         {{-- table --}}
-        @for ($j = 0; $j < 3; $j++)
+        @foreach ($products as $product)
           {{-- table row --}}
           <div class="row border-bottom border-end bg-white">
             <div class="col-6">
@@ -107,7 +75,7 @@
                 <div class="col-auto px-0 rounded-3">
                   <div class="p-0 me-1">
                     <div style="width: 6.5rem; height: 6.5rem;">
-                      <div class="w-100 h-100 rounded-3 border border-secondary" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
+                      <div class="w-100 h-100 rounded-3 border border-secondary" style="background-image: url('{{ asset('images') }}/{{ $product->foto1 }}'); background-size: cover; background-position: center center;"></div>
                     </div>
                   </div>
                 </div>
@@ -115,7 +83,7 @@
                 <div class="--sticky-table-item col d-flex flex-column justify-content-between">
                   <div class="row justify-content-between">
                     <div class="col-auto">
-                      <p class="mb-0 fw-bolder text-break">VGA MSI GT1030 AERO ITX 2G OC | GT 1030</p>
+                      <p class="mb-0 fw-bolder text-break">{{ $product->name }}</p>
                     </div>
                   </div>
                 </div>
@@ -124,48 +92,276 @@
             </div>
             {{-- harga --}}
             <div class="col-2 py-3">
-              <p class="--sticky-table-item mb-0 fw-bold" style="z-index: 1;">Rp3.050.000</p>
+              <p class="--sticky-table-item mb-0 fw-bold" style="z-index: 1;">Rp{{ number_format($product->harga, 0, ',', '.') }}</p>
             </div>
             {{-- kategori --}}
             <div class="col-2 py-3">
-              <p class="--sticky-table-item mb-0 fw-bold" style="z-index: 1;">Graphics Card</p>
+              <p class="--sticky-table-item mb-0 fw-bold" style="z-index: 1;">{{ $product->kategori }}</p>
             </div>
             {{-- action: edit / delete --}}
             <div class="col-2 py-3">
               <div class="--sticky-table-item" style="z-index: 1;">
                 <div class="row">
                   <div class="col-auto">
-                    <a href="#"><i class="fas fa-edit"></i></a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#modal-edit-product-{{ $product->id }}"><i class="fas fa-edit"></i></a>
                   </div>
                   <div class="col-auto">
-                    <a href="#"><i class="fas fa-trash"></i></a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#modal-hapus-product-{{ $product->id }}"><i class="fas fa-trash"></i></a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        @endfor
+          @endforeach
 
         {{-- pagination --}}
-        <div class="row border-end bg-light py-3">
-          <nav aria-label="...">
-            <ul class="pagination m-0 p-0 my-1 d-flex justify-content-center">
-              <li class="page-item disabled">
-                <a class="page-link">Previous</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item active" aria-current="page">
-                <a class="page-link" href="#">2</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-              </li>
-            </ul>
-          </nav>
+        <div class="row border-end bg-light py-3" >
+          {{ $products->onEachSide(1)->links() }}
         </div>
       </div>
 
+    </div>
+  </div>
+
+
+
+  <!--------------------------------------->
+  <!---------------- MODAL ---------------->
+  <!--------------------------------------->
+  {{-- data-bs-toggle="modal" data-bs-target="#modal-" --}}
+  
+  <!-- modal: hapus product -->
+  @foreach ($products as $product)
+  <div class="modal fade" id="modal-hapus-product-{{ $product->id }}" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title w-100 text-center" id="staticBackdropLabel">Hapus Produk?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-0 text-center">Konfirmasi penghapusan produk.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-sm p-1 fw-bold w-100" onclick="location.href='/delete-product/{{ $product->id }}'">Hapus</button>
+          <button type="button" class="btn btn-secondary btn-sm p-1 text-white fw-bold w-100" data-bs-dismiss="modal">Batal</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  @endforeach
+
+  <!-- modal: tambah produk -->
+  <div class="modal fade" id="modal-tambah-produk" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="min-width: 800px;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Tambah Produk</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form enctype="multipart/form-data" action="{{ route('product.store') }}" method="POST">
+            @csrf
+            <div class="row">
+              <div class="col">
+                <div class="row mb-2">
+                  <div class="col">
+                    <p class="mb-0 fw-bold">Nama Produk</p>
+                    <input id="" type="text" name="name" class="form-control" required autocomplete="name" autofocus placeholder="Nama Produk">
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col">
+                    <p class="mb-0 fw-bold">Kategori</p>
+                    <select name="kategori" class="form-select" id="">
+                      <option value="Processor">Processor</option>
+                      <option value="Graphics Card">Graphics Card</option>
+                      <option value="Memory">Memory</option>
+                      <option value="Storage">Storage</option>
+                      <option value="Monitor">Monitor</option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <p class="mb-0 fw-bold">Harga</p>
+                    <input id="" name="harga" type="number" class="form-control" required autocomplete="name" autofocus placeholder="Harga">
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col">
+                    <p class="mb-0 fw-bold">Stok</p>
+                    <input id="" name="stok" type="number" class="form-control" required autocomplete="name" autofocus placeholder="Stok">
+                  </div>
+                  <div class="col">
+                    <p class="mb-0 fw-bold">Berat (gram)</p>
+                    <input id="" name="berat" type="number" class="form-control" required autocomplete="name" autofocus placeholder="Berat (gram)">
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col">
+                    <p class="p-0 m-0 fw-bold text-break">Deskripsi</p>
+                    <textarea id="" name="deskripsi" type="text" class="form-control" name="name" rows="10" required autocomplete="name" autofocus placeholder="Deskripsi" style="overflow-y:scroll; max-height:100px;"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="row">
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label fw-bold">Foto Utama</label>
+                    <input class="form-control" name="foto1" type="file" id="formFile">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label fw-bold">Foto Depan</label>
+                    <input class="form-control" name="foto2" type="file" id="formFile">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label fw-bold">Foto Samping</label>
+                    <input class="form-control" name="foto3" type="file" id="formFile">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label fw-bold">Foto Belakang</label>
+                    <input class="form-control" name="foto4" type="file" id="formFile">
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-primary btn-sm px-3 fw-bold">Tambah</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal: edit produk -->
+  @foreach ($products as $product)  
+  <div class="modal fade" id="modal-edit-product-{{ $product->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="min-width: 800px;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Tambah Produk</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form enctype="multipart/form-data" action="{{ route('product.update') }}" method="POST">
+            @csrf
+            @method('PUT')
+            <input type="hidden" name="id" value="{{ $product->id }}">
+            <div class="row">
+              <div class="col">
+                <div class="row mb-2">
+                  <div class="col">
+                    <p class="mb-0 fw-bold">Nama Produk</p>
+                    <input id="" type="text" name="name" class="form-control" required autocomplete="name" autofocus placeholder="Nama Produk" value="{{ $product->name }}">
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col">
+                    <p class="mb-0 fw-bold">Kategori</p>
+                    <select name="kategori" class="form-select" id="">
+                      <option value="Processor">Processor</option>
+                      <option value="Graphics Card">Graphics Card</option>
+                      <option value="Memory">Memory</option>
+                      <option value="Storage">Storage</option>
+                      <option value="Monitor">Monitor</option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <p class="mb-0 fw-bold">Harga</p>
+                    <input id="" name="harga" type="number" class="form-control" required autocomplete="name" autofocus placeholder="Harga" value="{{ $product->harga }}">
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col">
+                    <p class="mb-0 fw-bold">Stok</p>
+                    <input id="" name="stok" type="number" class="form-control" required autocomplete="name" autofocus placeholder="Stok" value="{{ $product->stok }}">
+                  </div>
+                  <div class="col">
+                    <p class="mb-0 fw-bold">Berat (gram)</p>
+                    <input id="" name="berat" type="number" class="form-control" required autocomplete="name" autofocus placeholder="Berat (gram)" value="{{ $product->berat }}">
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col">
+                    <p class="p-0 m-0 fw-bold text-break">Deskripsi</p>
+                    <textarea id="" name="deskripsi" type="text" class="form-control" name="name" rows="10" required autocomplete="name" autofocus placeholder="Deskripsi" style="overflow-y:scroll; max-height:100px;">{{ $product->deskripsi }}</textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="row">
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label fw-bold">Foto Utama</label>
+                    <input class="form-control" name="foto1" type="file" id="formFile" value="{{ $product->foto1 }}">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label fw-bold">Foto Depan</label>
+                    <input class="form-control" name="foto2" type="file" id="formFile" value="{{ $product->foto2 }}">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label fw-bold">Foto Samping</label>
+                    <input class="form-control" name="foto3" type="file" id="formFile" value="{{ $product->foto3 }}">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label fw-bold">Foto Belakang</label>
+                    <input class="form-control" name="foto4" type="file" id="formFile" value="{{ $product->foto4 }}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-primary btn-sm px-3 fw-bold">Ubah</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+  @endforeach
+
+  <!-- modal: tambah kategori -->
+  <div class="modal fade" id="modal-tambah-kategori" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Tambah Kategori</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-2">
+            <div class="col">
+              <p class="mb-0 fw-bold">Nama Kategori</p>
+              <input id="nama" type="text" class="form-control" required autocomplete="name" autofocus placeholder="Alamat">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="formFile" class="form-label fw-bold">Foto Kategori</label>
+              <input class="form-control" type="file" id="formFile">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
+          <button type="button" class="btn btn-primary btn-sm px-3 fw-bold">Tambah</button>
+        </div>
+      </div>
     </div>
   </div>
 

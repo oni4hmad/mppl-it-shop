@@ -18,39 +18,7 @@
     <div class="row">
 
       {{-- sidebar --}}
-      <div class="col-auto ps-4 py-4 border-end border-1" style="width: 200px;">
-        <div class="sticky-top" id="sticky-fix">
-          {{-- sidebar: profile --}}
-          <div class="row border-bottom pb-4 mb-4">
-            <div class="col px-0 pe-1" style="max-width: 50px; max-height: 50px;">
-              <div style="width: 50px; height: 50px;">
-                <div class="w-100 h-100 bg-image rounded-circle border" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
-              </div>
-            </div>
-            <div class="col">
-              <p class="m-0 p-0 fw-bold text-break">Pokimane</p>
-              <p class="m-0 p-0 text-primary text-break">Admin</p>
-            </div>
-          </div>
-          {{-- sidebar: menu --}}
-          <a href="#" class="text-decoration-none"><p id="side-nav" class="mb-0 p-2 fw-bold text-break text-decoration-underline">
-            <i class="fas fa-home me-2"></i>Home</p>
-          </a>
-          <a href="#" class="text-decoration-none"><p id="side-nav" class="mb-0 p-2 fw-bold text-break text-secondary">
-            <i class="fas fa-microchip me-2"></i>Produk</p>
-          </a>
-          <a href="#" class="text-decoration-none"><p id="side-nav" class="mb-0 p-2 fw-bold text-break text-secondary">
-            <i class="fas fa-user-cog me-2"></i>Teknisi</p>
-          </a>
-          <p class="my-3 p-2 py-3 border-top border-bottom fw-bold text-break text-secondary">Orderan</p>
-          <a href="#" class="text-decoration-none"><p id="side-nav" class="mb-0 p-2 fw-bold text-break text-secondary">
-            <i class="fas fa-server me-2"></i>Produk Elektronik</p>
-          </a>
-          <a href="#" class="text-decoration-none"><p id="side-nav" class="mb-0 p-2 fw-bold text-break text-secondary">
-            <i class="fas fa-cog me-2"></i>Jasa Servis</p>
-          </a>
-        </div>
-      </div>
+      @include('partials.admin-sidebar')
 
       {{-- dashboard info --}}
       <div class="col">
@@ -62,10 +30,10 @@
                 <p class="mb-0 fw-bold">Produk</p>
               </div>
               <div class="card-body py-4">
-                <p class="card-text mb-0">4 produk dijual</p>
+                <p class="card-text mb-0">{{ $countProduct }} produk dijual</p>
               </div>
               <div class="card-footer bg-transparent">
-                <button type="button" class="btn btn-primary w-100 mb-2 fw-bold" onclick="{{ "location.href = 'manage-product'" }}">Kelola Produk</button>
+                <a href="/manage-product"><button type="button" class="btn btn-primary w-100 mb-2 fw-bold">Kelola Produk</button></a>
               </div>
             </div>
           </div>
