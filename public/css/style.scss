@@ -8,8 +8,8 @@ $theme-colors: (
   "light":  $light,
 );
 
-.fas:hover, .fab:hover {
-  color: $primary;
-}
+// .fas:hover, .fab:hover {
+//   color: $primary;
+// }
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
