@@ -45,8 +45,8 @@ Route::get('/track', function () {
     return view('track');
 });
 
-Route::get('/register-oni', function () {
-    return view('register-oni');
+Route::get('/register', function () {
+    return view('auth.register');
 });
 
 Route::get('/account-settings', function () {
