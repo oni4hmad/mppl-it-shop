@@ -89,7 +89,7 @@
           </div>
           {{-- Ubah password --}}
           <div class="card-footer bg-transparent">
-            <button type="button" class="btn btn-outline-primary my-2 w-100 fw-bold fs-6">Ubah Password</button>
+            <button type="button" class="btn btn-outline-primary my-2 w-100 fw-bold fs-6" data-bs-toggle="modal" data-bs-target="#modal-edit-password">Ubah Password</button>
           </div>
         </div>
       </div>
