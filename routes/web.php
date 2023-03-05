@@ -37,8 +37,12 @@ Route::get('/payment', function () {
     return view('payment');
 });
 
-Route::get('/order-history', function () {
-    return view('order-history');
+Route::get('/order-history-product', function () {
+    return view('order-history-product');
+});
+
+Route::get('/order-history-service  ', function () {
+    return view('order-history-service  ');
 });
 
 Route::get('/track', function () {
