@@ -75,23 +75,28 @@
         </div>
 
       </div>
-      <div class="col" style="max-width: 250px;">
-
+      <div class="col" style="max-width: 300px;">
 
         {{-- opsi foto --}}
         <div class="card w-100">
-          <div class="card-img-top p-3 pb-0" style="width: auto; height: 12em;">
+          <div class="card-img-top p-3 pb-0" style="width: auto; height: 16em;">
             <div class="card-img-top w-100 h-100 bg-image border" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
           </div>
           <div class="card-body">
             {{-- pilih foto --}}
-            <button type="button" class="btn btn-outline-primary w-100 fw-bold fs-6">Pilih Foto</button>
+            <form enctype="multipart/form-data" action="#" method="POST">
+              <input type="file" name="profile_picture" class="form-control form-control-sm mb-2" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+              <button type="submit" class="btn btn-outline-primary w-100 fw-bold fs-6">Upload Foto</button>
+            </form>
           </div>
           {{-- Ubah password --}}
           <div class="card-footer bg-transparent">
             <button type="button" class="btn btn-outline-primary my-2 w-100 fw-bold fs-6" data-bs-toggle="modal" data-bs-target="#modal-edit-password">Ubah Password</button>
           </div>
         </div>
+
+        {{-- opsi foto --}}
+
       </div>
     </div>
   </div>
