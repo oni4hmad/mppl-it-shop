@@ -97,7 +97,7 @@
                           <p class="text-break p-0 mb-0 fw-bold">Alamat</p>
                         </div>
                         <div class="col-auto ps-0">
-                          <a href="#" data-toggle="modal" data-target="#modal-edit-alamat"><p class="text-break p-0 mb-0 fw-bold">Edit Alamat</p></a>
+                          <a href="#" data-bs-toggle="modal" data-bs-target="#modal-edit-alamat"><p class="text-break p-0 mb-0 fw-bold">Edit Alamat</p></a>
                         </div>
                       </div>
                       <div class="row">
