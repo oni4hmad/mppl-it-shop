@@ -53,6 +53,25 @@ Route::get('/account-settings', function () {
     return view('account-settings');
 });
 
+Route::get('/dashboard', function () {
+    return view('admin.dashboard');
+});
+
+Route::get('/manage-product', function () {
+    return view('admin.manage-product');
+});
+
+Route::get('/manage-product-order', function () {
+    return view('admin.manage-product-order');
+});
+
+Route::get('/manage-service-order', function () {
+    return view('admin.manage-service-order');
+});
+
+Route::get('/manage-technician', function () {
+    return view('admin.manage-technician');
+});
 
 
 Route::get('/test', function () {
