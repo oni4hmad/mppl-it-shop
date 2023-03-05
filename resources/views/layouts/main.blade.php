@@ -22,70 +22,10 @@
 
 <body>
   <!-- navbar -->
-  <nav id="navbar_top" class="border-1 border-bottom bg-white">
-    <div class="container d-flex justify-content-between bg-white p-3">
-      <div>
-        <a class="navbar-brand ps-3" href="/">
-          <img src="/assets/itshop-logo.svg" alt="logo itshop" width="100px">
-        </a>
-      </div>
-      <div class="col-6">
-        <div class="input-group rounded">
-          <input type="search" class="form-control rounded-end rounded-pill" placeholder="Cari produk elektronikmu" aria-label="Search" aria-describedby="search-addon" />
-          <button type="button" class="btn btn-secondary rounded-start rounded-pill px-3">
-            <i class="fas fa-search text-white"></i>
-          </button>
-        </div>
-      </div>
-      <div>
-        <ul class="nav">
-          <li class="nav-item border-end border-2">
-            <a class="nav-link text-secondary" href="#">
-              <i class="fas fa-shopping-cart"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link fw-bold" data-bs-toggle="modal" data-bs-target="#login-modal" role="button">Login</a>
-          </li>
-          <li class="nav-item bg-primary rounded-pill">
-            <a class="btn btn-primary nav-link fw-bold text-white rounded-pill" href="#register" role="button">Register</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- login-modal -->
-  <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title fw-bold" id="exampleModalLabel">Login</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form action>
-          <div class="modal-body">
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label fw-bold">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-              <div id="emailHelp" class="form-text">Contoh: email@gmail.com</div>
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label fw-bold">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Remember Me</label>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary w-100 fw-bold">Login</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+  {{-- @include('partials.admin-navbar') --}}
+  {{-- @include('partials.guest-navbar') --}}
+  {{-- @include('partials.user-navbar') --}}
+  @include('partials.technician-navbar')
 
   {{-- content --}}
   @yield('content')
