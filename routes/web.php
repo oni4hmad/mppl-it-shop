@@ -37,6 +37,10 @@ Route::get('/payment', function () {
     return view('payment');
 });
 
+Route::get('/service-order', function () {
+    return view('service-order');
+});
+
 Route::get('/order-history-product', function () {
     return view('order-history-product');
 });
