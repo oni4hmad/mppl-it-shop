@@ -73,6 +73,10 @@ Route::get('/manage-technician', function () {
     return view('admin.manage-technician');
 });
 
+Route::get('/confirm-service-availability', function () {
+    return view('technician.confirm-service-availability');
+});
+
 
 Route::get('/test', function () {
     return view('_test-pg', [
