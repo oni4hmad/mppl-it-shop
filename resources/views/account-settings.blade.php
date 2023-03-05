@@ -35,7 +35,7 @@
                 <p class="card-text mb-0 text-break">Oni Ahmad</p>
               </div>
               <div class="col-2">
-                <a href="#"><p class="card-text mb-0 text-break">Edit</p></a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-edit-nama"><p class="card-text mb-0 text-break">Edit</p></a>
               </div>
             </div>
             <div class="row py-3">
@@ -46,7 +46,7 @@
                 <p class="card-text mb-0 text-break">oni_ahmad@gmail.com</p>
               </div>
               <div class="col-2">
-                <a href="#"><p class="card-text mb-0 text-break">Edit</p></a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-edit-email"><p class="card-text mb-0 text-break">Edit</p></a>
               </div>
             </div>
             <div class="row py-3">
@@ -57,7 +57,7 @@
                 <p class="card-text mb-0 text-break">089512341234</p>
               </div>
               <div class="col-2">
-                <a href="#"><p class="card-text mb-0 text-break">Edit</p></a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-edit-nomorhp"><p class="card-text mb-0 text-break">Edit</p></a>
               </div>
             </div>
             <div class="row py-3">
@@ -68,7 +68,7 @@
                 <p class="card-text mb-0 text-break">Jl. Manukan Indah II 19C/8, Kota Surabaya, Jawa Timur, 60185</p>
               </div>
               <div class="col-2">
-                <a href="#"><p class="card-text mb-0 text-break">Edit</p></a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-edit-alamat"><p class="card-text mb-0 text-break">Edit</p></a>
               </div>
             </div>
           </div>
@@ -92,6 +92,157 @@
             <button type="button" class="btn btn-outline-primary my-2 w-100 fw-bold fs-6">Ubah Password</button>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--------------------------------------->
+  <!---------------- MODAL ---------------->
+  <!--------------------------------------->
+
+  <!-- modal: edit nama -->
+  <div class="modal fade" id="modal-edit-nama" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <form action="#" method="post">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Edit Nama</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="mb-0 fw-bold">Nama</p>
+            <input id="nama" type="text" class="form-control" name="name" value="" required autocomplete="name" autofocus placeholder="Nama">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary btn-sm px-3 fw-bold">Simpan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal: edit Email -->
+  <div class="modal fade" id="modal-edit-email" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <form action="#" method="POST">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Edit Email</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="mb-0 fw-bold">Email</p>
+            <input id="email" type="text" class="form-control" name="email" value="" required autocomplete="email" autofocus placeholder="Email">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary btn-sm px-3 fw-bold">Simpan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal: edit email berhasil -->
+  {{-- <div class="modal fade" id="modal-edit-email-berhasil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Email Verifikasi Terkirim</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-0 text-break">Silahkan cek email yang baru untuk melakukan verifikasi</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-sm px-4 text-white fw-bold" data-bs-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div> --}}
+
+  <!-- modal: edit nomor hp -->
+  <div class="modal fade" id="modal-edit-nomorhp" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <form action="#" method="post">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Edit Nomor HP</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="mb-0 fw-bold">Nomor HP</p>
+            <input id="nomorhp" type="text" class="form-control" name="no_hp" value="" required autocomplete="no_hp" autofocus placeholder="Nomor HP">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary btn-sm px-3 fw-bold">Simpan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal: edit alamat -->
+  <div class="modal fade" id="modal-edit-alamat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <form action="#" method="POST">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Edit Alamat</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row mb-2">
+              <div class="col-9">
+                <p class="mb-0 fw-bold">Kabupaten / Kota</p>
+                <input id="nama" type="text" class="form-control" name="kota" value="" required autocomplete="name" autofocus placeholder="Kabupaten / Kota">
+              </div>
+              <div class="col">
+                <p class="mb-0 fw-bold">Kode Pos</p>
+                <input id="nama" type="text" class="form-control" name="kode_pos" value="" required autocomplete="name" autofocus placeholder="Kode Pos">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p class="mb-0 fw-bold">Alamat</p>
+                <input id="nama" type="text" class="form-control" name="alamat" value="" required autocomplete="name" autofocus placeholder="Alamat">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary btn-sm px-3 fw-bold">Simpan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal: ubah password -->
+  <div class="modal fade" id="modal-edit-password" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <form action="#" method="POST">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Edit Password</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="mb-0 fw-bold">Password Lama</p>
+            <input id="password-lama" type="password" class="form-control mb-3"  name="current_password" required autocomplete="name" autofocus placeholder="Password Lama">
+            <p class="mb-0 fw-bold">Password Baru</p>
+            <input id="password-baru" type="password" class="form-control mb-3" name="password" required autocomplete="name" autofocus placeholder="Password Baru">
+            <p class="mb-0 fw-bold">Ulangi Password Baru</p>
+            <input id="password-baru-ulang" type="password" class="form-control" name="password_confirmation" required autocomplete="name" autofocus placeholder="Password Baru">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary btn-sm px-3 fw-bold">Simpan</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
