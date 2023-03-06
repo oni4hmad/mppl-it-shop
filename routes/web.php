@@ -87,7 +87,7 @@ Route::get('/confirm-service-availability', function () {
 
 
 Route::get('/test', function () {
-    return view('_test-pg', [
+    return view('playground._test-pg', [
         "name" => "oni",
         "email" => "oni@oni.com"
     ]);

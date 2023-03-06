@@ -14,9 +14,10 @@
     <div class="row justify-content-center py-4">
       <div class="col-2">
         <div class="row px-3 sticky-top" id="sticky-fix">
-          <button type="button" class="btn btn-outline-primary py-3 fw-bold">
+          <button type="button" class="btn btn-outline-primary py-3 fw-bold" onclick="{{ "location.href = '/order-history-product';" }}">
             <i class="fas fa-chevron-circle-left me-2"></i>Kembali
           </button>
+          <p class="mt-2 text-center text-secondary">ORDER ID: 12000</p>
         </div>
       </div>
 
@@ -131,6 +132,7 @@
       </div>
       <div class="col-2">
         {{-- sisi kanan kosong --}}
+        {{-- ini jangan dihapus --}}
       </div>
     </div>
   </div>

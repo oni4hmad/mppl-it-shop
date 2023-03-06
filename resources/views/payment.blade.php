@@ -48,7 +48,7 @@
           </div>
           <div class="card-footer bg-transparent">
             {{-- cek status --}}
-            <button type="button" class="btn btn-primary w-100 mb-2 fw-bold" onclick="{{ "location.href = '/';" }}">Cek Status</button>
+            <button type="button" class="btn btn-primary w-100 mb-2 fw-bold" onclick="{{ "location.href = '/track';" }}">Cek Status</button>
           </div>
         </div>
       </div>

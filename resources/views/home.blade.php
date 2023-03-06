@@ -122,7 +122,7 @@
           <div class="container pb-5">
             <div class="row">
               <div class="col-12">
-                <a class="btn btn-primary w-70 fw-bold btn-lg rounded-pill" href="#jasa-servis" role="button">Pesan Jasa Servis</a>
+                <a class="btn btn-primary w-70 fw-bold btn-lg rounded-pill" href="/service-order" role="button">Pesan Jasa Servis</a>
               </div>
             </div>
           </div>
