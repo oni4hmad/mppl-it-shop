@@ -1,28 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.main')
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
-
-  <!-- bootstrap 5 css -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-  <!-- customized bootstrap css -->
-  <link rel="stylesheet" href="css/style.css">
-
-  <!-- font awesome -->
-  <script src="https://kit.fontawesome.com/662e3d0d32.js" crossorigin="anonymous"></script>
-
-  <!-- navbar fix -->
-  <script src="js/navbar-fix.js"></script>
-</head>
-
-<body>
-  <!-- navbar -->
-  @include('partials.guest-navbar')
+@section('content')
 
   <!-- login-modal -->
   <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -147,7 +125,7 @@
 
   <!-- category: grid -->
   <div class="container">
-    <div class="d-flex justify-content-between mt-2" style="height: 180px;">
+    <div class="d-flex justify-content-between mt-2 mb-4" style="height: 180px;">
       <div class="w-100 me-3 position-relative bg-image rounded-3" style="background-image: url('img/category/proci.png'); background-size: cover;">
         <div class="position-absolute w-100 h-100 rounded-3" style="background: linear-gradient(to top, rgba(0, 0, 0, 1.0), rgba(255, 255, 255, 0));"></div>
         <div class="position-absolute start-0 bottom-0 mb-0 ms-3 pb-1">
@@ -191,62 +169,4 @@
     </div>
   </div>
 
-  <!-- footer -->
-  <div class="container-fluid mt-5 px-0">
-    <div class="bg-dark py-5">
-      <div class="container">
-        <div class="d-flex justify-content-between">
-          <div class="d-block w-100 me-5">
-            <h4 class="border-start border-primary border-5 ps-2 pb-2 text-white">Follow Us</h4>
-            <p class="ps-3 text-white">Infomrasi seputar produk baru, restock, review, promo, dan lain-lain.</p>
-            <div class="ps-3 d-flex justify-content-start">
-              <div class="d-block me-3">
-                <a href="#sosmed" class="text-white">
-                  <i class="fab fa-facebook fa-2x"></i>
-                </a>
-              </div>
-              <div class="d-block me-3">
-                <a href="#sosmed" class="text-white">
-                  <i class="fab fa-youtube fa-2x"></i>
-                </a>
-              </div>
-              <div class="d-block">
-                <a href="#sosmed" class="text-white">
-                  <i class="fab fa-instagram fa-2x"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="d-block w-100 me-5">
-            <h4 class="border-start border-primary border-5 ps-2 pb-2 text-white">Customer Service</h4>
-            <ul class="ms-1 text-white">
-              <li>08113004000</li>
-              <li>081234363000</li>
-            </ul>
-          </div>
-          <div class="d-block w-100 me-5">
-            <h4 class="border-start border-primary border-5 ps-2 pb-2 text-white">Location</h4>
-            <div class="ps-3 text-white">
-              <p>ITC Surabaya Mega Grosir<br>ITech City Lantai 2 Blok L8 No 9<br>Jl. Gembong No.20-30<br><b>SURABAYA</b></p>
-              <p>Ruko Center Point<br>Jl. Puncak Borobudur No.B29<br><b>MALANG</b></p>
-            </div>
-          </div>
-          <div class="d-block w-100">
-            <h4 class="border-start border-primary border-5 ps-2 pb-2 text-white">Jam Operasional</h4>
-            <div class="ps-3 text-white">
-              <p><b>BUKA</b><br>Senin – Sabtu<br>10:00 – 17:00 WIB<br></p>
-              <p><b>TUTUP</b><br>Minggu / Libur Nasional</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- bootstrap 5 css -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-</body>
-
-</html>
+@endsection
