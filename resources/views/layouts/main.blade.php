@@ -22,10 +22,13 @@
 
 <body>
   <!-- navbar -->
-  {{-- @include('partials.admin-navbar') --}}
-  {{-- @include('partials.guest-navbar') --}}
-  {{-- @include('partials.user-navbar') --}}
-  @include('partials.technician-navbar')
+  @if (\Illuminate\Support\Facades\Auth::check())
+    @include('partials.user-navbar')
+  @else
+    @include('partials.guest-navbar')
+  @endif
+  {{--@include('partials.admin-navbar')--}}
+  {{--@include('partials.technician-navbar')--}}
 
   {{-- content --}}
   @yield('content')

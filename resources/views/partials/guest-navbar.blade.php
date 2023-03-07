@@ -41,7 +41,10 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form method="POST" action="#">
+
+          <form method="POST" action="/login">
+            @csrf
+
             <div class="mb-3">
               <label for="email" class="form-label fw-bold">Email Address</label>
               <input id="email" type="email" class="form-control" name="email" value="" required autocomplete="email" autofocus>
@@ -53,7 +56,7 @@
             </div>
 
             <div class="form-check mb-3">
-              <input class="form-check-input" type="checkbox" name="remember" id="remember" checked>
+              <input class="form-check-input" type="checkbox" name="remember" id="remember">
               <label class="form-check-label" for="exampleCheck1">Remember Me</label>
             </div>
 
@@ -61,9 +64,8 @@
               <button type="submit" class="btn btn-primary w-100 fw-bold">Login</button>
               <a class="btn btn-link p-0 m-0" href="#">Forgot Your Password?</a>
             </div>
-
-            </div>
           </form>
+
         </div>
       </div>
     </div>

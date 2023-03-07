@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +17,23 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
+})->name('home');
+
+Route::controller(RegistrationController::class)->group(function () {
+    Route::get('/register', 'create')->middleware('guest');
+    Route::post('/register', 'store')->middleware('guest');
+});
+
+Route::controller(LoginController::class)->group(function () {
+    Route::get('/login', 'index')->middleware('guest');
+    Route::post('/login', 'login')->middleware('guest');
+    Route::get('/logout', 'logout')->middleware('auth');
+});
+
+
+Route::controller(\App\Http\Controllers\AccountSettingsController::class)->group(function () {
+    Route::get('/account-settings', 'edit')->middleware('auth');
+    Route::post('/account-settings', 'update')->middleware('auth');
 });
 
 Route::get('/search', function () {
@@ -51,14 +70,6 @@ Route::get('/order-history-service  ', function () {
 
 Route::get('/track', function () {
     return view('track');
-});
-
-Route::get('/register', function () {
-    return view('auth.register');
-});
-
-Route::get('/account-settings', function () {
-    return view('account-settings');
 });
 
 Route::get('/dashboard', function () {

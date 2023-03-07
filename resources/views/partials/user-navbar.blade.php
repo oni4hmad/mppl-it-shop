@@ -27,17 +27,15 @@
               <div class="me-2" style="width: 1.5rem; height: 1.5rem;">
                 <div class="w-100 h-100 rounded-circle border border-secondary" style="background-image: url('assets/user-icon.svg'); background-size: cover; background-position: center center;"></div>
               </div>
-              <span class="fw-bold text-primary">{{ 'Yuser' }}</span>
+              <span class="fw-bold text-primary">{{ Auth::user()->nama }}</span>
             </a>
             {{-- drop down menu --}}
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="/order-history">Riwayat Order</a></li>
+              <li><a class="dropdown-item" href="/order-history-product">Riwayat Order</a></li>
               <li><a class="dropdown-item" href="/account-settings">Pengaturan Akun</a></li>
               <li><hr class="dropdown-divider"></li>
               <li>
-                <a class="dropdown-item" href="#" onclick="">Logout</a>
-                <form id="logout-form" action="#" method="POST" class="d-none">
-                </form>
+                <a class="dropdown-item" href="/logout" onclick="">Logout</a>
               </li>
             </ul>
           </li>
