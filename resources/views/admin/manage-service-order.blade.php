@@ -123,7 +123,6 @@
                   <div class="row">
                     <p class="mb-0 fw-bold text-break">Alamat</p>
                     <p class="mb-0 text-break">Fiody Ardhito (089512341234)<br>Jl. Manukan Indah II 19C/8, Kec. Tandes, Kota Surabaya, Jawa Timur, 60185</p>
-<<<<<<< HEAD
                   </div>
                 </div>
                 <div class="col-3">
@@ -142,26 +141,6 @@
                     <p class="mb-0 me-1 px-0 fw-bold text-break">Teknisi:</p>
                     <p class="mb-0 px-0 fw-bold text-break me-4">-</p>
                   </div>
-=======
-                  </div>
-                </div>
-                <div class="col-3">
-                  <div class="row">
-                    <p class="mb-0 fw-bold text-break">Permintaan Jadwal</p>
-                    <p class="mb-0 text-break">Selasa, 29 Juni 2021</p>
-                    <p class="mb-0 text-break">Jam 12.00</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row mx-0">
-              <div class="col px-3 py-1 rounded-3 border bg-light">
-                <div class="row">
-                  <div class="col-6 d-flex flex-row">
-                    <p class="mb-0 me-1 px-0 fw-bold text-break">Teknisi:</p>
-                    <p class="mb-0 px-0 fw-bold text-break me-4">-</p>
-                  </div>
->>>>>>> origin
                   <div class="col-6 d-flex flex-row">
                     <p class="mb-0 me-1 px-0 fw-bold text-break">Total Biaya:</p>
                     <p class="mb-0 px-0 fw-bold text-break me-4">-</p>
@@ -188,7 +167,6 @@
             <div class="col-12 mb-3">
               <div class="row mx-0">
                 <div class="col-5 ps-0 border-end">
-<<<<<<< HEAD
                   <div class="row">
                     <p class="mb-0 fw-bold text-break">Servis:</p>
                     <p class="mb-0 text-break">Laptop suka tiba-tiba mati sendiri padahal baterai masih penuh dan kadang bisa di cas kadang tidak bisa</p>
@@ -200,49 +178,15 @@
                     <p class="mb-0 text-break">Fiody Ardhito (089512341234)<br>Jl. Manukan Indah II 19C/8, Kec. Tandes, Kota Surabaya, Jawa Timur, 60185</p>
                   </div>
                 </div>
-=======
-                  <div class="row">
-                    <p class="mb-0 fw-bold text-break">Servis:</p>
-                    <p class="mb-0 text-break">Laptop suka tiba-tiba mati sendiri padahal baterai masih penuh dan kadang bisa di cas kadang tidak bisa</p>
-                  </div>
-                </div>
-                <div class="col-4 border-end">
-                  <div class="row">
-                    <p class="mb-0 fw-bold text-break">Alamat</p>
-                    <p class="mb-0 text-break">Fiody Ardhito (089512341234)<br>Jl. Manukan Indah II 19C/8, Kec. Tandes, Kota Surabaya, Jawa Timur, 60185</p>
-                  </div>
-                </div>
->>>>>>> origin
                 <div class="col-3">
                   <div class="row">
                     <p class="mb-0 fw-bold text-break">Permintaan Jadwal</p>
                     <p class="mb-0 text-break">Selasa, 29 Juni 2021</p>
                     <p class="mb-0 text-break">Jam 12.00</p>
                   </div>
-<<<<<<< HEAD
-=======
                 </div>
               </div>
             </div>
-            <div class="row mx-0">
-              <div class="col px-3 py-1 rounded-3 border bg-light">
-                <div class="row">
-                  <div class="col-6 d-flex flex-row">
-                    <p class="mb-0 me-1 px-0 fw-bold text-break">Teknisi:</p>
-                    <p class="mb-0 px-0 fw-bold text-break me-4">-</p>
-                  </div>
-                  <div class="col-6 d-flex flex-row">
-                    <p class="mb-0 me-1 px-0 fw-bold text-break">Total Biaya:</p>
-                    <p class="mb-0 px-0 fw-bold text-break me-4">-</p>
-                  </div>
->>>>>>> origin
-                </div>
-              </div>
-              <div class="col-auto ps-2 pe-0">
-                <button type="button" class="btn btn-sm btn-outline-primary rounded-3 h-100 fw-bold" style="min-width: 200px;" data-bs-toggle="modal" data-bs-target="#modal-catatan-teknisi">Catatan Teknisi</button>
-              </div>
-            </div>
-<<<<<<< HEAD
             <div class="row mx-0">
               <div class="col px-3 py-1 rounded-3 border bg-light">
                 <div class="row">
@@ -260,8 +204,6 @@
                 <button type="button" class="btn btn-sm btn-outline-primary rounded-3 h-100 fw-bold" style="min-width: 200px;" data-bs-toggle="modal" data-bs-target="#modal-catatan-teknisi">Catatan Teknisi</button>
               </div>
             </div>
-=======
->>>>>>> origin
           </div>
 
         </div>
