@@ -23,12 +23,16 @@
 <body>
   <!-- navbar -->
   @if (\Illuminate\Support\Facades\Auth::check())
-    @include('partials.user-navbar')
+    @if (\Illuminate\Support\Facades\Auth::user()->isAdmin())
+      @include('partials.admin-navbar')
+    @elseif (\Illuminate\Support\Facades\Auth::user()->isTechnician())
+      @include('partials.technician-navbar')
+    @else
+      @include('partials.user-navbar')
+    @endif
   @else
     @include('partials.guest-navbar')
   @endif
-  {{--@include('partials.admin-navbar')--}}
-  {{--@include('partials.technician-navbar')--}}
 
   {{-- content --}}
   @yield('content')

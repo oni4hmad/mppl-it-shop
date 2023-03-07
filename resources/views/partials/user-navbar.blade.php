@@ -17,7 +17,7 @@
       <div>
         <ul class="nav">
           <li class="nav-item border-end border-2">
-            <a class="nav-link text-secondary" href="#">
+            <a class="nav-link text-secondary" href="/cart">
               <i class="fas fa-shopping-cart"></i>
             </a>
           </li>
@@ -25,7 +25,7 @@
             {{-- foto & nama akun --}}
             <a class="nav-link dropdown-toggle d-flex flex-row align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <div class="me-2" style="width: 1.5rem; height: 1.5rem;">
-                <div class="w-100 h-100 rounded-circle border border-secondary" style="background-image: url('assets/user-icon.svg'); background-size: cover; background-position: center center;"></div>
+                <div class="w-100 h-100 rounded-circle border border-secondary" style="background-image: url('{{ empty(Auth::user()->profile_picture) ? 'assets/user-icon.svg' : "photo/user/".Auth::user()->profile_picture }}'); background-size: cover; background-position: center center;"></div>
               </div>
               <span class="fw-bold text-primary">{{ Auth::user()->nama }}</span>
             </a>

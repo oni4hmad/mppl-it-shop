@@ -60,9 +60,9 @@
             {{-- foto & nama akun --}}
             <a class="nav-link dropdown-toggle d-flex flex-row align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <div class="me-2" style="width: 1.5rem; height: 1.5rem;">
-                <div class="w-100 h-100 rounded-circle border border-secondary" style="background-image: url('assets/admin-icon.svg'); background-size: cover; background-position: center center;"></div>
+                <div class="w-100 h-100 rounded-circle border border-secondary" style="background-image: url('{{ empty(Auth::user()->profile_picture) ? 'assets/admin-icon.svg' : "photo/user/".Auth::user()->profile_picture }}'); background-size: cover; background-position: center center;"></div>
               </div>
-              <span class="fw-bold text-primary">{{ 'Mimin' }}</span>
+              <span class="fw-bold text-primary">{{ Auth::user()->nama }}</span>
             </a>
             {{-- drop down menu --}}
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -70,9 +70,7 @@
               <li><a class="dropdown-item" href="/account-settings">Pengaturan Akun</a></li>
               <li><hr class="dropdown-divider"></li>
               <li>
-                <a class="dropdown-item" href="#" onclick="">Logout</a>
-                <form id="logout-form" action="#" method="POST" class="d-none">
-                </form>
+                <a class="dropdown-item" href="/logout" onclick="">Logout</a>
               </li>
             </ul>
           </li>
