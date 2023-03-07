@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
 class AccountSettingsController extends Controller
@@ -59,6 +60,26 @@ class AccountSettingsController extends Controller
             auth()->user()->update(['password' => $request->password]);
             return $this->updateSuccess("Password");
         }
+
+        if (isset($request->profile_picture)) {
+            $this->validate($request, [
+                "profile_picture" => ["required", "image", "max:1024", "mimes:jpeg,png,jpg"],
+            ]);
+
+            $destination = public_path('photo/user/').auth()->user()->profile_picture;
+            if (File::exists($destination)) {
+                File::delete($destination);
+            }
+            $file = $request->file('profile_picture');
+            $extension = $file->getClientOriginalExtension();
+            $filename = 'profile_picture_'.auth()->user()->id.'_'.time().'.'.$extension;
+            $file->move(public_path('photo/user/'), $filename);
+            auth()->user()->profile_picture = $filename;
+            auth()->user()->update();
+            return $this->updateSuccess("Foto profil");
+        }
+
+        return redirect('/account-settings');
     }
 
     private function updateSuccess(string $dataName) {

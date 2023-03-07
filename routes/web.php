@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountSettingsController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
@@ -31,10 +32,33 @@ Route::controller(LoginController::class)->group(function () {
 });
 
 
-Route::controller(\App\Http\Controllers\AccountSettingsController::class)->group(function () {
+Route::controller(AccountSettingsController::class)->group(function () {
     Route::get('/account-settings', 'edit')->middleware('auth');
-    Route::post('/account-settings', 'update')->middleware('auth');
+    Route::put('/account-settings', 'update')->middleware('auth');
 });
+
+Route::get('/dashboard', function () {
+    return view('admin.dashboard');
+});
+
+Route::get('/manage-product', function () {
+    return view('admin.manage-product');
+});
+
+Route::get('/manage-product-order', function () {
+    return view('admin.manage-product-order');
+});
+
+Route::get('/manage-service-order', function () {
+    return view('admin.manage-service-order');
+});
+
+Route::get('/manage-technician', function () {
+    return view('admin.manage-technician');
+});
+
+
+
 
 Route::get('/search', function () {
     return view('search');
@@ -70,26 +94,6 @@ Route::get('/order-history-service  ', function () {
 
 Route::get('/track', function () {
     return view('track');
-});
-
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-});
-
-Route::get('/manage-product', function () {
-    return view('admin.manage-product');
-});
-
-Route::get('/manage-product-order', function () {
-    return view('admin.manage-product-order');
-});
-
-Route::get('/manage-service-order', function () {
-    return view('admin.manage-service-order');
-});
-
-Route::get('/manage-technician', function () {
-    return view('admin.manage-technician');
 });
 
 Route::get('/confirm-service-availability', function () {
