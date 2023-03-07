@@ -108,11 +108,13 @@
         {{-- opsi foto --}}
         <div class="card w-100">
           <div class="card-img-top p-3 pb-0" style="width: auto; height: 16em;">
-            <div class="card-img-top w-100 h-100 bg-image border" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
+            <div class="card-img-top w-100 h-100 bg-image border" style="background-image: url('{{ empty(Auth::user()->profile_picture) ? 'assets/user-icon.svg' : "photo/user/".Auth::user()->profile_picture }}'); background-size: cover; background-position: center center;"></div>
           </div>
           <div class="card-body">
             {{-- pilih foto --}}
-            <form enctype="multipart/form-data" action="#" method="POST">
+            <form enctype="multipart/form-data" action="/account-settings" method="POST">
+              @method('put')
+              @csrf
               <input type="file" name="profile_picture" class="form-control form-control-sm mb-2" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
               <button type="submit" class="btn btn-outline-primary w-100 fw-bold fs-6">Upload Foto</button>
             </form>
@@ -139,6 +141,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <form action="/account-settings" method="post">
+          @method('put')
           @csrf
           <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">Edit Nama</h5>
@@ -162,6 +165,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <form action="/account-settings" method="post">
+          @method('put')
           @csrf
           <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">Edit Email</h5>
@@ -203,6 +207,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <form action="/account-settings" method="post">
+          @method('put')
           @csrf
           <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">Edit Nomor HP</h5>
@@ -226,6 +231,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <form action="/account-settings" method="post">
+          @method('put')
           @csrf
           <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">Edit Alamat</h5>
@@ -263,6 +269,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <form action="/account-settings" method="post">
+          @method('put')
           @csrf
           <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">Edit Password</h5>
