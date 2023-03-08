@@ -20,7 +20,7 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
         if (!Auth::attempt($credentials)) {
             return redirect('/login')
-                ->with(['error' => 'Login gagal.']);
+                ->with(['error' => 'Email atau password salah.']);
         }
         return redirect('/');
     }
