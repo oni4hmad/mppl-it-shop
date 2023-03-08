@@ -7,6 +7,9 @@
     #side-nav:hover {
       background-color: #F2F2F2;
     }
+    .toast-container {
+      z-index: 1080;
+    }
   </style>
 
   <!-- sticky content fix -->
@@ -14,15 +17,67 @@
   <script src="js/sticky-header-menu-fix.js"></script>
   <script src="js/sticky-table-item-fix.js"></script>
 
+  {{--toast success--}}
+  <div class="toast-container position-fixed p-3 py-5 bottom-0 start-50 translate-middle-x z-3">
+    <div id="liveToast" class="toast align-items-center bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body text-white">
+          Hello, world! This is a toast message.
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+  {{--toast error validation--}}
+  <div class="toast-container position-fixed p-3 py-5 bottom-0 start-50 translate-middle-x z-3">
+    <div id="liveToast2" class="toast align-items-center bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="300000">
+      <div class="d-flex">
+        <div class="toast-body text-white">
+          Hello, world! This is a toast message.
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.onload = () => {
+      const toastLiveExample = document.getElementById('liveToast');
+      const changeText = (text) => toastLiveExample.querySelector('.toast-body').innerHTML = `${text}`;
+      const toast = new bootstrap.Toast(toastLiveExample);
+      {{--success--}}
+      @if ($message = Session::get('success'))
+        changeText("{{ $message }}");
+        toast.show();
+      @endif
+
+
+      const toastLiveExample2 = document.getElementById('liveToast2');
+      const changeText2 = (text) => toastLiveExample2.querySelector('.toast-body').innerHTML = `${text}`;
+      const toast2 = new bootstrap.Toast(toastLiveExample2);
+
+      {{--error validation--}}
+      let message = "Pengisian gagal:";
+      @if ($errors->any())
+        @foreach ($errors->all() as $error)
+          message += "<li>{{ $error }}</li>";
+        @endforeach
+        changeText2(message);
+        toast2.show();
+      @endif
+    }
+  </script>
+
   <div class="container">
     <div class="row">
 
       {{-- sidebar --}}
       @include('partials.admin-sidebar')
 
-      <div class="col" style="min-height: 90vh;">
+      <div class="col border-end">
         {{-- header menu --}}
-        <div class="row bg-light border-bottom border-end sticky-top" id="sticky-header-menu">
+        <div class="row bg-light border-bottom sticky-top" id="sticky-header-menu">
           <h5 class="fw-bold text-primary pt-4 pb-2">Kelola Produk</h5>
           <div class="d-flex flex-row align-items-center mb-3">
             <p class="text-secondary fw-bold me-3 mb-0">Kategori</p>
@@ -66,7 +121,7 @@
         {{-- table --}}
 
         {{-- table row --}}
-        <div class="row border-bottom border-end bg-white">
+        <div class="row border-bottom bg-white">
           <div class="col-6">
 
             {{-- product item --}}
@@ -114,7 +169,7 @@
         </div>
 
         {{-- table row --}}
-        <div class="row border-bottom border-end bg-white">
+        <div class="row border-bottom bg-white">
           <div class="col-6">
 
             {{-- product item --}}
@@ -162,7 +217,7 @@
         </div>
 
         {{-- pagination --}}
-        <div class="row border-end bg-light py-3">
+        <div class="row bg-light py-3">
           <nav aria-label="...">
             <ul class="pagination m-0 p-0 my-1 d-flex justify-content-center">
               <li class="page-item disabled">
@@ -216,80 +271,83 @@
           <h5 class="modal-title" id="staticBackdropLabel">Tambah Produk</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col">
-              <div class="row mb-2">
-                <div class="col">
-                  <p class="mb-0 fw-bold">Nama Produk</p>
-                  <input id="" type="text" class="form-control" required autocomplete="name" autofocus placeholder="Nama Produk">
+        <form enctype="multipart/form-data" action="/manage-product" method="post">
+          @csrf
+          <div class="modal-body">
+            <div class="row">
+              <div class="col">
+                <div class="row mb-2">
+                  <div class="col">
+                    <p class="mb-0 fw-bold">Nama Produk</p>
+                    <input id="" name="nama" type="text" class="form-control" required autocomplete="name" autofocus placeholder="Nama Produk">
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col">
+                    <p class="mb-0 fw-bold">Kategori</p>
+                    <select class="form-select" id="" name="category_id">
+
+                      @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->nama }}</option>
+                      @endforeach
+
+                    </select>
+                  </div>
+                  <div class="col">
+                    <p class="mb-0 fw-bold">Harga</p>
+                    <input id="" name="harga" type="number" class="form-control" required autocomplete="name" autofocus placeholder="Harga">
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col">
+                    <p class="mb-0 fw-bold">Stok</p>
+                    <input id="" name="stok" type="number" class="form-control" required autocomplete="name" autofocus placeholder="Stok">
+                  </div>
+                  <div class="col">
+                    <p class="mb-0 fw-bold">Berat (gram)</p>
+                    <input id="" name="berat" type="number" class="form-control" required autocomplete="name" autofocus placeholder="Berat (gram)">
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col">
+                    <p class="p-0 m-0 fw-bold text-break">Deskripsi</p>
+                    <textarea id="" name="deskripsi" type="text" class="form-control" rows="10" required autocomplete="name" autofocus placeholder="Deskripsi" style="overflow-y:scroll; max-height:100px;"></textarea>
+                  </div>
                 </div>
               </div>
-              <div class="row mb-2">
-                <div class="col">
-                  <p class="mb-0 fw-bold">Kategori</p>
-                  <select class="form-select" id="">
-                    <option value="0">Processor</option>
-                    <option value="1">Graphics Card</option>
-                    <option value="2">Memory</option>
-                    <option value="3">Storage</option>
-                    <option value="4">Monitor</option>
-                  </select>
+              <div class="col">
+                <div class="row">
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label fw-bold">Foto Utama</label>
+                    <input class="form-control" name="photo_1" type="file" id="formFile">
+                  </div>
                 </div>
-                <div class="col">
-                  <p class="mb-0 fw-bold">Harga</p>
-                  <input id="" type="number" class="form-control" required autocomplete="name" autofocus placeholder="Harga">
+                <div class="row">
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label fw-bold">Foto Depan</label>
+                    <input class="form-control" name="photo_2" type="file" id="formFile">
+                  </div>
                 </div>
-              </div>
-              <div class="row mb-2">
-                <div class="col">
-                  <p class="mb-0 fw-bold">Stok</p>
-                  <input id="" type="number" class="form-control" required autocomplete="name" autofocus placeholder="Stok">
+                <div class="row">
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label fw-bold">Foto Samping</label>
+                    <input class="form-control" name="photo_3" type="file" id="formFile">
+                  </div>
                 </div>
-                <div class="col">
-                  <p class="mb-0 fw-bold">Berat (gram)</p>
-                  <input id="" type="number" class="form-control" required autocomplete="name" autofocus placeholder="Berat (gram)">
-                </div>
-              </div>
-              <div class="row mb-2">
-                <div class="col">
-                  <p class="p-0 m-0 fw-bold text-break">Deskripsi</p>
-                  <textarea id="" type="text" class="form-control" name="name" rows="10" required autocomplete="name" autofocus placeholder="Deskripsi" style="overflow-y:scroll; max-height:100px;"></textarea>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="row">
-                <div class="mb-3">
-                  <label for="formFile" class="form-label fw-bold">Foto Utama</label>
-                  <input class="form-control" type="file" id="formFile">
-                </div>
-              </div>
-              <div class="row">
-                <div class="mb-3">
-                  <label for="formFile" class="form-label fw-bold">Foto Depan</label>
-                  <input class="form-control" type="file" id="formFile">
-                </div>
-              </div>
-              <div class="row">
-                <div class="mb-3">
-                  <label for="formFile" class="form-label fw-bold">Foto Samping</label>
-                  <input class="form-control" type="file" id="formFile">
-                </div>
-              </div>
-              <div class="row">
-                <div class="mb-3">
-                  <label for="formFile" class="form-label fw-bold">Foto Belakang</label>
-                  <input class="form-control" type="file" id="formFile">
+                <div class="row">
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label fw-bold">Foto Belakang</label>
+                    <input class="form-control" name="photo_4" type="file" id="formFile">
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn-primary btn-sm px-3 fw-bold">Tambah</button>
-        </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary btn-sm px-3 fw-bold">Tambah</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -388,24 +446,27 @@
           <h5 class="modal-title" id="staticBackdropLabel">Tambah Kategori</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <div class="row mb-2">
-            <div class="col">
-              <p class="mb-0 fw-bold">Nama Kategori</p>
-              <input id="nama" type="text" class="form-control" required autocomplete="name" autofocus placeholder="Alamat">
+        <form enctype="multipart/form-data" action="/category" method="post">
+          @csrf
+          <div class="modal-body">
+            <div class="row mb-2">
+              <div class="col">
+                <p class="mb-0 fw-bold">Nama Kategori</p>
+                <input id="nama" name="nama" type="text" class="form-control" required autocomplete="name" autofocus placeholder="Nama Kategori">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="formFile" class="form-label fw-bold">Foto Kategori</label>
+                <input class="form-control" name="photo" type="file" id="formFile">
+              </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col">
-              <label for="formFile" class="form-label fw-bold">Foto Kategori</label>
-              <input class="form-control" type="file" id="formFile">
-            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary btn-sm px-3 fw-bold">Tambah</button>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn-primary btn-sm px-3 fw-bold">Tambah</button>
-        </div>
+        </form>
       </div>
     </div>
   </div>

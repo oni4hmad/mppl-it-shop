@@ -126,7 +126,7 @@
   <!-- category: grid -->
   <div class="container">
     <div class="d-flex justify-content-between mt-2 mb-4" style="height: 180px;">
-      <div class="w-100 me-3 position-relative bg-image rounded-3" style="background-image: url('img/category/proci.png'); background-size: cover;">
+      <div class="w-100 me-3 position-relative bg-image rounded-3" style="background-image: url('photo/category/proci.png'); background-size: cover;">
         <div class="position-absolute w-100 h-100 rounded-3" style="background: linear-gradient(to top, rgba(0, 0, 0, 1.0), rgba(255, 255, 255, 0));"></div>
         <div class="position-absolute start-0 bottom-0 mb-0 ms-3 pb-1">
           <a href="#kategori">
@@ -134,7 +134,7 @@
           </a>
         </div>
       </div>
-      <div class="w-100 me-3 position-relative bg-image rounded-3" style="background-image: url('img/category/gpu.png'); background-size: cover;">
+      <div class="w-100 me-3 position-relative bg-image rounded-3" style="background-image: url('photo/category/gpu.png'); background-size: cover;">
         <div class="position-absolute w-100 h-100 rounded-3" style="background: linear-gradient(to top, rgba(0, 0, 0, 1.0), rgba(255, 255, 255, 0));"></div>
         <div class="position-absolute start-0 bottom-0 mb-0 ms-3 pb-1">
           <a href="#kategori">
@@ -142,7 +142,7 @@
           </a>
         </div>
       </div>
-      <div class="w-100 me-3 position-relative bg-image rounded-3" style="background-image: url('img/category/ram.png'); background-size: cover;">
+      <div class="w-100 me-3 position-relative bg-image rounded-3" style="background-image: url('photo/category/ram.png'); background-size: cover;">
         <div class="position-absolute w-100 h-100 rounded-3" style="background: linear-gradient(to top, rgba(0, 0, 0, 1.0), rgba(255, 255, 255, 0));"></div>
         <div class="position-absolute start-0 bottom-0 mb-0 ms-3 pb-1">
           <a href="#kategori">
@@ -150,7 +150,7 @@
           </a>
         </div>
       </div>
-      <div class="w-100 me-3 position-relative bg-image rounded-3" style="background-image: url('img/category/storage.png'); background-size: cover;">
+      <div class="w-100 me-3 position-relative bg-image rounded-3" style="background-image: url('photo/category/storage.png'); background-size: cover;">
         <div class="position-absolute w-100 h-100 rounded-3" style="background: linear-gradient(to top, rgba(0, 0, 0, 1.0), rgba(255, 255, 255, 0));"></div>
         <div class="position-absolute start-0 bottom-0 mb-0 ms-3 pb-1">
           <a href="#kategori">
@@ -158,7 +158,7 @@
           </a>
         </div>
       </div>
-      <div class="w-100 position-relative bg-image rounded-3" style="background-image: url('img/category/monitor.png'); background-size: cover;">
+      <div class="w-100 position-relative bg-image rounded-3" style="background-image: url('photo/category/monitor.png'); background-size: cover;">
         <div class="position-absolute w-100 h-100 rounded-3" style="background: linear-gradient(to top, rgba(0, 0, 0, 1.0), rgba(255, 255, 255, 0));"></div>
         <div class="position-absolute start-0 bottom-0 mb-0 pb-1 ms-3">
           <a href="#kategori">

@@ -31,7 +31,7 @@
 
           @if ($message = Session::get('error'))
             <div class="alert alert-danger alert-dismissible fade show m-1" role="alert">
-              <strong>{{ $message }}</strong> Silahkan coba lagi.
+              {{ $message }}
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
           @endif
@@ -71,7 +71,7 @@
             {{-- btn login --}}
             <div class="card-footer text-center bg-transparent py-3">
               <button type="submit" class="btn btn-primary w-100 fw-bold">Login</button>
-              <a class="btn btn-link p-0 m-0" href="#">Forgot Your Password?</a>
+              <a class="btn btn-link p-0 m-0 text-decoration-none" href="#"><small>Forgot Your Password?</small></a>
             </div>
 
           </form>

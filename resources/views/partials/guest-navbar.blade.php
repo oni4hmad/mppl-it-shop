@@ -62,7 +62,7 @@
 
             <div class="modal-footer justify-content-center pb-0">
               <button type="submit" class="btn btn-primary w-100 fw-bold">Login</button>
-              <a class="btn btn-link p-0 m-0" href="#">Forgot Your Password?</a>
+              <a class="btn btn-link p-0 m-0 text-decoration-none" href="#"><small>Forgot Your Password?</small></a>
             </div>
           </form>
 
