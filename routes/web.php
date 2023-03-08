@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\AccountSettingsController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductManagementController;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,13 +40,24 @@ Route::controller(AccountSettingsController::class)->group(function () {
     Route::put('/account-settings', 'update')->middleware('auth');
 });
 
+Route::controller(CategoryController::class)->group(function () {
+    Route::post('/category', 'store')->middleware('auth.admin');
+});
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
+})->middleware('auth.admin');
+
+Route::controller(ProductManagementController::class)->group(function () {
+    Route::get('/manage-product', 'index')->middleware('auth.admin');
 });
 
-Route::get('/manage-product', function () {
-    return view('admin.manage-product');
+Route::controller(ProductController::class)->group(function () {
+    Route::post('/manage-product', 'store')->middleware('auth.admin');
 });
+
+//Route::get('/manage-product', function () {
+//    return view('admin.manage-product');
+//});
 
 Route::get('/manage-product-order', function () {
     return view('admin.manage-product-order');
