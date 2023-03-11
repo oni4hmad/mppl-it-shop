@@ -14,7 +14,7 @@
   <script src="js/sticky-header-menu-fix.js"></script>
   <script src="js/sticky-table-item-fix.js"></script>
 
-  <div class="container" style="min-height: 90vh;">
+  <div class="container">
     <div class="row">
 
       {{-- sidebar --}}

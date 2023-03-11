@@ -23,7 +23,7 @@
             {{-- foto product: besar --}}
             <div class="d-block">
               <div style="width: 100%; height: 20rem;">
-                <div class="w-100 h-100 bg-image rounded-3 border border-secondary" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
+                <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
               </div>
             </div>
 
@@ -31,17 +31,17 @@
             <div class="d-flex flex-row justify-content-between m-0 p-0 mt-2">
               <div class="p-0 me-1">
                 <div style="width: 6.5rem; height: 6.5rem;">
-                  <div class="w-100 h-100 bg-image rounded-3 border border-secondary" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
+                  <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
                 </div>
               </div>
               <div class="p-0 me-1">
                 <div style="width: 6.5rem; height: 6.5rem;">
-                  <div class="w-100 h-100 bg-image rounded-3 border border-secondary" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
+                  <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
                 </div>
               </div>
               <div class="p-0">
                 <div style="width: 6.5rem; height: 6.5rem;">
-                  <div class="w-100 h-100 bg-image rounded-3 border border-secondary" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
+                  <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
                 </div>
               </div>
             </div>
