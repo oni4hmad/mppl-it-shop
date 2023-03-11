@@ -53,6 +53,8 @@ Route::controller(ProductManagementController::class)->group(function () {
 
 Route::controller(ProductController::class)->group(function () {
     Route::post('/manage-product', 'store')->middleware('auth.admin');
+    Route::put('/manage-product', 'update')->middleware('auth.admin');
+    Route::delete('/manage-product/{id}/delete', 'delete')->middleware('auth.admin');
 });
 
 //Route::get('/manage-product', function () {

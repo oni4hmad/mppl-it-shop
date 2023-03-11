@@ -1,10 +1,11 @@
 <?php
 
+use App\Enums\TechnicianStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoriesTable extends Migration
+class CreateTechnicianDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +14,11 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('technician_details', function (Blueprint $table) {
             $table->id();
-            $table->string('nama')->unique();
-            $table->string('photo')->nullable();
+            $table->foreignId('user_id')->constrained();
+            $table->enum('status', TechnicianStatus::getValues())
+                ->default(TechnicianStatus::TERSEDIA);
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('technician_details');
     }
 }
