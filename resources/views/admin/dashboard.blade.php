@@ -10,9 +10,9 @@
   </style>
 
   <!-- sticky content fix -->
-  <script src="js/sticky-content-fix.js"></script>
-  <script src="js/sticky-header-menu-fix.js"></script>
-  <script src="js/sticky-table-item-fix.js"></script>
+  <script src="/js/sticky-content-fix.js"></script>
+  <script src="/js/sticky-header-menu-fix.js"></script>
+  <script src="/js/sticky-table-item-fix.js"></script>
 
   <div class="container">
     <div class="row">

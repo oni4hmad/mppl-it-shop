@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\AccountSettingsController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductManagementController;
+use App\Http\Controllers\ProductSearchController;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,7 +32,7 @@ Route::controller(RegistrationController::class)->group(function () {
 
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'index')->middleware('guest');
-    Route::post('/login', 'login')->middleware('guest');
+    Route::post('/login', 'login')->middleware('guest')->name('login');
     Route::get('/logout', 'logout')->middleware('auth');
 });
 
@@ -43,6 +45,7 @@ Route::controller(AccountSettingsController::class)->group(function () {
 Route::controller(CategoryController::class)->group(function () {
     Route::post('/category', 'store')->middleware('auth.admin');
 });
+
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware('auth.admin');
@@ -74,19 +77,27 @@ Route::get('/manage-technician', function () {
 });
 
 
-
-
-Route::get('/search', function () {
-    return view('search');
+Route::controller(ProductSearchController::class)->group(function () {
+    Route::get('/search', 'index');
+    Route::get('/product/{product:slug}', 'show');
 });
 
-Route::get('/product', function () {
-    return view('product');
+//Route::get('/search', function () {
+//    return view('search');
+//});
+
+//Route::get('/product', function () {
+//    return view('product');
+//});
+
+Route::controller(CartController::class)->group(function () {
+    Route::get('/cart', 'index')->middleware('auth');
+    Route::post('/cart', 'store')->middleware('auth');
 });
 
-Route::get('/cart', function () {
-    return view('cart');
-});
+//Route::get('/cart', function () {
+//    return view('cart');
+//});
 
 Route::get('/checkout', function () {
     return view('checkout');

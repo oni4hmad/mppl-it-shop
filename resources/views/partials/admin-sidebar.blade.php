@@ -5,7 +5,7 @@
           <div class="row border-bottom pb-4 mb-4">
             <div class="col px-0 pe-1" style="max-width: 50px; max-height: 50px;">
               <div style="width: 50px; height: 50px;">
-                <div class="w-100 h-100 bg-image rounded-circle border" style="background-image: url('{{ empty(Auth::user()->profile_picture) ? 'assets/admin-icon.svg' : "photo/user/".Auth::user()->profile_picture }}'); background-size: cover; background-position: center center;"></div>
+                <div class="w-100 h-100 bg-image rounded-circle border" style="background-image: url('/{{ Auth::user()->profile_picture ?? 'assets/admin-icon.svg' }}'); background-size: cover; background-position: center center;"></div>
               </div>
             </div>
             <div class="col">

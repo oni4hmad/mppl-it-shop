@@ -12,6 +12,8 @@
     }
   </style>
 
+  {{--sticky content fix--}}
+  <script src="/js/sticky-content-fix.js"></script>
   {{--autonumeric: currency formatting--}}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/autonumeric/4.6.2/autoNumeric.min.js" integrity="sha512-x1gR+AwmBYNFnEk4ixRnurDnPeGmhkUVGZtuF5LYRvXk2z3uIbIhpQswbl2X0qTIB1/kx+PNzTwqD+ZOuYtHbA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
@@ -93,10 +95,10 @@
             <div class="d-flex flex-row align-items-center mb-3">
               <p class="text-secondary fw-bold me-3 mb-0">Kategori</p>
               <div class="input-group input-group-sm px-0 me-5" style="width: 150px;">
-                <select class="form-select" id="inputGroupSelect01" name="category_id" onchange="this.form.submit()">
+                <select class="form-select" id="inputGroupSelect01" name="category" onchange="this.form.submit()">
                   <option value="">All Products</option>
                   @foreach ($categories as $category)
-                    <option value="{{ $category->id }}" {{ $category->id == request()->category_id ? "selected" : "" }}>{{ $category->nama }}</option>
+                    <option value="{{ $category->slug }}" {{ $category->slug == request()->category ? "selected" : "" }}>{{ $category->nama }}</option>
                   @endforeach
                 </select>
               </div>
@@ -148,7 +150,7 @@
                 <div class="col-auto px-0 rounded-3">
                   <div class="p-0 me-1">
                     <div style="width: 6.5rem; height: 6.5rem;">
-                      <div class="w-100 h-100 rounded-3 border border-body" style="background-image: url('photo/product/{{ $product->photo_1 ?? 'default.png' }}'); background-size: cover; background-position: center center;"></div>
+                      <div class="w-100 h-100 rounded-3 border border-body" style="background-image: url('{{ $product->photo_1 ?? 'img/default.png' }}'); background-size: cover; background-position: center center;"></div>
                     </div>
                   </div>
                 </div>
@@ -288,16 +290,16 @@
                 <div class="row">
                   <div class="d-flex justify-content-between mb-3">
                     <div style="width: 5.5rem; height: 5.5rem;">
-                      <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('photo/product/{{ $product->photo_1 ?? 'default.png' }}'); background-size: cover; background-position: center center;"></div>
+                      <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('{{ $product->photo_1 ?? 'img/default.png' }}'); background-size: cover; background-position: center center;"></div>
                     </div>
                     <div style="width: 5.5rem; height: 5.5rem;">
-                      <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('photo/product/{{ $product->photo_2 ?? 'default.png' }}'); background-size: cover; background-position: center center;"></div>
+                      <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('{{ $product->photo_2 ?? 'img/default.png' }}'); background-size: cover; background-position: center center;"></div>
                     </div>
                     <div style="width: 5.5rem; height: 5.5rem;">
-                      <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('photo/product/{{ $product->photo_3 ?? 'default.png' }}'); background-size: cover; background-position: center center;"></div>
+                      <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('{{ $product->photo_3 ?? 'img/default.png' }}'); background-size: cover; background-position: center center;"></div>
                     </div>
                     <div style="width: 5.5rem; height: 5.5rem;">
-                      <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('photo/product/{{ $product->photo_4 ?? 'default.png' }}'); background-size: cover; background-position: center center;"></div>
+                      <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('{{ $product->photo_4 ?? 'img/default.png' }}'); background-size: cover; background-position: center center;"></div>
                     </div>
                   </div>
                 </div>

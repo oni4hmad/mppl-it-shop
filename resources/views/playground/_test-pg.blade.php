@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <!-- customized bootstrap css -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 
     <!-- font awesome -->
     <script src="https://kit.fontawesome.com/662e3d0d32.js" crossorigin="anonymous"></script>
@@ -19,7 +19,7 @@
 
   {{-- js: copy kode pembayaran --}}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="js/copy-kode-pembayaran.js"></script>
+  <script src="/js/copy-kode-pembayaran.js"></script>
 
   <div class="container">
     <h3>Tooltip Methods</h3>

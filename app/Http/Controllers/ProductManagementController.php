@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class ProductManagementController extends Controller
 {
     public function index(Request $request) {
-        $product = null;
+//        $product = null;
 //        if (!$request->search && !$request->category_id) {
 //            $product = Product::latest();
 //        }
@@ -22,7 +22,7 @@ class ProductManagementController extends Controller
 //                : Product::where('nama', 'like', '%'.$request->search.'%');
 //        }
 
-        $product = Product::filter($request->all(['search', 'category_id']))
+        $product = Product::filter($request->all(['search', 'category']))
             ->latest()
             ->paginate(10)
             ->withQueryString();

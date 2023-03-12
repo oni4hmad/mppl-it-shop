@@ -18,11 +18,11 @@
   </style>
 
   <!-- sticky content fix -->
-  <script src="js/sticky-content-fix.js"></script>
+  <script src="/js/sticky-content-fix.js"></script>
 
   {{-- jquery: atur jumlah --}}
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="js/atur-jumlah.js"></script>
+  <script src="/js/atur-jumlah.js"></script>
 
   <div class="container mb-4">
     <div class="row">

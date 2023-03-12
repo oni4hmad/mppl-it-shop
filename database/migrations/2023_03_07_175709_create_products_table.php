@@ -15,6 +15,7 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('slug')->unique();
             $table->string('nama');
             $table->foreignId('category_id')->constrained();
 //            $table->unsignedBigInteger('category_id');
@@ -23,6 +24,9 @@ class CreateProductsTable extends Migration
             $table->integer('stok');
             $table->integer('berat');
             $table->text('deskripsi');
+            $table->integer('terjual')->default(0);
+            $table->unsignedFloat('rating')->default(0.0);
+            $table->integer('jumlah_ulasan')->default(0);
             $table->string('photo_1')->nullable();
             $table->string('photo_2')->nullable();
             $table->string('photo_3')->nullable();

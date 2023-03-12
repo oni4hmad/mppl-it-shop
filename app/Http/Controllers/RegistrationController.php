@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,8 @@ class RegistrationController extends Controller
             "alamat" => ["required"]
         ]);
 
-        User::create(\request(['email', 'password', 'nomor_hp', 'nama', 'kota', 'kode_pos', 'alamat']));
+        $user = User::create(\request(['email', 'password', 'nomor_hp', 'nama', 'kota', 'kode_pos', 'alamat']));
+        Cart::create(['user_id' => $user->id]);
 
         return view('auth.register')
             ->with('registration_success', true);

@@ -11,13 +11,16 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
   <!-- customized bootstrap css -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
 
   <!-- font awesome -->
   <script src="https://kit.fontawesome.com/662e3d0d32.js" crossorigin="anonymous"></script>
 
   <!-- navbar fix -->
-  <script src="js/navbar-fix.js"></script>
+  <script src="/js/navbar-fix.js"></script>
+
+  <!-- csrf token -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>

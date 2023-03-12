@@ -15,14 +15,11 @@ class CategoryController extends Controller
             "photo" => ["required", "image", "max:1024", "mimes:jpeg,png,jpg"],
         ]);
 
-        $file = $request->file('photo');
-        $extension = $file->getClientOriginalExtension();
-        $filename = 'category_'.time().'_'.Str::random(5).'.'.$extension;
-        $file->move(public_path('photo/category/'), $filename);
-
         $category = new Category();
         $category->nama = $request->nama;
-        $category->photo = $filename;
+        $category->photo = $request
+            ->file('photo')
+            ->store('photo/category', 'public_direct');
         $category->save();
 
         return redirect()

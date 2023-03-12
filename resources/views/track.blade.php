@@ -5,10 +5,10 @@
   {{-- js: copy nomor resi --}}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
-  <script src="js/copy-kode-pembayaran.js"></script>
+  <script src="/js/copy-kode-pembayaran.js"></script>
 
   <!-- sticky content fix -->
-  <script src="js/sticky-content-fix.js"></script>
+  <script src="/js/sticky-content-fix.js"></script>
 
   <div class="container">
     <div class="row justify-content-center py-4">

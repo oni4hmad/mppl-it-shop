@@ -46,13 +46,13 @@
           </div>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <a href="#promo"><img src="img/promo/promo1.jpg" class="d-block w-100" alt="banner promo"></a>
+              <a href="#promo"><img src="/img/promo/promo1.jpg" class="d-block w-100" alt="banner promo"></a>
             </div>
             <div class="carousel-item">
-              <a href="#promo"><img src="img/promo/promo2.jpg" class="d-block w-100" alt="banner promo"></a>
+              <a href="#promo"><img src="/img/promo/promo2.jpg" class="d-block w-100" alt="banner promo"></a>
             </div>
             <div class="carousel-item">
-              <a href="#promo"><img src="img/promo/promo3.jpg" class="d-block w-100" alt="banner promo"></a>
+              <a href="#promo"><img src="/img/promo/promo3.jpg" class="d-block w-100" alt="banner promo"></a>
             </div>
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
@@ -87,7 +87,7 @@
             </div>
           </div>
         </div>
-        <img src="img/banner/home_bg-produk-elektronik.png" class="img-fluid rounded-3" alt="banner produk elektronik">
+        <img src="/img/banner/home_bg-produk-elektronik.png" class="img-fluid rounded-3" alt="banner produk elektronik">
       </div>
       <div class="position-relative col-4 p-2">
         <div class="position-absolute bottom-0 start-0 ps-3">
@@ -105,7 +105,7 @@
             </div>
           </div>
         </div>
-        <img src="img/banner/home_bg-servis-komputer.png" class="img-fluid rounded-3" alt="banner produk elektronik">
+        <img src="/img/banner/home_bg-servis-komputer.png" class="img-fluid rounded-3" alt="banner produk elektronik">
       </div>
     </div>
   </div>

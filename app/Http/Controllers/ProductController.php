@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
-    public function store(Request $request) {
-
+    public function store(Request $request)
+    {
         $this->validate($request, [
             "nama" => ["required"],
             "category_id" => ["required", "exists:categories,id"],
@@ -23,42 +22,16 @@ class ProductController extends Controller
             "photo_3" => ["nullable", "image", "max:1024", "mimes:jpeg,png,jpg"],
             "photo_4" => ["nullable", "image", "max:1024", "mimes:jpeg,png,jpg"],
         ]);
-
         $product = new Product();
-        if (isset($request->photo_1)) {
-            $product->photo_1 = $this->storeImage($request, 'photo_1');
-        }
-        if (isset($request->photo_2)) {
-            $product->photo_2 = $this->storeImage($request, 'photo_2');
-        }
-        if (isset($request->photo_3)) {
-            $product->photo_3 = $this->storeImage($request, 'photo_3');
-        }
-        if (isset($request->photo_4)) {
-            $product->photo_4 = $this->storeImage($request, 'photo_4');
-        }
-        $product->nama = $request->nama;
-        $product->category_id = $request->category_id;
-        $product->harga = $request->harga;
-        $product->stok = $request->stok;
-        $product->berat = $request->berat;
-        $product->deskripsi = $request->deskripsi;
-        $product->save();
-
+        $this->checkAndExecuteImage(array($this, 'storeImage'), $product, $request);
+        $this->saveProduct($product, $request);
         return redirect()
             ->back()
             ->with(['success' => "Produk berhasil ditambahkan."]);
     }
 
-    private function storeImage(Request $request, $photoColumn) {
-        $file = $request->file($photoColumn);
-        $extension = $file->getClientOriginalExtension();
-        $filename = 'product_'.time().'_'.$photoColumn.'_'.Str::random(5).'.'.$extension;
-        $file->move(public_path('photo/product/'), $filename);
-        return $filename;
-    }
-
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
 
         $this->validate($request, [
             "id" => ["required", "exists:products,id"],
@@ -73,26 +46,74 @@ class ProductController extends Controller
             "photo_3" => ["nullable", "image", "max:1024", "mimes:jpeg,png,jpg"],
             "photo_4" => ["nullable", "image", "max:1024", "mimes:jpeg,png,jpg"],
         ]);
-
         $product = Product::find($request->id);
         if (!isset($product)) {
             return redirect()
                 ->back()
                 ->with(['error' => "Produk tidak ditemukan."]);
         }
+        $this->checkAndExecuteImage(array($this, 'updateImage'), $product, $request);
+        $this->saveProduct($product, $request);
+        return redirect()
+            ->back()
+            ->with(['success' => "Produk berhasil diupdate."]);
+    }
 
-        if (isset($request->photo_1)) {
-            $product->photo_1 = $this->updateImage($request, $product, 'photo_1');
+    public function delete($id)
+    {
+        $product = Product::find($id);
+        if (!isset($product)) {
+            return redirect()
+                ->back()
+                ->with(['error' => "Produk tidak ditemukan."]);
         }
-        if (isset($request->photo_2)) {
-            $product->photo_2 = $this->updateImage($request, $product, 'photo_2');
+        $this->checkAndExecuteImage(array($this, 'deleteImage'), $product);
+        $product->delete();
+        return redirect()
+            ->back()
+            ->with(['success' => "Produk berhasil dihapus."]);
+    }
+
+    private function checkAndExecuteImage($callbackExecute, $product, Request $request = null) {
+        if (isset($request->photo_1) || $callbackExecute[1] == "deleteImage") {
+            $product->photo_1 = $callbackExecute([
+                "request" => $request, "product" => $product, "photoColumn" => "photo_1"]);
         }
-        if (isset($request->photo_3)) {
-            $product->photo_3 = $this->updateImage($request, $product, 'photo_3');
+        if (isset($request->photo_2) || $callbackExecute[1] == "deleteImage") {
+            $product->photo_2 = $callbackExecute([
+                "request" => $request, "product" => $product, "photoColumn" => "photo_2"]);
         }
-        if (isset($request->photo_4)) {
-            $product->photo_4 = $this->updateImage($request, $product, 'photo_4');
+        if (isset($request->photo_3) || $callbackExecute[1] == "deleteImage") {
+            $product->photo_3 = $callbackExecute([
+                "request" => $request, "product" => $product, "photoColumn" => "photo_3"]);
         }
+        if (isset($request->photo_4) || $callbackExecute[1] == "deleteImage") {
+            $product->photo_4 = $callbackExecute([
+                "request" => $request, "product" => $product, "photoColumn" => "photo_4"]);
+        }
+    }
+
+    private function storeImage(array $args)
+    {
+        return $args["request"]->file($args["photoColumn"])->store('photo/product', 'public_direct');;
+    }
+
+    private function updateImage(array $args)
+    {
+        $this->deleteImage($args);
+        return $args["request"]->file($args["photoColumn"])->store('photo/product', 'public_direct');
+    }
+
+    private function deleteImage(array $args)
+    {
+        $destination = $args["product"][$args["photoColumn"]];
+        if (File::exists($destination)) {
+            File::delete($destination);
+        }
+    }
+
+    private function saveProduct($product, $request)
+    {
         $product->nama = $request->nama;
         $product->category_id = $request->category_id;
         $product->harga = $request->harga;
@@ -100,54 +121,6 @@ class ProductController extends Controller
         $product->berat = $request->berat;
         $product->deskripsi = $request->deskripsi;
         $product->save();
-        return redirect()
-            ->back()
-            ->with(['success' => "Produk berhasil diupdate."]);
-    }
-
-    private function updateImage(Request $request, Product $product, $photoColumn) {
-        $destination = public_path('photo/product/').$product[$photoColumn];
-        if (File::exists($destination)) {
-            File::delete($destination);
-        }
-        $file = $request->file($photoColumn);
-        $extension = $file->getClientOriginalExtension();
-        $filename = 'product_'.time().'_'.$photoColumn.'_'.Str::random(5).'.'.$extension;
-        $file->move(public_path('photo/product/'), $filename);
-        return $filename;
-    }
-
-    public function delete($id) {
-        $product = Product::find($id);
-        if (!isset($product)) {
-            return redirect()
-                ->back()
-                ->with(['error' => "Produk tidak ditemukan."]);
-        }
-
-        if (isset($product->photo_1)) {
-            $this->deleteImage($product, 'photo_1');
-        }
-        if (isset($product->photo_2)) {
-            $this->deleteImage($product, 'photo_2');
-        }
-        if (isset($product->photo_3)) {
-            $this->deleteImage($product, 'photo_3');
-        }
-        if (isset($product->photo_4)) {
-            $this->deleteImage($product, 'photo_4');
-        }
-        $product->delete();
-        return redirect()
-            ->back()
-            ->with(['success' => "Produk berhasil dihapus."]);
-    }
-
-    private function deleteImage(Product $product, $photoColumn) {
-        $destination = public_path('photo/product/').$product[$photoColumn];
-        if (File::exists($destination)) {
-            File::delete($destination);
-        }
     }
 
 }

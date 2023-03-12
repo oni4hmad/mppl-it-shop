@@ -63,23 +63,19 @@ class AccountSettingsController extends Controller
 
         if (isset($request->profile_picture)) {
             $this->validate($request, [
-                "profile_picture" => ["required", "image", "max:1024", "mimes:jpeg,png,jpg"],
+                "profile_picture" => ["required", "image", "file", "max:1024", "mimes:jpeg,png,jpg"],
             ]);
 
-            $destination = public_path('photo/user/').auth()->user()->profile_picture;
+            $destination = auth()->user()->profile_picture;
             if (File::exists($destination)) {
                 File::delete($destination);
             }
-            $file = $request->file('profile_picture');
-            $extension = $file->getClientOriginalExtension();
-            $filename = 'profile_picture_'.auth()->user()->id.'_'.time().'.'.$extension;
-            $file->move(public_path('photo/user/'), $filename);
-            auth()->user()->profile_picture = $filename;
+            auth()->user()->profile_picture = $request
+                ->file('profile_picture')
+                ->store('photo/user', 'public_direct');
             auth()->user()->update();
             return $this->updateSuccess("Foto profil");
         }
-
-        return redirect('/account-settings');
     }
 
     private function updateSuccess(string $dataName) {

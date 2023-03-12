@@ -71,4 +71,9 @@ class User extends Authenticatable
     public function isTechnician() {
         return $this->user_type == UserType::TECHNICIAN;
     }
+
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
+    }
 }

@@ -10,9 +10,9 @@
   </style>
 
   <!-- sticky content fix -->
-  <script src="js/sticky-content-fix.js"></script>
-  <script src="js/sticky-header-menu-fix.js"></script>
-  <script src="js/sticky-table-item-fix.js"></script>
+  <script src="/js/sticky-content-fix.js"></script>
+  <script src="/js/sticky-header-menu-fix.js"></script>
+  <script src="/js/sticky-table-item-fix.js"></script>
 
   <div class="container" style="min-height: 90vh;">
     <div class="row">
@@ -24,7 +24,7 @@
           <div class="row border-bottom pb-4 mb-4">
             <div class="col px-0 pe-1" style="max-width: 50px; max-height: 50px;">
               <div style="width: 50px; height: 50px;">
-                <div class="w-100 h-100 bg-image rounded-circle border" style="background-image: url('assets/user-icon.svg'); background-size: cover; background-position: center center;"></div>
+                <div class="w-100 h-100 bg-image rounded-circle border" style="background-image: url('/assets/user-icon.svg'); background-size: cover; background-position: center center;"></div>
               </div>
             </div>
             <div class="col">

@@ -20,7 +20,7 @@
   {{-- js: copy kode pembayaran --}}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
-  <script src="js/copy-kode-pembayaran.js"></script>
+  <script src="/js/copy-kode-pembayaran.js"></script>
 
   <div class="container my-4" style="height: 85vh;">
     <div class="row w-100 justify-content-center">

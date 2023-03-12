@@ -2,23 +2,26 @@ document.addEventListener("DOMContentLoaded", function () {
     // add padding top to show content behind navbar
     let navbar_height = document.querySelector("#navbar_top").offsetHeight;
     let sticky_element = document.querySelector("#sticky-fix");
-    // let sticky_pos = sticky_element.getBoundingClientRect();
     let currRem = convertRemToPixels(1) * 1.5; // pt-4
+    sticky_element.style.zIndex = "0";
 
     function convertRemToPixels(rem) {
         return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
     }
-
-    const onScroll = () => {
-        // console.log(`navbar_height: ${navbar_height}, sticky_pos.top: ${sticky_pos.top}, window.pageYOffset: ${window.pageYOffset}, currRem ${currRem}`)
-        if (window.pageYOffset > navbar_height + currRem) {
+    function onScrollCallback(event) {
+        if (window_height >= first_container.offsetHeight)
+            return;
+        if (window.scrollY > navbar_height + currRem)
             sticky_element.style.paddingTop = navbar_height + currRem + "px";
-        }
-        else {
-            sticky_element.style.paddingTop = window.pageYOffset + "px";
-        }
-    };
+        else sticky_element.style.paddingTop = window.scrollY + "px";
+    }
 
-    window.addEventListener("scroll", onScroll);
+    let first_container = document.querySelector("body > .container");
+    let window_height = window.innerHeight;
+    window.addEventListener("resize", (event) => {
+        window_height = window.innerHeight;
+        window.removeEventListener("scroll", onScrollCallback);
+        window.addEventListener("scroll", onScrollCallback);
+    });
+    window.addEventListener("scroll", onScrollCallback);
 });
-// DOMContentLoaded  end

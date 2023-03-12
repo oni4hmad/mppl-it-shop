@@ -3,11 +3,72 @@
 @section('content')
 
   <!-- sticky content fix -->
-  <script src="js/sticky-content-fix.js"></script>
+  <script src="/js/sticky-content-fix.js"></script>
 
   {{-- jquery: atur jumlah --}}
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="js/atur-jumlah.js"></script>
+  <script src="/js/atur-jumlah.js"></script>
+
+  {{-- add to cart --}}
+  <script>
+    function addToCart() {
+      let product_id = {{ $product->id }};
+      let csrf_token = document.querySelector("meta[name='csrf-token']").content;
+      let quantity = document.querySelector("#quantity").value;
+      let btnAddToCart = document.querySelector("#btn-add-to-cart");
+      btnAddToCart.disabled = true;
+
+      const modal = new bootstrap.Modal('#modal-berhasil-masuk-keranjang');
+      const showModal = (headerText, bodyText, btnText = "Lihat Keranjang", btnHref = "/cart") => {
+        document.querySelector('#modal-berhasil-masuk-keranjang #staticBackdropLabel').textContent = headerText;
+        document.querySelector('#modal-berhasil-masuk-keranjang .modal-body p').textContent = bodyText;
+        document.querySelector('#modal-berhasil-masuk-keranjang .modal-footer a').textContent = btnText;
+        document.querySelector('#modal-berhasil-masuk-keranjang .modal-footer a').href = btnHref;
+        modal.show()
+      };
+
+      fetch("/cart", {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          "X-CSRF-TOKEN": csrf_token
+        },
+        body: JSON.stringify({
+          "product_id": product_id,
+          "kuantitas": quantity
+        }),
+        method: "POST"
+      }).then(response => {
+        if (!response.ok) {
+          console.log(response);
+          response.text().then(text => {
+            console.log("failed", text);
+            showModal(
+              "Gagal Menambahkan",
+              "Product gagal ditambahkan ke keranjang. Silahkan refresh halaman dan coba lagi.",
+              "Refresh Halaman",
+              location.href
+            );
+          });
+          return;
+        }
+        response.json().then(json => {
+          console.log("response", json);
+          if (!json.error) {
+            showModal("Berhasil Ditambahkan", json.message);
+            btnAddToCart.disabled = false;
+          } else {
+            showModal(
+              "Gagal Menambahkan",
+              json.message,
+              "Refresh Halaman",
+              location.href
+            );
+          }
+        })
+      });
+    }
+  </script>
 
   <div class="container mb-4">
     <div class="row">
@@ -23,7 +84,7 @@
             {{-- foto product: besar --}}
             <div class="d-block">
               <div style="width: 100%; height: 20rem;">
-                <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
+                <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('/{{ $product->photo_1 ?? "img/default.png" }}'); background-size: cover; background-position: center center;"></div>
               </div>
             </div>
 
@@ -31,17 +92,17 @@
             <div class="d-flex flex-row justify-content-between m-0 p-0 mt-2">
               <div class="p-0 me-1">
                 <div style="width: 6.5rem; height: 6.5rem;">
-                  <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
+                  <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('/{{ $product->photo_2 ?? "img/default.png" }}'); background-size: cover; background-position: center center;"></div>
                 </div>
               </div>
               <div class="p-0 me-1">
                 <div style="width: 6.5rem; height: 6.5rem;">
-                  <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
+                  <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('/{{ $product->photo_3 ?? "img/default.png" }}'); background-size: cover; background-position: center center;"></div>
                 </div>
               </div>
               <div class="p-0">
                 <div style="width: 6.5rem; height: 6.5rem;">
-                  <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
+                  <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('/{{ $product->photo_4 ?? "img/default.png" }}'); background-size: cover; background-position: center center;"></div>
                 </div>
               </div>
             </div>
@@ -51,42 +112,30 @@
           {{-- detail product --}}
           <div class="col-7">
             <div class="row">
-              <h5 class="fw-bold text-break">VGA MSI GT1030 AERO ITX 2G OC | GT 1030 2GB1030 2GB</h5>
+              <h5 class="fw-bold text-break">{{ $product->nama }}</h5>
               <div class="d-flex align-items-center text-dark">
-                <p class="m-0 me-1">Terjual 500</p>
+                <p class="m-0 me-1">Terjual {{ $product->terjual }}</p>
                 <p class="m-0 mx-1">•</p>
                 <i class="fas fa-star text-warning me-1"></i>
-                <p class="m-0">4.9 (3 ulasan)</p>
+                <p class="m-0">{{ number_format($product->rating, 1) }} ({{ $product->jumlah_ulasan }} ulasan)</p>
               </div>
             </div>
             <div class="row mt-2">
-              <h3 class="fw-bolder">Rp1.500.000</h3>
+              <h3 class="fw-bolder">Rp{{ number_format($product->harga, 0, ',', '.') }}</h3>
             </div>
             <div class="row my-2 border-top border-bottom">
               <p class="py-1 my-0 fw-bold text-primary">Detail</p>
             </div>
             <div class="row">
               <div class="col-8">
-                <p class="text-break">
-                  Spesifikasi:<br>
-                  Product Name : MSI GeForce GT 1030 2GB DDR4 - AERO ITX 2G OC<br>
-                  Brand : MSI<br>
-                  Interface : PCI Express x16 3.0<br>
-                  GPU : GeForce GT 1030<br>
-                  Base Clock : 1265 MHz<br>
-                  Boost Clock : 1518 MHz<br>
-                  Memory Clock Speed : 6008 MHz<br>
-                  Memory Size : 2GB<br>
-                  Memory Interface : 64 bit<br>
-                  Garansi Resmi 2 Tahun<br>
-                </p>
+                <p class="text-break"><?php echo nl2br(stripcslashes($product->deskripsi)) ?></p>
               </div>
               <div class="col-4">
                 <p class="m-0"><b>Berat:</b></p>
-                <p class="m-0">800 Gram</p>
+                <p class="m-0">{{ $product->berat }} Gram</p>
                 <br>
                 <p class="m-0"><b>Kategori:</b></p>
-                <p class="m-0">Graphics Card</p>
+                <p class="m-0">{{ $product->category->nama }}</p>
               </div>
             </div>
           </div>
@@ -186,18 +235,18 @@
                     <i class="fas fa-minus text-white"></i>
                   </button>
                 </span>
-                <input type="number" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="{{ '11' }}">
+                <input type="number" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="{{ $product->stok }}">
                 <span class="input-group-btn">
                   <button type="button" class="quantity-right-plus btn btn-primary btn-number" data-type="plus" data-field="">
                     <i class="fas fa-plus text-white"></i>
                   </button>
                 </span>
-                <p class="card-text ms-3">Stok <b>{{ '11' }}</b></p>
+                <p class="card-text ms-3">Stok <b>{{ $product->stok }}</b></p>
               </div>
 
               {{-- masukkan keranjang / checkout --}}
-              <button type="button" class="btn btn-primary w-100 mb-2 fw-bold">Masukkan Keranjang</button>
-              <button type="button" class="btn btn-outline-primary w-100 fw-bold" onclick="{{ "location.href = 'cart';" }}">Checkout</button>
+              <button id="btn-add-to-cart" type="button" class="btn btn-primary w-100 mb-2 fw-bold" onclick="addToCart()">Masukkan Keranjang</button>
+              <a href="/cart" class="btn btn-outline-primary w-100 fw-bold">Checkout</a>
             </div>
           </div>
         </div>
@@ -223,12 +272,12 @@
         <div class="modal-body">
           <div class="row mb-2">
             <div class="col">
-              <p class="mb-0 text-center">Item berhasil ditambahkan ke keranjang.</p>
+              <p class="mb-0 text-center" id="">Item berhasil ditambahkan ke keranjang.</p>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary btn-sm p-2 fw-bold w-100" onclick="{{ "location.href = 'cart';" }}">Lihat Keranjang</button>
+          <a href="/cart" class="btn btn-primary btn-sm p-2 fw-bold w-100">Lihat Keranjang</a>
         </div>
       </div>
     </div>
