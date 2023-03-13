@@ -162,6 +162,8 @@
 
     function onChangeQty(productStackCartId, inputElement) {
       console.log(productStackCartId, inputElement, inputElement.value);
+      inputElement.value = inputElement.value < inputElement.min ? inputElement.min : inputElement.value;
+      inputElement.value = inputElement.value > inputElement.max ? inputElement.max : inputElement.value;
 
       let csrf_token = document.querySelector("meta[name='csrf-token']").content;
       const showControl = (show) => {
