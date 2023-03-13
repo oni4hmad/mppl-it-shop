@@ -11,7 +11,9 @@ class CartController extends Controller
 {
     public function index()
     {
-        return view('cart');
+//        dd(ProductStackCart::where('cart_id', auth()->user()->cart->id)->get());
+        return view('cart')
+            ->with('productStackCarts', ProductStackCart::where('cart_id', auth()->user()->cart->id)->get());
     }
 
     public function store(Request $request)

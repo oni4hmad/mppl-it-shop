@@ -18,6 +18,7 @@ class CreateProductStackCartsTable extends Migration
             $table->foreignId('cart_id')->constrained();
             $table->foreignId('product_id')->constrained();
             $table->integer('kuantitas')->default(0);
+            $table->boolean('checked')->default(true);
             $table->timestamps();
         });
     }

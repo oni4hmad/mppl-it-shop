@@ -245,7 +245,11 @@
               </div>
 
               {{-- masukkan keranjang / checkout --}}
-              <button id="btn-add-to-cart" type="button" class="btn btn-primary w-100 mb-2 fw-bold" onclick="addToCart()">Masukkan Keranjang</button>
+              @if(auth()->check())
+                <button id="btn-add-to-cart" type="button" class="btn btn-primary w-100 mb-2 fw-bold" onclick="addToCart()">Masukkan Keranjang</button>
+              @else
+                <a href="/login" id="btn-add-to-cart" class="btn btn-primary w-100 mb-2 fw-bold">Masukkan Keranjang</a>
+              @endif
               <a href="/cart" class="btn btn-outline-primary w-100 fw-bold">Checkout</a>
             </div>
           </div>

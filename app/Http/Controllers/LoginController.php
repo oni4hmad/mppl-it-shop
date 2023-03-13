@@ -22,11 +22,11 @@ class LoginController extends Controller
             return redirect('/login')
                 ->with(['error' => 'Email atau password salah.']);
         }
-        return redirect('/');
+        return redirect()->back();
     }
 
     public function logout() {
         Auth::logout();
-        return redirect('/');
+        return redirect()->back();
     }
 }
