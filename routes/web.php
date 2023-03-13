@@ -3,10 +3,12 @@
 use App\Http\Controllers\AccountSettingsController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductManagementController;
 use App\Http\Controllers\ProductSearchController;
+use App\Http\Controllers\ProductStackCartController;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
@@ -95,13 +97,22 @@ Route::controller(CartController::class)->group(function () {
     Route::post('/cart', 'store')->middleware('auth');
 });
 
+Route::controller(ProductStackCartController::class)->group(function () {
+    Route::put('/cart/{productStackCart:id}', 'update')->middleware('auth');
+    Route::delete('/cart/{productStackCart:id}', 'delete')->middleware('auth');
+});
+
 //Route::get('/cart', function () {
 //    return view('cart');
 //});
 
-Route::get('/checkout', function () {
-    return view('checkout');
+Route::controller(CheckoutController::class)->group(function () {
+    Route::get('checkout', 'index')->middleware('auth');
 });
+
+//Route::get('/checkout', function () {
+//    return view('checkout');
+//});
 
 Route::get('/payment', function () {
     return view('payment');

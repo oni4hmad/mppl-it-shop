@@ -128,7 +128,7 @@
             </div>
             <div class="row">
               <div class="col-8">
-                <p class="text-break"><?php echo nl2br(stripcslashes($product->deskripsi)) ?></p>
+                <p class="text-break">{!! nl2br(stripcslashes($product->deskripsi)) !!}</p>
               </div>
               <div class="col-4">
                 <p class="m-0"><b>Berat:</b></p>

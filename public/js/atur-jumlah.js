@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Increment
         if (quantity < max) {
             inputElement.setAttribute("value", quantity+1);
+            inputElement.onchange();
         }
     });
 
@@ -26,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Decrement
         if (quantity > min) {
             inputElement.setAttribute("value", quantity-1);
+            inputElement.onchange();
         }
     });
 });

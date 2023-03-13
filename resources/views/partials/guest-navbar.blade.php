@@ -19,7 +19,7 @@
       <div>
         <ul class="nav">
           <li class="nav-item border-end border-2">
-            <a class="nav-link text-secondary" href="#">
+            <a class="nav-link text-secondary" href="/cart">
               <i class="fas fa-shopping-cart"></i>
             </a>
           </li>

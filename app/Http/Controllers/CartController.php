@@ -12,8 +12,11 @@ class CartController extends Controller
     public function index()
     {
 //        dd(ProductStackCart::where('cart_id', auth()->user()->cart->id)->get());
+//        dd(json_encode(ProductStackCart::where('cart_id', auth()->user()->cart->id)->get()));
+        $productStackCarts = ProductStackCart::where('cart_id', auth()->user()->cart->id)->with('product')->get();
         return view('cart')
-            ->with('productStackCarts', ProductStackCart::where('cart_id', auth()->user()->cart->id)->get());
+            ->with('productStackCarts', $productStackCarts)
+            ->with('productStackCartsJson', json_encode($productStackCarts));
     }
 
     public function store(Request $request)

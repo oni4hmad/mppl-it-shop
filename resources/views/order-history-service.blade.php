@@ -4,8 +4,6 @@
 
   <!-- sticky content fix -->
   <script src="/js/sticky-content-fix.js"></script>
-  <script src="/js/sticky-header-menu-fix.js"></script>
-  <script src="/js/sticky-table-item-fix.js"></script>
 
   <div class="container">
     <div class="row">
@@ -33,7 +31,7 @@
 
       <div class="col">
         {{-- header menu --}}
-        <div class="row bg-light border-bottom border-end sticky-top" id="sticky-header-menu">
+        <div class="row bg-light border-bottom border-end" id="sticky-header-menu">
           <h5 class="fw-bold text-primary pt-4 pb-2">Riwayat Order</h5>
           <div class="d-flex flex-row align-items-center mb-3">
             <div class="input-group input-group-sm rounded" style="width: 250px;">
