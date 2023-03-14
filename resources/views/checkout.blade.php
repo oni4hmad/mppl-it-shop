@@ -112,20 +112,20 @@
                       {{-- pengiriman, kurir, metode bayar --}}
                       <div class="row">
                         <div class="col me-2 px-0">
-                          <p class="text-break p-0 mb-0 fw-bold">Pilih Pengiriman</p>
-                          <div class="input-group input-group-sm mb-3">
-                            <select class="form-select" id="inputGroupSelect01">
-                              <option value="0">Next Day</option>
-                              <option value="1" selected>Regular</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col px-0">
                           <p class="text-break p-0 mb-0 fw-bold">Pilih Kurir</p>
                           <div class="input-group input-group-sm mb-3">
                             <select class="form-select" id="inputGroupSelect01">
                               <option value="0">JNE</option>
                               <option value="1" selected>AnterAja</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col px-0">
+                          <p class="text-break p-0 mb-0 fw-bold">Pilih Pengiriman</p>
+                          <div class="input-group input-group-sm mb-3">
+                            <select class="form-select" id="inputGroupSelect01">
+                              <option value="0">Next Day</option>
+                              <option value="1" selected>Regular</option>
                             </select>
                           </div>
                         </div>

@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Enums\UserType;
 use App\Models\Cart;
 use App\Models\Category;
+use App\Models\Courier;
+use App\Models\CourierType;
 use App\Models\Product;
 use App\Models\Technician;
 use App\Models\User;
@@ -86,6 +88,29 @@ class DatabaseSeeder extends Seeder
         Category::all()->each(function ($category) {
             $products = Product::factory()->count(10)->make();
             $category->products()->saveMany($products);
+        });
+
+        /* Payment Method */
+        DB::table('payment_methods')->insert([
+            ['nama' => 'BCA (Nomor Rekening)', 'nomor_rekening' => '0005‑01‑00130‑7304'],
+            ['nama' => 'BNI (Nomor Rekening)', 'nomor_rekening' => '123‑12‑4001'],
+            ['nama' => 'Mandiri (Nomor Rekening)', 'nomor_rekening' => '27‑9300‑3056'],
+        ]);
+
+        /* Courier */
+        DB::table('couriers')->insert([
+            ['nama' => 'JNE'],
+            ['nama' => 'J&T'],
+            ['nama' => 'SiCepat'],
+            ['nama' => 'POS Indonesia'],
+        ]);
+        /* Courier Type */
+        Courier::all()->each(function ($courier) {
+            CourierType::insert([
+                ["courier_id" => $courier->id, "nama" => "Regular", "harga" => 10000],
+                ["courier_id" => $courier->id, "nama" => "Express", "harga" => 17000],
+                ["courier_id" => $courier->id, "nama" => "Instant", "harga" => 28000],
+            ]);
         });
     }
 }
