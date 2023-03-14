@@ -246,7 +246,7 @@
                   <div class="p-0 me-1">
                     <div style="width: 6.5rem; height: 6.5rem;">
                       <a href="/product/{{ $productStackCart->product->slug }}">
-                        <div class="w-100 h-100 rounded-3 border border-secondary" style="background-image: url('/{{ $productStackCart->product->photo_1 ?? "img/default.png" }}'); background-size: cover; background-position: center center;"></div>
+                        <div class="w-100 h-100 rounded-3 border border-secondary" style="background-image: url('/{{ $productStackCart->product->photo_1->path ?? "img/default.png" }}'); background-size: cover; background-position: center center;"></div>
                       </a>
                     </div>
                   </div>

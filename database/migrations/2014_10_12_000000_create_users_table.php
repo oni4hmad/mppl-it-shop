@@ -19,7 +19,6 @@ class CreateUsersTable extends Migration
             $table->string('nama');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('profile_picture')->nullable();
             $table->enum('user_type', UserType::getValues())->default(UserType::CUSTOMER);
             $table->string('nomor_hp');
             $table->string('kota');

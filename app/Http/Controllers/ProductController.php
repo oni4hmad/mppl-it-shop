@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Photo;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -23,8 +24,8 @@ class ProductController extends Controller
             "photo_4" => ["nullable", "image", "max:1024", "mimes:jpeg,png,jpg"],
         ]);
         $product = new Product();
-        $this->checkAndExecuteImage(array($this, 'storeImage'), $product, $request);
         $this->saveProduct($product, $request);
+        $this->checkAndExecuteImage(array($this, 'storeImage'), $product, $request);
         return redirect()
             ->back()
             ->with(['success' => "Produk berhasil ditambahkan."]);
@@ -68,6 +69,11 @@ class ProductController extends Controller
                 ->with(['error' => "Produk tidak ditemukan."]);
         }
         $this->checkAndExecuteImage(array($this, 'deleteImage'), $product);
+        Photo::where('photoable_type', Photo::class)
+            ->where('photoable_id', $id)
+            ->get()->each(function ($photo) {
+                $photo->delete();
+            });
         $product->delete();
         return redirect()
             ->back()
@@ -76,26 +82,30 @@ class ProductController extends Controller
 
     private function checkAndExecuteImage($callbackExecute, $product, Request $request = null) {
         if (isset($request->photo_1) || $callbackExecute[1] == "deleteImage") {
-            $product->photo_1 = $callbackExecute([
+            $photoPath = $callbackExecute([
                 "request" => $request, "product" => $product, "photoColumn" => "photo_1"]);
+            $product->photo_1()->updateOrCreate([], ['path' => $photoPath]);
         }
         if (isset($request->photo_2) || $callbackExecute[1] == "deleteImage") {
-            $product->photo_2 = $callbackExecute([
+            $photoPath = $callbackExecute([
                 "request" => $request, "product" => $product, "photoColumn" => "photo_2"]);
+            $product->photo_2()->updateOrCreate([], ['path' => $photoPath]);
         }
         if (isset($request->photo_3) || $callbackExecute[1] == "deleteImage") {
-            $product->photo_3 = $callbackExecute([
+            $photoPath = $callbackExecute([
                 "request" => $request, "product" => $product, "photoColumn" => "photo_3"]);
+            $product->photo_3()->updateOrCreate([], ['path' => $photoPath]);
         }
         if (isset($request->photo_4) || $callbackExecute[1] == "deleteImage") {
-            $product->photo_4 = $callbackExecute([
+            $photoPath = $callbackExecute([
                 "request" => $request, "product" => $product, "photoColumn" => "photo_4"]);
+            $product->photo_4()->updateOrCreate([], ['path' => $photoPath]);
         }
     }
 
     private function storeImage(array $args)
     {
-        return $args["request"]->file($args["photoColumn"])->store('photo/product', 'public_direct');;
+        return $args["request"]->file($args["photoColumn"])->store('photo/product', 'public_direct');
     }
 
     private function updateImage(array $args)
@@ -106,8 +116,9 @@ class ProductController extends Controller
 
     private function deleteImage(array $args)
     {
-        $destination = $args["product"][$args["photoColumn"]];
-        if (File::exists($destination)) {
+        $photo = $args["product"][$args["photoColumn"]];
+        if (isset($photo) && File::exists($args["product"][$args["photoColumn"]]->path)) {
+            $destination = $args["product"][$args["photoColumn"]]->path;
             File::delete($destination);
         }
     }

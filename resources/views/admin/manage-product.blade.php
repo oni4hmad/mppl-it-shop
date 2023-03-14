@@ -150,7 +150,7 @@
                 <div class="col-auto px-0 rounded-3">
                   <div class="p-0 me-1">
                     <div style="width: 6.5rem; height: 6.5rem;">
-                      <div class="w-100 h-100 rounded-3 border border-body" style="background-image: url('{{ $product->photo_1 ?? 'img/default.png' }}'); background-size: cover; background-position: center center;"></div>
+                      <div class="w-100 h-100 rounded-3 border border-body" style="background-image: url('/{{ $product->photo_1->path ?? 'img/default.png' }}'); background-size: cover; background-position: center center;"></div>
                     </div>
                   </div>
                 </div>
@@ -290,16 +290,16 @@
                 <div class="row">
                   <div class="d-flex justify-content-between mb-3">
                     <div style="width: 5.5rem; height: 5.5rem;">
-                      <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('{{ $product->photo_1 ?? 'img/default.png' }}'); background-size: cover; background-position: center center;"></div>
+                      <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('/{{ $product->photo_1->path ?? 'img/default.png' }}'); background-size: cover; background-position: center center;"></div>
                     </div>
                     <div style="width: 5.5rem; height: 5.5rem;">
-                      <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('{{ $product->photo_2 ?? 'img/default.png' }}'); background-size: cover; background-position: center center;"></div>
+                      <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('/{{ $product->photo_2->path ?? 'img/default.png' }}'); background-size: cover; background-position: center center;"></div>
                     </div>
                     <div style="width: 5.5rem; height: 5.5rem;">
-                      <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('{{ $product->photo_3 ?? 'img/default.png' }}'); background-size: cover; background-position: center center;"></div>
+                      <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('/{{ $product->photo_3->path ?? 'img/default.png' }}'); background-size: cover; background-position: center center;"></div>
                     </div>
                     <div style="width: 5.5rem; height: 5.5rem;">
-                      <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('{{ $product->photo_4 ?? 'img/default.png' }}'); background-size: cover; background-position: center center;"></div>
+                      <div class="w-100 h-100 bg-image rounded-3 border border-body" style="background-image: url('/{{ $product->photo_4->path ?? 'img/default.png' }}'); background-size: cover; background-position: center center;"></div>
                     </div>
                   </div>
                 </div>

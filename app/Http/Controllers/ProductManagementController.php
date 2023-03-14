@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 
 class ProductManagementController extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
+
 //        $product = null;
 //        if (!$request->search && !$request->category_id) {
 //            $product = Product::latest();

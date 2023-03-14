@@ -46,7 +46,7 @@
             @foreach($products as $product)
               <a href="/product/{{ $product->slug }}" class="card border-secondary p-0 h-100 me-3 mb-3 text-decoration-none text-dark" style="width: 10rem; min-height: 20rem; max-height: 20rem;">
                 <div class="card-img-top" style="width: 9.9rem; height: 10rem;">
-                  <div class="card-img-top w-100 h-100 bg-image" style="background-image: url('{{ $product->photo_1 ?? 'img/default.png' }}'); background-size: cover; background-position: center center;"></div>
+                  <div class="card-img-top w-100 h-100 bg-image" style="background-image: url('/{{ $product->photo_1->path ?? 'img/default.png' }}'); background-size: cover; background-position: center center;"></div>
                 </div>
                 <div class="card-body p-2 border-top border-secondary">
                   <div class="text-truncate-container">

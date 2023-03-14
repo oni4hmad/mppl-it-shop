@@ -27,10 +27,6 @@ class CreateProductsTable extends Migration
             $table->integer('terjual')->default(0);
             $table->unsignedFloat('rating')->default(0.0);
             $table->integer('jumlah_ulasan')->default(0);
-            $table->string('photo_1')->nullable();
-            $table->string('photo_2')->nullable();
-            $table->string('photo_3')->nullable();
-            $table->string('photo_4')->nullable();
             $table->timestamps();
         });
     }

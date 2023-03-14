@@ -27,7 +27,7 @@
             {{-- foto & nama akun --}}
             <a class="nav-link dropdown-toggle d-flex flex-row align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <div class="me-2" style="width: 1.5rem; height: 1.5rem;">
-                <div class="w-100 h-100 rounded-circle border border-secondary" style="background-image: url('/{{ Auth::user()->profile_picture ?? 'assets/admin-icon.svg' }}'); background-size: cover; background-position: center center;"></div>
+                <div class="w-100 h-100 rounded-circle border border-secondary" style="background-image: url('/{{ Auth::user()->profile_picture->path ?? 'assets/admin-icon.svg' }}'); background-size: cover; background-position: center center;"></div>
               </div>
               <span class="fw-bold text-primary">{{ Auth::user()->nama }}</span>
             </a>

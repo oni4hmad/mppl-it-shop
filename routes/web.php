@@ -62,10 +62,6 @@ Route::controller(ProductController::class)->group(function () {
     Route::delete('/manage-product/{id}/delete', 'delete')->middleware('auth.admin');
 });
 
-//Route::get('/manage-product', function () {
-//    return view('admin.manage-product');
-//});
-
 Route::get('/manage-product-order', function () {
     return view('admin.manage-product-order');
 });
@@ -78,19 +74,10 @@ Route::get('/manage-technician', function () {
     return view('admin.manage-technician');
 });
 
-
 Route::controller(ProductSearchController::class)->group(function () {
     Route::get('/search', 'index');
     Route::get('/product/{product:slug}', 'show');
 });
-
-//Route::get('/search', function () {
-//    return view('search');
-//});
-
-//Route::get('/product', function () {
-//    return view('product');
-//});
 
 Route::controller(CartController::class)->group(function () {
     Route::get('/cart', 'index')->middleware('auth');
@@ -101,10 +88,6 @@ Route::controller(ProductStackCartController::class)->group(function () {
     Route::put('/cart/{productStackCart:id}', 'update')->middleware('auth');
     Route::delete('/cart/{productStackCart:id}', 'delete')->middleware('auth');
 });
-
-//Route::get('/cart', function () {
-//    return view('cart');
-//});
 
 Route::controller(CheckoutController::class)->group(function () {
     Route::get('checkout', 'index')->middleware('auth');

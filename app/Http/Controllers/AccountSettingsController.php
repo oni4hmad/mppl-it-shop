@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
@@ -66,14 +67,15 @@ class AccountSettingsController extends Controller
                 "profile_picture" => ["required", "image", "file", "max:1024", "mimes:jpeg,png,jpg"],
             ]);
 
-            $destination = auth()->user()->profile_picture;
-            if (File::exists($destination)) {
+            $profile_picture = auth()->user()->profile_picture;
+            if (isset($profile_picture) && File::exists($profile_picture->path)) {
+                $destination = $profile_picture->path;
                 File::delete($destination);
             }
-            auth()->user()->profile_picture = $request
+            $photoPath = $request
                 ->file('profile_picture')
                 ->store('photo/user', 'public_direct');
-            auth()->user()->update();
+            auth()->user()->profile_picture()->updateOrCreate([], ['path' => $photoPath]);
             return $this->updateSuccess("Foto profil");
         }
     }

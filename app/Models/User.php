@@ -76,4 +76,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Cart::class);
     }
+
+    public function profile_picture()
+    {
+        return $this->morphOne(Photo::class, 'photoable');
+    }
 }

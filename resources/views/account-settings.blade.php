@@ -108,7 +108,7 @@
         {{-- opsi foto --}}
         <div class="card w-100">
           <div class="card-img-top p-3 pb-0" style="width: auto; height: 16em;">
-            <div class="card-img-top w-100 h-100 bg-image border" style="background-image: url('/{{ Auth::user()->profile_picture ?? 'assets/user-icon.svg' }}'); background-size: cover; background-position: center center;"></div>
+            <div class="card-img-top w-100 h-100 bg-image border" style="background-image: url('/{{ Auth::user()->profile_picture->path ?? 'assets/user-icon.svg' }}'); background-size: cover; background-position: center center;"></div>
           </div>
           <div class="card-body">
             {{-- pilih foto --}}
