@@ -52,21 +52,21 @@ class Product extends Model
 
     public function photo_1()
     {
-        return $this->morphOne(Photo::class, 'photoable');
+        return $this->belongsTo(Photo::class, 'photo_id_1');
     }
 
     public function photo_2()
     {
-        return $this->morphOne(Photo::class, 'photoable');
+        return $this->belongsTo(Photo::class, 'photo_id_2');
     }
 
     public function photo_3()
     {
-        return $this->morphOne(Photo::class, 'photoable');
+        return $this->belongsTo(Photo::class, 'photo_id_3');
     }
 
     public function photo_4()
     {
-        return $this->morphOne(Photo::class, 'photoable');
+        return $this->belongsTo(Photo::class, 'photo_id_4');
     }
 }

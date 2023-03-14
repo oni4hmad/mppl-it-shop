@@ -82,24 +82,51 @@ class ProductController extends Controller
 
     private function checkAndExecuteImage($callbackExecute, $product, Request $request = null) {
         if (isset($request->photo_1) || $callbackExecute[1] == "deleteImage") {
-            $photoPath = $callbackExecute([
-                "request" => $request, "product" => $product, "photoColumn" => "photo_1"]);
-            $product->photo_1()->updateOrCreate([], ['path' => $photoPath]);
+            $photoPath = $callbackExecute(["request" => $request, "product" => $product, "photoColumn" => "photo_1"]);
+            if ($callbackExecute[1] != "deleteImage") {
+                $photo = Photo::create([
+                    'path' => $photoPath,
+                    'photoable_id' => $product->id,
+                    'photoable_type' => Product::class
+                ]);
+                $product->photo_id_1 = $photo->id;
+            }
         }
         if (isset($request->photo_2) || $callbackExecute[1] == "deleteImage") {
-            $photoPath = $callbackExecute([
-                "request" => $request, "product" => $product, "photoColumn" => "photo_2"]);
-            $product->photo_2()->updateOrCreate([], ['path' => $photoPath]);
+            $photoPath = $callbackExecute(["request" => $request, "product" => $product, "photoColumn" => "photo_2"]);
+            if ($callbackExecute[1] != "deleteImage") {
+                $photo = Photo::create([
+                    'path' => $photoPath,
+                    'photoable_id' => $product->id,
+                    'photoable_type' => Product::class
+                ]);
+                $product->photo_id_2 = $photo->id;
+            }
         }
         if (isset($request->photo_3) || $callbackExecute[1] == "deleteImage") {
-            $photoPath = $callbackExecute([
-                "request" => $request, "product" => $product, "photoColumn" => "photo_3"]);
-            $product->photo_3()->updateOrCreate([], ['path' => $photoPath]);
+            $photoPath = $callbackExecute(["request" => $request, "product" => $product, "photoColumn" => "photo_3"]);
+            if ($callbackExecute[1] != "deleteImage") {
+                $photo = Photo::create([
+                    'path' => $photoPath,
+                    'photoable_id' => $product->id,
+                    'photoable_type' => Product::class
+                ]);
+                $product->photo_id_3 = $photo->id;
+            }
         }
         if (isset($request->photo_4) || $callbackExecute[1] == "deleteImage") {
-            $photoPath = $callbackExecute([
-                "request" => $request, "product" => $product, "photoColumn" => "photo_4"]);
-            $product->photo_4()->updateOrCreate([], ['path' => $photoPath]);
+            $photoPath = $callbackExecute(["request" => $request, "product" => $product, "photoColumn" => "photo_4"]);
+            if ($callbackExecute[1] != "deleteImage") {
+                $photo = Photo::create([
+                    'path' => $photoPath,
+                    'photoable_id' => $product->id,
+                    'photoable_type' => Product::class
+                ]);
+                $product->photo_id_4 = $photo->id;
+            }
+        }
+        if ($callbackExecute[1] == "storeImage") {
+            $product->save();
         }
     }
 
@@ -111,15 +138,26 @@ class ProductController extends Controller
     private function updateImage(array $args)
     {
         $this->deleteImage($args);
-        return $args["request"]->file($args["photoColumn"])->store('photo/product', 'public_direct');
+        return $args["request"]->file($args["photoColumn"])->store('photo/product', 'public_direct');;
     }
 
     private function deleteImage(array $args)
     {
+//        dd([$args["product"][$args["photoColumn"]], $args["product"]->category, $args["product"]->photo_1]);
         $photo = $args["product"][$args["photoColumn"]];
         if (isset($photo) && File::exists($args["product"][$args["photoColumn"]]->path)) {
+//            dd($args["product"][$args["photoColumn"]]->id);
             $destination = $args["product"][$args["photoColumn"]]->path;
-            File::delete($destination);
+            $linkedPhoto = Photo::where('path', $destination)->get();
+            if (count($linkedPhoto) <= 1) {
+                File::delete($destination);
+            }
+
+            // TODO: delete record on photo table (parent table)
+//            $args["product"][$args["photoColumn"]]->delete();
+            $args['product']['photo_id_'.substr($args['photoColumn'], -1)] = null;
+            $args['product']->save();
+            Photo::find($args["product"][$args["photoColumn"]]->id)->delete();
         }
     }
 

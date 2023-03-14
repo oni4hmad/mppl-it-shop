@@ -19,6 +19,10 @@ class ProductFactory extends Factory
             'stok' => $this->faker->numberBetween(1, 200),
             'berat' => $this->faker->numberBetween(200, 2000),
             'deskripsi' => $this->faker->paragraphs(2, true),
+            'photo_id_1' => null,
+            'photo_id_2' => null,
+            'photo_id_3' => null,
+            'photo_id_4' => null,
         ];
     }
 }
