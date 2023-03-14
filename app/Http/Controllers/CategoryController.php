@@ -17,11 +17,11 @@ class CategoryController extends Controller
 
         $category = new Category();
         $category->nama = $request->nama;
-        $category->photo = $request
+        $photoPath = $request
             ->file('photo')
             ->store('photo/category', 'public_direct');
         $category->save();
-
+        $category->photo()->updateOrCreate([], ['path' => $photoPath]);
         return redirect()
             ->back()
             ->with(['success' => "Kategori berhasil ditambahkan."]);

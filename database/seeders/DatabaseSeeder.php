@@ -69,12 +69,20 @@ class DatabaseSeeder extends Seeder
         /* Category */
         /* add initial category */
         DB::table('categories')->insert([
-            ['nama' => 'Processor', 'slug' => 'processor', 'photo' => 'proci.png'],
-            ['nama' => 'Graphics Card', 'slug' => 'graphics-card', 'photo' => 'gpu.png'],
-            ['nama' => 'Memory', 'slug' => 'memory', 'photo' => 'ram.png'],
-            ['nama' => 'Storage', 'slug' => 'storage', 'photo' => 'storage.png'],
-            ['nama' => 'Monitor', 'slug' => 'monitor', 'photo' => 'monitor.png'],
+            ['nama' => 'Processor', 'slug' => 'processor'],
+            ['nama' => 'Graphics Card', 'slug' => 'graphics-card'],
+            ['nama' => 'Memory', 'slug' => 'memory'],
+            ['nama' => 'Storage', 'slug' => 'storage'],
+            ['nama' => 'Monitor', 'slug' => 'monitor'],
         ]);
+        DB::table('photos')->insert([
+            ['path' => 'photo/category/proci.png', 'photoable_id' => 1, 'photoable_type' => Category::class ],
+            ['path' => 'photo/category/gpu.png', 'photoable_id' => 2, 'photoable_type' => Category::class ],
+            ['path' => 'photo/category/ram.png', 'photoable_id' => 3, 'photoable_type' => Category::class ],
+            ['path' => 'photo/category/storage.png', 'photoable_id' => 4, 'photoable_type' => Category::class ],
+            ['path' => 'photo/category/monitor.png', 'photoable_id' => 5, 'photoable_type' => Category::class ],
+        ]);
+
         Category::all()->each(function ($category) {
             $products = Product::factory()->count(10)->make();
             $category->products()->saveMany($products);
