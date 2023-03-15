@@ -9,25 +9,7 @@
     <div class="row">
 
       {{-- sidebar --}}
-      <div class="col-auto ps-4 py-4 border-end border-1" style="width: 200px;">
-        <div class="sticky-top" id="sticky-fix">
-          {{-- sidebar: profile --}}
-          <div class="row border-bottom pb-4 mb-4">
-            <div class="col px-0 pe-1" style="max-width: 50px; max-height: 50px;">
-              <div style="width: 50px; height: 50px;">
-                <div class="w-100 h-100 bg-image rounded-circle border" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
-              </div>
-            </div>
-            <div class="col">
-              <p class="m-0 p-0 fw-bold text-break">Oni Ahmad</p>
-              <p class="m-0 p-0 text-primary text-break">Pelanggan</p>
-            </div>
-          </div>
-          {{-- sidebar: menu --}}
-          <a href="/order-history-product" class="text-decoration-none"><p class="fw-bold text-break text-secondary">Produk Elektronik</p></a>
-          <a href="/order-history-service" class="text-decoration-none"><p class="fw-bold text-break text-dark text-decoration-underline">Servis Komputer</p></a>
-        </div>
-      </div>
+      @include('partials.user-sidebar')
 
       <div class="col">
         {{-- header menu --}}

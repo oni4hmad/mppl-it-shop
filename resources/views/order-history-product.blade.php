@@ -10,28 +10,7 @@
     <div class="row">
 
       {{-- sidebar --}}
-
-      <div class="col-auto ps-4 py-4 border-end border-1" style="width: 200px;">
-        <div class="sticky-top" id="sticky-fix">
-          {{-- sidebar: profile --}}
-          <div class="row border-bottom pb-4 mb-4">
-            <div class="col px-0 pe-1" style="max-width: 50px; max-height: 50px;">
-              <div style="width: 50px; height: 50px;">
-                <div class="w-100 h-100 bg-image rounded-circle border" style="background-image: url('/{{ Auth::user()->profile_picture->path ?? 'assets/user-icon.svg' }}'); background-size: cover; background-position: center center;"></div>
-              </div>
-            </div>
-            <div class="col">
-              <p class="m-0 p-0 fw-bold text-break">{{ auth()->user()->nama }}</p>
-              <p class="m-0 p-0 text-primary text-break">Pelanggan</p>
-            </div>
-          </div>
-          {{-- sidebar: menu --}}
-          <a href="/order-history-product" class="text-decoration-none"><p
-              class="fw-bold text-break text-dark text-decoration-underline">Produk Elektronik</p></a>
-          <a href="/order-history-service" class="text-decoration-none"><p class="fw-bold text-break text-secondary">
-              Servis Komputer</p></a>
-        </div>
-      </div>
+      @include('partials.user-sidebar')
 
       <div class="col">
         {{-- header menu --}}
@@ -80,7 +59,6 @@
           {{-- baris order dynamic --}}
           <div class="row border-bottom border-end bg-white">
             <div class="col-5">
-
               {{-- order item --}}
               @foreach($productOrder->product_stack_orders as $productStackOrder)
                 <a href="/product/{{ $productStackOrder->product->slug }}" class="text-decoration-none text-black">
@@ -109,7 +87,6 @@
                   </div>
                 </a>
               @endforeach
-
             </div>
             {{-- status --}}
             <div class="col-2 py-3">
@@ -145,8 +122,7 @@
             <div class="col-3 py-3">
               <div class="--sticky-table-item" style="z-index: 1;">
                 <a href="/track" class="btn btn-primary btn-sm rounded-3 w-100 fw-bold">Lacak</a>
-                <p class="--sticky-table-item mb-0 text-secondary w-100 text-center">Order
-                  ID: {{ $productOrder->id }}</p>
+                <p class="--sticky-table-item mb-0 text-secondary w-100 text-center">Order ID: {{ $productOrder->id }}</p>
               </div>
             </div>
           </div>
