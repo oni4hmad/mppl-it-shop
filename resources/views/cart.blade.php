@@ -255,7 +255,7 @@
                 </div>
                 <div class="col d-flex flex-column justify-content-between">
                   <div class="row justify-content-between">
-                    <div class="col-auto">
+                    <div class="col">
                       <p class="mb-0 text-break">{{ $productStackCart->product->nama }}</p>
                       <p class="px-0 fw-bolder text-break">Rp{{ number_format($productStackCart->product->harga, 0, ',', '.') }}</p>
                     </div>
