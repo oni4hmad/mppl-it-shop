@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PlaceOrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductManagementController;
 use App\Http\Controllers\ProductSearchController;
@@ -90,12 +91,16 @@ Route::controller(ProductStackCartController::class)->group(function () {
 });
 
 Route::controller(CheckoutController::class)->group(function () {
-    Route::get('checkout', 'index')->middleware('auth');
+    Route::get('/checkout', 'index')->middleware('auth');
 });
 
 //Route::get('/checkout', function () {
 //    return view('checkout');
 //});
+
+Route::controller(PlaceOrderController::class)->group(function () {
+    Route::post('/place-order', 'store')->middleware('auth');
+});
 
 Route::get('/payment', function () {
     return view('payment');

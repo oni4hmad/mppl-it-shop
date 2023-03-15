@@ -24,7 +24,7 @@ class CreateProductOrdersTable extends Migration
             $table->string('nomor_hp');
             $table->unsignedBigInteger('total_bayar');
             $table->integer('ongkos_kirim');
-            $table->enum('status', ProductOrderStatus::getValues());
+            $table->enum('status', ProductOrderStatus::getValues())->default(ProductOrderStatus::MENUNGGU_DIBAYAR);
             $table->timestamps();
         });
     }
