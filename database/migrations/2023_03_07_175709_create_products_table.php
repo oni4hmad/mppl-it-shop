@@ -47,6 +47,7 @@ class CreateProductsTable extends Migration
 //            $table->foreignId('photo_3')->nullable();
 //            $table->foreignId('photo_4')->nullable();
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }
