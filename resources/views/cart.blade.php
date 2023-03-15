@@ -162,8 +162,10 @@
 
     function onChangeQty(productStackCartId, inputElement) {
       console.log(productStackCartId, inputElement, inputElement.value);
-      inputElement.value = inputElement.value < inputElement.min ? inputElement.min : inputElement.value;
-      inputElement.value = inputElement.value > inputElement.max ? inputElement.max : inputElement.value;
+      inputElement.value = parseInt(inputElement.value) < parseInt(inputElement.min) ?
+        inputElement.min : inputElement.value;
+      inputElement.value = parseInt(inputElement.value) > parseInt(inputElement.max) ?
+        inputElement.max : inputElement.value;
 
       let csrf_token = document.querySelector("meta[name='csrf-token']").content;
       const showControl = (show) => {
@@ -195,9 +197,9 @@
           });
           return;
         }
-        response.text().then(json => {
+        response.json().then(json => {
           console.log("response", json);
-          if (!json.error) {
+          if (json && !json.error) {
             updateCheckedProductStackCartQty();
             updateRingkasanBelanja();
             disableCheckoutBtn(false);

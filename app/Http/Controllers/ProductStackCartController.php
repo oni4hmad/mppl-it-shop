@@ -16,15 +16,16 @@ class ProductStackCartController extends Controller
             $productStackCart->kuantitas = $request->kuantitas;
         }
         $productStackCart->save();
-        response()->json([
+        return response()->json([
             'error' => false,
+            'request' => $request->all()
         ]);
     }
 
     public function delete(ProductStackCart $productStackCart)
     {
         $productStackCart->delete();
-        response()->json([
+        return response()->json([
             'error' => false,
         ]);
     }

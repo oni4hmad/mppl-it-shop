@@ -4,13 +4,14 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
         // Get the local input filed
         let inputElement = e.currentTarget.parentNode.parentNode.childNodes[3];
-        let max = parseInt(inputElement.getAttribute("max"));
-        let quantity = parseInt(inputElement.getAttribute("value"));
+        let max = parseInt(inputElement.max);
+        let quantity = parseInt(inputElement.value);
 
+        console.log('max', max, 'qty', quantity);
         // If is not undefined
         // Increment
         if (quantity < max) {
-            inputElement.setAttribute("value", quantity+1);
+            inputElement.value = quantity+1;
             inputElement.onchange();
         }
     });
@@ -20,13 +21,14 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
         // Get the local input filed
         let inputElement = e.currentTarget.parentNode.parentNode.childNodes[3];
-        let min = parseInt(inputElement.getAttribute("min"));
-        let quantity = parseInt(inputElement.getAttribute("value"));
+        let min = parseInt(inputElement.min);
+        let quantity = parseInt(inputElement.value);
 
+        console.log('min', min, 'qty', quantity);
         // If is not undefined
         // Decrement
         if (quantity > min) {
-            inputElement.setAttribute("value", quantity-1);
+            inputElement.value = quantity-1;
             inputElement.onchange();
         }
     });
