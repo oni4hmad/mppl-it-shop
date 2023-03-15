@@ -145,24 +145,26 @@
             <div class="col-6">
 
               {{-- product item --}}
-              <div class="row mx-0 py-3">
-                {{-- image --}}
-                <div class="col-auto px-0 rounded-3">
-                  <div class="p-0 me-1">
-                    <div style="width: 6.5rem; height: 6.5rem;">
-                      <div class="w-100 h-100 rounded-3 border border-body" style="background-image: url('/{{ $product->photo_1->path ?? 'img/default.png' }}'); background-size: cover; background-position: center center;"></div>
+              <a class="text-decoration-none text-black" href="/product/{{ $product->slug }}">
+                <div class="row mx-0 py-3">
+                  {{-- image --}}
+                  <div class="col-auto px-0 rounded-3">
+                    <div class="p-0 me-1">
+                      <div style="width: 6.5rem; height: 6.5rem;">
+                        <div class="w-100 h-100 rounded-3 border border-body" style="background-image: url('/{{ $product->photo_1->path ?? 'img/default.png' }}'); background-size: cover; background-position: center center;"></div>
+                      </div>
+                    </div>
+                  </div>
+                  {{-- product name --}}
+                  <div class="--sticky-table-item col d-flex flex-column justify-content-between">
+                    <div class="row justify-content-between">
+                      <div class="col-auto">
+                        <p class="mb-0 fw-bolder text-break">{{ $product->nama }}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-                {{-- product name --}}
-                <div class="--sticky-table-item col d-flex flex-column justify-content-between">
-                  <div class="row justify-content-between">
-                    <div class="col-auto">
-                      <p class="mb-0 fw-bolder text-break">{{ $product->nama }}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              </a>
 
             </div>
             {{-- harga --}}
