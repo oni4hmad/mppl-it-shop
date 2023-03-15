@@ -16,6 +16,8 @@ class CheckoutController extends Controller
             ->with('product')
             ->where('checked', true)
             ->get();
+
+        // TODO: handle error Checkout: No items found
         if (count($checkedProductStackCarts) <= 0) {
             return "No items found.";
         }

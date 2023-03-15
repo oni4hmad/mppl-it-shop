@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AddressOrder;
+use App\Models\CourierType;
 use App\Models\Product;
 use App\Models\ProductOrder;
 use App\Models\ProductStackCart;
@@ -19,8 +20,8 @@ class PlaceOrderController extends Controller
             "courier_id" => ["required", "exists:couriers,id"],
             "courier_type_id" => ["required", "exists:courier_types,id"],
             "payment_method_id" => ["required", "exists:payment_methods,id"],
-            "subtotal" => ["required", "numeric", "min:0"],
-            "ongkos_kirim" => ["required", "numeric", "min:0"],
+            "subtotal" => ["required", "numeric", "min:0"], // TODO: subtotal not used
+            "ongkos_kirim" => ["required", "numeric", "min:0"], // TODO: subtotal not used
             "total_bayar" => ["required", "numeric", "min:0"],
             "kota" => ["required"],
             "kode_pos" => ["required", "numeric"],
@@ -33,8 +34,23 @@ class PlaceOrderController extends Controller
             ->get();
 
         /* validate $checkedProductStackCarts hash */
+        // TODO: handle error PlaceOrder: terjadi perubahan data ketika melakukan checkout.
         if ($request->checkedProductStackCarts_hash != md5(json_encode($checkedProductStackCarts))) {
             return "Error: terjadi perubahan data ketika melakukan checkout. Silahkan coba lagi.";
+        }
+
+        /* validate total_bayar */
+        $verified_total_bayar = 0;
+        foreach ($checkedProductStackCarts as $productStackCart) {
+            $productId = $productStackCart->product->id;
+            $orderQty = $productStackCart->kuantitas;
+            $product = Product::find($productId);
+            $verified_total_bayar += $product->harga * $orderQty;
+        }
+        $verified_total_bayar += CourierType::find($request->courier_type_id)->harga;
+        // TODO: handle error PlaceOrder: total bayar tidak valid.
+        if ($verified_total_bayar != $request->total_bayar) {
+            return "Error: total bayar tidak valid.";
         }
 
         /* clear $checkedProductStackCarts from user cart */
@@ -87,6 +103,7 @@ class PlaceOrderController extends Controller
         });
 
 //        dd([json_encode($request->all()), md5(json_encode($checkedProductStackCarts))]);
+        // TODO: handle place order berhasil
         return "Place order berhasil";
     }
 }
