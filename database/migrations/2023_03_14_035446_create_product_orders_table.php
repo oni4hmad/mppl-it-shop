@@ -22,9 +22,10 @@ class CreateProductOrdersTable extends Migration
             $table->foreignId('address_order_id')->constrained();
             $table->string('nama_penerima');
             $table->string('nomor_hp');
+            $table->string('nomor_resi')->nullable();
             $table->unsignedBigInteger('total_bayar');
             $table->integer('ongkos_kirim');
-            $table->enum('status', ProductOrderStatus::getValues())->default(ProductOrderStatus::MENUNGGU_DIBAYAR);
+            $table->enum('status', ProductOrderStatus::getValues())->default(ProductOrderStatus::MENUNGGU_PEMBAYARAN);
             $table->timestamps();
         });
     }

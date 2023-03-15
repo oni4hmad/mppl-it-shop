@@ -8,6 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PlaceOrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductManagementController;
+use App\Http\Controllers\ProductOrderController;
 use App\Http\Controllers\ProductSearchController;
 use App\Http\Controllers\ProductStackCartController;
 use App\Http\Controllers\RegistrationController;
@@ -94,25 +95,27 @@ Route::controller(CheckoutController::class)->group(function () {
     Route::get('/checkout', 'index')->middleware('auth');
 });
 
-//Route::get('/checkout', function () {
-//    return view('checkout');
-//});
-
 Route::controller(PlaceOrderController::class)->group(function () {
     Route::post('/place-order', 'store')->middleware('auth');
 });
 
+// TODO: not done yet
 Route::get('/payment', function () {
     return view('payment');
 });
 
+// TODO: not done yet
 Route::get('/service-order', function () {
     return view('service-order');
 });
 
-Route::get('/order-history-product', function () {
-    return view('order-history-product');
+Route::controller(ProductOrderController::class)->group(function () {
+    Route::get('/order-history-product', 'index')->middleware('auth');
 });
+
+//Route::get('/order-history-product', function () {
+//    return view('order-history-product');
+//});
 
 Route::get('/order-history-service  ', function () {
     return view('order-history-service  ');

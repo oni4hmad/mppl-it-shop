@@ -18,6 +18,11 @@ class ProductOrder extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function product_stack_orders()
+    {
+        return $this->hasMany(ProductStackOrder::class);
+    }
+
     public function payment_method()
     {
         return $this->belongsTo(PaymentMethod::class);
@@ -36,11 +41,6 @@ class ProductOrder extends Model
     public function courier()
     {
         return $this->courier_type->courier;
-    }
-
-    public function product_stack_orders()
-    {
-        return $this->hasMany(ProductStackOrder::class);
     }
 
     public function bukti_pembayaran()

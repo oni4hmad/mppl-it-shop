@@ -13,6 +13,11 @@ class ProductStackOrder extends Model
         "id",
     ];
 
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
     public function photo()
     {
         return $this->morphOne(Photo::class, 'photoable');

@@ -11,7 +11,7 @@ use BenSampo\Enum\Enum;
  */
 final class ProductOrderStatus extends Enum
 {
-    const MENUNGGU_DIBAYAR = "0";
+    const MENUNGGU_PEMBAYARAN = "0";
     const MENUNGGU_VERIFIKASI = "1";
     const MENUNGGU_RESI = "2";
     const SEDANG_DIKIRIM = "3";
