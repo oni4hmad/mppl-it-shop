@@ -35,9 +35,9 @@
           <h5 class="fw-bold text-primary pt-4 pb-2">Riwayat Order</h5>
           <div class="d-flex flex-row align-items-center mb-3">
             <div class="input-group input-group-sm rounded" style="width: 250px;">
-              <button type="button" class="btn btn-white bg-white border-end-0 border rounded-end rounded-pill px-3">
+              <a class="btn btn-white bg-white border-end-0 border rounded-end rounded-pill px-3" style="cursor: default !important;">
                 <i class="fas fa-search text-secondary"></i>
-              </button>
+              </a>
               <input type="search" class="form-control rounded-start rounded-pill border-start-0" placeholder="Cari orderan" aria-label="Search" aria-describedby="search-addon" />
             </div>
           </div>

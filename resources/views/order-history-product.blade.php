@@ -50,11 +50,10 @@
               </select>
             </div>
             <div class="input-group input-group-sm rounded" style="width: 250px;">
-              <button type="button" class="btn btn-white bg-white border-end-0 border rounded-end rounded-3 px-3">
+              <a class="btn btn-white bg-white border-end-0 border rounded-end rounded-pill px-3" style="cursor: default !important;">
                 <i class="fas fa-search text-secondary"></i>
-              </button>
-              <input type="search" class="form-control rounded-start rounded-3 border-start-0"
-                     placeholder="Cari orderan" aria-label="Search" aria-describedby="search-addon"/>
+              </a>
+              <input type="search" class="form-control rounded-start rounded-pill border-start-0" placeholder="Cari orderan" aria-label="Search" aria-describedby="search-addon" />
             </div>
           </div>
           <div class="container-fluid border-top bg-white">
