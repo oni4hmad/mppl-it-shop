@@ -10,6 +10,7 @@ use App\Http\Controllers\PlaceOrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductManagementController;
 use App\Http\Controllers\ProductOrderController;
+use App\Http\Controllers\ProductOrderManagementController;
 use App\Http\Controllers\ProductRatingController;
 use App\Http\Controllers\ProductSearchController;
 use App\Http\Controllers\ProductStackCartController;
@@ -68,9 +69,14 @@ Route::controller(ProductController::class)->group(function () {
 });
 
 // TODO: route not done yet
-Route::get('/manage-product-order', function () {
-    return view('admin.manage-product-order');
+Route::controller(ProductOrderManagementController::class)->group(function () {
+    Route::get('/manage-product-order', 'index')->middleware('auth.admin');
+    Route::post('/confirm-payment/{productOrder:id}', 'confirmPayment')->middleware('auth.admin');
+    Route::post('/update-resi/{productOrder:id}', 'updateResi')->middleware('auth.admin');
 });
+//Route::get('/manage-product-order', function () {
+//    return view('admin.manage-product-order');
+//});
 
 // TODO: route not done yet
 Route::get('/manage-service-order', function () {
@@ -115,6 +121,7 @@ Route::controller(ProductOrderController::class)->group(function () {
     Route::put('/payment/{productOrder:id}', 'update')->middleware('auth');
     Route::post('/cancel-order-product/{productOrder:id}', 'cancel')->middleware('auth');
     Route::get('/track/{productOrder:id}', 'track')->middleware('auth');
+    Route::put('/mark-order-done/{productOrder:id}', 'markDone')->middleware('auth');
 });
 
 Route::controller(ProductRatingController::class)->group(function () {

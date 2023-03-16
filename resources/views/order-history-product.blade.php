@@ -17,6 +17,16 @@
       background-color: #c82333;
       border-color: #bd2130;
     }
+
+    .btn-success {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .btn-success:hover {
+      background-color: #218838;
+      color: white;
+    }
   </style>
 
   <script>
@@ -196,7 +206,12 @@
                     <button class="btn btn-primary btn-sm rounded-3 w-100 fw-bold" disabled>Lacak</button>
                     @break
                   @case(ProductOrderStatus::SEDANG_DIKIRIM)
-                    <a href="/track/{{ $productOrder->id }}" class="btn btn-primary btn-sm rounded-3 w-100 fw-bold">Lacak</a>
+                    <a href="/track/{{ $productOrder->id }}" class="btn btn-primary btn-sm rounded-3 w-100 fw-bold border border-white">Lacak</a>
+                    <form action="/mark-order-done/{{ $productOrder->id }}" method="post">
+                      @method('put')
+                      @csrf
+                      <button type="submit" class="btn btn-success btn-sm rounded-3 w-100 fw-bold border border-white text-white">Konfirmasi Diterima</button>
+                    </form>
                     @break
                   @case(ProductOrderStatus::ORDER_SELESAI)
                     @php
@@ -288,7 +303,7 @@
                       <h5 class="modal-title" id="staticBackdropLabel">Upload Bukti Pembayaran</h5>
                     </div>
                     <div class="col-auto p-0">
-                      <p class="small ms-3 py-0 px-2 m-0 bg-secondary rounded-3 text-white fw-bold">Order ID: {{ $productOrder->id }}</span></p>
+                      <p class="small ms-3 py-0 px-2 m-0 bg-secondary rounded-3 text-white fw-bold">Order ID: {{ $productOrder->id }}</p>
                     </div>
                   </div>
                 </div>

@@ -102,8 +102,7 @@ class PlaceOrderController extends Controller
             }
         });
 
-//        dd([json_encode($request->all()), md5(json_encode($checkedProductStackCarts))]);
         // TODO: handle place order berhasil
-        return "Place order berhasil";
+        return redirect('/payment/'.$productOrder->id);
     }
 }

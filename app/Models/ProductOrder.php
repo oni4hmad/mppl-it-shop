@@ -40,7 +40,14 @@ class ProductOrder extends Model
 
     public function courier()
     {
-        return $this->courier_type->courier;
+        return $this->hasOneThrough(
+            Courier::class,
+            CourierType::class,
+            'id',
+            'id',
+            'courier_type_id',
+            'courier_id'
+        );
     }
 
     public function bukti_pembayaran()

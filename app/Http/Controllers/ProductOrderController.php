@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ProductOrderStatus;
+use App\Enums\UserType;
 use App\Models\ProductOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -52,24 +53,41 @@ class ProductOrderController extends Controller
 
     public function cancel(ProductOrder $productOrder)
     {
-        if ($productOrder->user->id != auth()->user()->id) {
+        $isThisUserProductOrder = $productOrder->user->id == auth()->user()->id;
+        $isThisUserAdmin = auth()->user()->user_type == UserType::ADMINISTRATOR;
+        if (!$isThisUserProductOrder && !$isThisUserAdmin) {
             // TODO: add error cancel order order ini bukan milik current user
             return 'error: this order isn\'t yours';
         }
         $productOrder->update(['status' => ProductOrderStatus::DIBATALKAN]);
-        return redirect('/order-history-product')
+        return redirect()->back()
             ->with('success', 'Order berhasil dibatalkan (Order ID: '.$productOrder->id.')');
     }
 
     public function track(ProductOrder $productOrder, Request $request)
     {
         $isThisUserProductOrder = $productOrder->user->id == auth()->user()->id;
+        $isThisUserAdmin = auth()->user()->user_type == UserType::ADMINISTRATOR;
         $isThisProductOrderHasResi = isset($productOrder->nomor_resi);
-        if (!$isThisUserProductOrder || !$isThisProductOrderHasResi) {
+        if ((!$isThisUserProductOrder && !$isThisUserAdmin) || !$isThisProductOrderHasResi) {
             // TODO: add 404 page track
             return "404 (not your order (or) not have nomor_resi)";
         }
         return view('track')
             ->with('nomor_resi', $productOrder->nomor_resi);
+    }
+
+    public function markDone(ProductOrder $productOrder)
+    {
+        $isThisUserProductOrder = $productOrder->user->id == auth()->user()->id;
+        $isThisUserAdmin = auth()->user()->user_type == UserType::ADMINISTRATOR;
+        $isThisProductOrderHasResi = isset($productOrder->nomor_resi);
+        if ((!$isThisUserProductOrder && !$isThisUserAdmin) || !$isThisProductOrderHasResi) {
+            // TODO: add 404 page track
+            return "404 (not your order (or) not have nomor_resi)";
+        }
+        $productOrder->update(['status' => ProductOrderStatus::ORDER_SELESAI]);
+        return redirect()->back()
+            ->with('success', 'Berhasil mengonfirmasi produk telah selesai diterima. (Order ID: '.$productOrder->id.')');
     }
 }
