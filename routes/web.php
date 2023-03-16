@@ -74,6 +74,7 @@ Route::controller(ProductOrderManagementController::class)->group(function () {
     Route::post('/confirm-payment/{productOrder:id}', 'confirmPayment')->middleware('auth.admin');
     Route::post('/update-resi/{productOrder:id}', 'updateResi')->middleware('auth.admin');
 });
+
 //Route::get('/manage-product-order', function () {
 //    return view('admin.manage-product-order');
 //});
@@ -105,6 +106,7 @@ Route::controller(ProductStackCartController::class)->group(function () {
 
 Route::controller(CheckoutController::class)->group(function () {
     Route::get('/checkout', 'index')->middleware('auth');
+    Route::post('/checkout/{product:id}', 'directCheckout')->middleware('auth');
 });
 
 Route::controller(PlaceOrderController::class)->group(function () {
@@ -140,6 +142,11 @@ Route::get('/order-history-service', function () {
 Route::get('/confirm-service-availability', function () {
     return view('technician.confirm-service-availability');
 });
+
+
+
+
+
 
 Route::get('/test', function () {
     return view('playground._test-pg', [

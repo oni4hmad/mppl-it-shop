@@ -12,6 +12,8 @@ class ProductStackCart extends Model
     protected $fillable = [
         'cart_id',
         'product_id',
+        'kuantitas',
+        'checked',
     ];
 
     public function product()

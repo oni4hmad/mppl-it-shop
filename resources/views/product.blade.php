@@ -227,30 +227,34 @@
               <h5 class="fw-bolder">Atur Jumlah</h5>
             </div>
             <div class="card-body">
+              <form action="/checkout/{{ $product->id }}" method="post">
+                @csrf
 
-              {{-- numeric up down --}}
-              <div class="d-flex flex-row align-items-center input-group mb-3">
-                <span class="input-group-btn">
-                  <button type="button" class="quantity-left-minus btn btn-primary btn-number" data-type="minus" data-field="">
-                    <i class="fas fa-minus text-white"></i>
-                  </button>
-                </span>
-                <input type="number" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="{{ $product->stok }}">
-                <span class="input-group-btn">
-                  <button type="button" class="quantity-right-plus btn btn-primary btn-number" data-type="plus" data-field="">
-                    <i class="fas fa-plus text-white"></i>
-                  </button>
-                </span>
-                <p class="card-text ms-3">Stok <b>{{ $product->stok }}</b></p>
-              </div>
+                {{-- numeric up down --}}
+                <div class="d-flex flex-row align-items-center input-group mb-3">
+                  <span class="input-group-btn">
+                    <button type="button" class="quantity-left-minus btn btn-primary btn-number" data-type="minus" data-field="">
+                      <i class="fas fa-minus text-white"></i>
+                    </button>
+                  </span>
+                  <input type="number" id="quantity" name="kuantitas" class="form-control input-number" value="1" min="1" max="{{ $product->stok }}">
+                  <span class="input-group-btn">
+                    <button type="button" class="quantity-right-plus btn btn-primary btn-number" data-type="plus" data-field="">
+                      <i class="fas fa-plus text-white"></i>
+                    </button>
+                  </span>
+                  <p class="card-text ms-3">Stok <b>{{ $product->stok }}</b></p>
+                </div>
 
-              {{-- masukkan keranjang / checkout --}}
-              @if(auth()->check())
-                <button id="btn-add-to-cart" type="button" class="btn btn-primary w-100 mb-2 fw-bold" onclick="addToCart()">Masukkan Keranjang</button>
-              @else
-                <a href="/login" id="btn-add-to-cart" class="btn btn-primary w-100 mb-2 fw-bold">Masukkan Keranjang</a>
-              @endif
-              <a href="/cart" class="btn btn-outline-primary w-100 fw-bold">Checkout</a>
+                {{-- masukkan keranjang / checkout --}}
+                @if(auth()->check())
+                  <button id="btn-add-to-cart" type="button" class="btn btn-primary w-100 mb-2 fw-bold" onclick="addToCart()">Masukkan Keranjang</button>
+                @else
+                  <a href="/login" id="btn-add-to-cart" class="btn btn-primary w-100 mb-2 fw-bold">Masukkan Keranjang</a>
+                @endif
+                <button type="submit" class="btn btn-outline-primary w-100 fw-bold">Checkout</button>
+
+              </form>
             </div>
           </div>
         </div>
