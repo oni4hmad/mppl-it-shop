@@ -22,6 +22,41 @@
   <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
   <script src="/js/copy-kode-pembayaran.js"></script>
 
+  <script>
+    const productStackOrders = {!! json_encode($productOrder->product_stack_orders) !!};
+    const stacksTotalQty = productStackOrders.map(i => i.kuantitas).reduce((a, b) => a + b, 0);
+
+    window.onload = () => {
+      /* update stacks qty */
+      document.querySelector('#text-count-barang').innerText = `Total: ${stacksTotalQty} barang`;
+      /* show errors */
+      @if ($errors->any())
+      {{--show error validation toast--}}
+      let toastErrorEl = document.getElementById('toast-error');
+      let changeErrorText = (text) => toastErrorEl.querySelector('.toast-body').innerHTML = `${text}`;
+      let toastError = new bootstrap.Toast(toastErrorEl);
+      let message = "Pengisian gagal:";
+      @foreach ($errors->all() as $error)
+        message += "<li>{{ $error }}</li>";
+      @endforeach
+      changeErrorText(message);
+      toastError.show();
+      @endif
+    };
+  </script>
+
+  {{--toast error--}}
+  <div class="toast-container position-fixed p-3 py-5 bottom-0 start-50 translate-middle-x z-3">
+    <div id="toast-error" class="toast align-items-center bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="300000">
+      <div class="d-flex">
+        <div class="toast-body text-white">
+          Hello, world! This is a toast message.
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
   <div class="container my-4" style="height: 85vh;">
     <div class="row w-100 justify-content-center">
       {{-- batas akhir pembayaran --}}
@@ -38,14 +73,14 @@
           <div class="card-body py-4">
             <p class="card-text mb-0 fw-bold">Nomor Rekening</p>
             <div class="d-flex mb-4 justify-content-between align-items-center">
-              <p class="card-text fw-bold fs-4 mb-0 me-4">{{ '827708912341234' }}</p>
-              <button id="copy-kode-pembayaran" data-clipboard-text="{{ '827708912341234' }}" type="button" class="btn btn-outline-primary fw-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-trigger="manual" title="Copied!">
+              <p class="card-text fw-bold fs-5 mb-0 me-4">{{ $productOrder->payment_method->nomor_rekening ?? '99999999999999' }}</p>
+              <button id="copy-kode-pembayaran" data-clipboard-text="{{ $productOrder->payment_method->nomor_rekening ?? '99999999999999' }}" type="button" class="btn btn-sm btn-outline-primary fw-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-trigger="manual" title="Copied!">
                 <i class="fas fa-copy me-1"></i>Salin
               </button>
             </div>
             <p class="card-text mb-0 fw-bold">Total Pembayaran</p>
             <div class="d-flex justify-content-between align-items-center">
-              <p class="card-text fw-bold fs-4 mb-0 me-4">Rp7.015.000</p>
+              <p class="card-text fw-bold fs-5 mb-0 me-4">Rp{{ isset($productOrder->total_bayar) ? number_format($productOrder->total_bayar, 0, ',', '.') : "0.000.000" }}</p>
               <button type="button" class="btn btn-outline-primary btn-sm fw-bold" data-bs-toggle="modal" data-bs-target="#modal-detail-order">Detail Order</button>
             </div>
           </div>
@@ -73,13 +108,14 @@
           <h5 class="modal-title" id="staticBackdropLabel">Upload Bukti Pembayaran</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form enctype="multipart/form-data" action="/category" method="post">
+        <form enctype="multipart/form-data" action="/payment/{{ $productOrder->id }}" method="post">
+          @method('put')
           @csrf
           <div class="modal-body">
             <div class="row mb-2">
               <div class="col">
                 <p class="mb-0 fw-bold">Atas Nama</p>
-                <input name="atas_nama" type="text" class="form-control" autocomplete="name" autofocus placeholder="Nama" required>
+                <input name="nama_pembayar" type="text" class="form-control" autocomplete="name" autofocus placeholder="Nama" required>
               </div>
             </div>
             <div class="row">
@@ -104,25 +140,26 @@
       <div class="modal-content">
         <div class="modal-header">
           <div class="row">
-            <h5 class="modal-title" id="staticBackdropLabel">Detail Order (ID: 12001)</h5>
-            <p class="mb-0 text-secondary">Total: 3 barang</p>
+            <h5 class="modal-title" id="staticBackdropLabel">Detail Order (ID: {{ $productOrder->id }})</h5>
+            <p id="text-count-barang" class="mb-0 text-secondary">Total: 3 barang</p>
           </div>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          @for ($i = 0; $i < 3; $i++)
+          @foreach($productOrder->product_stack_orders as $productStackOrder)
             <div class="row mb-3">
               <div class="col-auto pe-0">
                 <div style="width: 6.5rem; height: 6.5rem;">
-                  <div class="w-100 h-100 rounded-3 border border-secondary" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
+                  <div class="w-100 h-100 rounded-3 border border-secondary" style="background-image: url('/{{ $productStackOrder->photo ?? 'img/default.png' }}'); background-size: cover; background-position: center center;"></div>
                 </div>
               </div>
               <div class="col ms-2 ps-0">
-                <p class="mb-0 fw-bold text-break">VGA MSI GT1030 AERO ITX 2G OC | GT 1030</p>
-                <p class="mb-0 px-0 text-break">1 barang x Rp4.000.000</p>
+                <p class="mb-0 fw-bold text-break">{{ $productStackOrder->nama }}</p>
+                <p class="mb-0 px-0 text-break">{{ $productStackOrder->kuantitas }} barang x Rp{{ number_format($productStackOrder->harga, 0, ',', '.') }}</p>
               </div>
             </div>
-          @endfor
+
+          @endforeach
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary btn-sm px-5 text-white fw-bold" data-bs-dismiss="modal">OK</button>

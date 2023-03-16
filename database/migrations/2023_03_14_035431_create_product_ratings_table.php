@@ -15,7 +15,9 @@ class CreateProductRatingsTable extends Migration
     {
         Schema::create('product_ratings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
             $table->foreignId('product_id')->constrained();
+            $table->foreignId('product_stack_order_id')->constrained();
             $table->unsignedSmallInteger('nilai_rating');
             $table->text('deskripsi_rating');
             $table->timestamps();

@@ -14,9 +14,9 @@
     <div class="row justify-content-center py-4">
       <div class="col-2">
         <div class="row px-3 sticky-top" id="sticky-fix">
-          <button type="button" class="btn btn-outline-primary py-3 fw-bold" onclick="{{ "location.href = '/order-history-product';" }}">
+          <a href="{{ url()->previous() }}" class="btn btn-outline-primary py-3 fw-bold">
             <i class="fas fa-chevron-circle-left me-2"></i>Kembali
-          </button>
+          </a>
           <p class="mt-2 text-center text-secondary">ORDER ID: 12000</p>
         </div>
       </div>
@@ -80,8 +80,8 @@
             <div class="card-body py-4">
               <p class="card-text mb-0 fw-bold">Nomor Resi</p>
               <div class="d-flex mb-4 pb-4 justify-content-start border-bottom">
-                <p class="card-text fw-bold fs-4 mb-0 me-4">{{ '002714553710' }}</p>
-                <button id="copy-kode-pembayaran" data-clipboard-text="{{ '002714553710' }}" type="button" class="btn btn-outline-primary fw-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-trigger="manual" title="Copied!">
+                <p class="card-text fw-bold fs-4 mb-0 me-4">{{ $nomor_resi ?? '999999999999' }}</p>
+                <button id="copy-kode-pembayaran" data-clipboard-text="{{ $nomor_resi ?? '999999999999' }}" type="button" class="btn btn-outline-primary fw-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-trigger="manual" title="Copied!">
                   <i class="fas fa-copy me-2"></i>Salin
                 </button>
               </div>

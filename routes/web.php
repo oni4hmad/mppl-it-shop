@@ -5,10 +5,12 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PlaceOrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductManagementController;
 use App\Http\Controllers\ProductOrderController;
+use App\Http\Controllers\ProductRatingController;
 use App\Http\Controllers\ProductSearchController;
 use App\Http\Controllers\ProductStackCartController;
 use App\Http\Controllers\RegistrationController;
@@ -50,6 +52,7 @@ Route::controller(CategoryController::class)->group(function () {
     Route::post('/category', 'store')->middleware('auth.admin');
 });
 
+// TODO: route not done yet
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware('auth.admin');
@@ -64,14 +67,17 @@ Route::controller(ProductController::class)->group(function () {
     Route::delete('/manage-product/{id}/delete', 'delete')->middleware('auth.admin');
 });
 
+// TODO: route not done yet
 Route::get('/manage-product-order', function () {
     return view('admin.manage-product-order');
 });
 
+// TODO: route not done yet
 Route::get('/manage-service-order', function () {
     return view('admin.manage-service-order');
 });
 
+// TODO: route not done yet
 Route::get('/manage-technician', function () {
     return view('admin.manage-technician');
 });
@@ -99,36 +105,34 @@ Route::controller(PlaceOrderController::class)->group(function () {
     Route::post('/place-order', 'store')->middleware('auth');
 });
 
-// TODO: not done yet
-Route::get('/payment', function () {
-    return view('payment');
-});
-
-// TODO: not done yet
-Route::get('/service-order', function () {
-    return view('service-order');
+// TODO: route not done yet
+Route::controller(PaymentController::class)->group(function () {
+    Route::get('/payment/{productOrder:id}', 'show')->middleware('auth');
 });
 
 Route::controller(ProductOrderController::class)->group(function () {
     Route::get('/order-history-product', 'index')->middleware('auth');
+    Route::put('/payment/{productOrder:id}', 'update')->middleware('auth');
+    Route::post('/cancel-order-product/{productOrder:id}', 'cancel')->middleware('auth');
+    Route::get('/track/{productOrder:id}', 'track')->middleware('auth');
 });
 
-//Route::get('/order-history-product', function () {
-//    return view('order-history-product');
-//});
-
-Route::get('/order-history-service  ', function () {
-    return view('order-history-service  ');
+Route::controller(ProductRatingController::class)->group(function () {
+    Route::post('/product-rating/{productStackOrder:id}', 'store')->middleware('auth');
 });
 
-Route::get('/track', function () {
-    return view('track');
+// TODO: route not done yet
+Route::get('/service-order', function () {
+    return view('service-order');
+});
+
+Route::get('/order-history-service', function () {
+    return view('order-history-service');
 });
 
 Route::get('/confirm-service-availability', function () {
     return view('technician.confirm-service-availability');
 });
-
 
 Route::get('/test', function () {
     return view('playground._test-pg', [

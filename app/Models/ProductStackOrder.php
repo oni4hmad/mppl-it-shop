@@ -13,9 +13,26 @@ class ProductStackOrder extends Model
         "id",
     ];
 
+    public function user()
+    {
+        return $this->hasOneThrough(
+            User::class,
+            ProductOrder::class,
+            'id',
+            'id',
+            'product_order_id',
+            'user_id'
+        );
+    }
+
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function product_rating()
+    {
+        return $this->hasOne(ProductRating::class);
     }
 
     public function photo()
