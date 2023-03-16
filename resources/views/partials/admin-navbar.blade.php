@@ -20,43 +20,48 @@
       <div>
         <ul class="nav">
           <li class="nav-item dropdown border-end border-2">
-            <a class="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown0" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fas fa-bell"></i>
-            </a>
-            <ul class="dropdown-menu py-0" aria-labelledby="navbarDropdown0" style="min-width: 300px;">
-              <div class="container-fluid">
+            <div class="d-flex">
+              <a class="nav-link text-secondary" href="/cart">
+                <i class="fas fa-shopping-cart"></i>
+              </a>
+              <a class="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown0" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-bell"></i>
+              </a>
+              <ul class="dropdown-menu py-0" aria-labelledby="navbarDropdown0" style="min-width: 300px;">
+                <div class="container-fluid">
 
-                {{-- notification items --}}
-                {{-- notif-1 --}}
-                <a href="#" class="text-decoration-none text-black">
-                  <div class="row py-2">
-                    <div class="col-auto">
-                      <i class="fas fa-cog text-secondary"></i>
+                  {{-- notification items --}}
+                  {{-- notif-1 --}}
+                  <a href="#" class="text-decoration-none text-black">
+                    <div class="row py-2">
+                      <div class="col-auto">
+                        <i class="fas fa-cog text-secondary"></i>
+                      </div>
+                      <div class="col ps-0">
+                        <p class="mb-0 text-break"><b>Oni Ahmad</b> memesan <b>jasa servis</b></p>
+                        <p class="mb-0 text-secondary text-break">3 jam yang lalu</p>
+                      </div>
                     </div>
-                    <div class="col ps-0">
-                      <p class="mb-0 text-break"><b>Oni Ahmad</b> memesan <b>jasa servis</b></p>
-                      <p class="mb-0 text-secondary text-break">3 jam yang lalu</p>
-                    </div>
-                  </div>
-                </a>
-                <li><hr class="dropdown-divider my-0"></li>
+                  </a>
+                  <li><hr class="dropdown-divider my-0"></li>
 
-                {{-- notif-2 --}}
-                <a href="#" class="text-decoration-none text-black">
-                  <div class="row py-2">
-                    <div class="col-auto">
-                      <i class="fas fa-server text-secondary"></i>
+                  {{-- notif-2 --}}
+                  <a href="#" class="text-decoration-none text-black">
+                    <div class="row py-2">
+                      <div class="col-auto">
+                        <i class="fas fa-server text-secondary"></i>
+                      </div>
+                      <div class="col ps-0">
+                        <p class="mb-0 text-break"><b>Oni Ahmad</b> memesan <b>4 barang elektronik</b></p>
+                        <p class="mb-0 text-secondary text-break">3 Juli 2021 09:00</p>
+                      </div>
                     </div>
-                    <div class="col ps-0">
-                      <p class="mb-0 text-break"><b>Oni Ahmad</b> memesan <b>4 barang elektronik</b></p>
-                      <p class="mb-0 text-secondary text-break">3 Juli 2021 09:00</p>
-                    </div>
-                  </div>
-                </a>
-                <li><hr class="dropdown-divider my-0"></li>
+                  </a>
+                  <li><hr class="dropdown-divider my-0"></li>
 
-              </div>
-            </ul>
+                </div>
+              </ul>
+            </div>
           </li>
           <li class="nav-item dropdown">
             {{-- foto & nama akun --}}
@@ -69,6 +74,7 @@
             {{-- drop down menu --}}
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="/dashboard">Halaman Admin</a></li>
+              <li><a class="dropdown-item" href="/order-history-product">Riwayat Order</a></li>
               <li><a class="dropdown-item" href="/account-settings">Pengaturan Akun</a></li>
               <li><hr class="dropdown-divider"></li>
               <li>
