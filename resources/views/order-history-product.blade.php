@@ -332,7 +332,7 @@
                       <h5 class="modal-title" id="staticBackdropLabel">Edit Bukti Pembayaran</h5>
                     </div>
                     <div class="col-auto p-0">
-                      <p class="small ms-3 py-0 px-2 m-0 bg-secondary rounded-3 text-white fw-bold">Order ID: {{ $productOrder->id }}</span></p>
+                      <p class="small ms-3 py-0 px-2 m-0 bg-secondary rounded-3 text-white fw-bold">Order ID: {{ $productOrder->id }}</p>
                     </div>
                   </div>
                 </div>
