@@ -32,7 +32,7 @@
 </script>
 
 {{--toast success--}}
-<div class="toast-container position-fixed p-3 py-5 bottom-0 start-50 translate-middle-x z-3">
+<div class="toast-container position-fixed p-3 py-5 bottom-0 start-50 translate-middle-x" style="z-index: 1080;">
   <div id="toast-success" class="toast align-items-center bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="d-flex">
       <div class="toast-body text-white">
@@ -44,7 +44,7 @@
 </div>
 
 {{--toast error--}}
-<div class="toast-container position-fixed p-3 py-5 bottom-0 start-50 translate-middle-x z-3">
+<div class="toast-container position-fixed p-3 py-5 bottom-0 start-50 translate-middle-x" style="z-index: 1080;">
   <div id="toast-error" class="toast align-items-center bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="300000">
     <div class="d-flex">
       <div class="toast-body text-white">

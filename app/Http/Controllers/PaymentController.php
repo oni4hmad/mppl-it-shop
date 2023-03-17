@@ -10,8 +10,7 @@ class PaymentController extends Controller
     public function show(ProductOrder $productOrder)
     {
         if ($productOrder->user->id != auth()->user()->id) {
-            // TODO: add 404 page payment not your order
-            return "404 (not your order)";
+            return abort(404);
         }
         $productOrderId = $productOrder->id;
         return view('payment')

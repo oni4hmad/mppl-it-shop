@@ -15,14 +15,12 @@ class ProductRatingController extends Controller
 
         /* check if this productStackOrder actually owned by this current user */
         if ($productStackOrder->user->id != auth()->user()->id) {
-            // TODO: product add rating error handler 1
-            return 'error: its not your product stack kekw';
+            return abort(404);
         }
 
         /* check if productStackOrder has no rating */
         if ($productStackOrder->product_rating()->exists()){
-            // TODO: product add rating error handler 2
-            return 'error: you already rate this product';
+            return abort(404);
         }
 
         /* create product rating */

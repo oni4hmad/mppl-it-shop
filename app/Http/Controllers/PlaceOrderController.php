@@ -34,9 +34,9 @@ class PlaceOrderController extends Controller
             ->get();
 
         /* validate $checkedProductStackCarts hash */
-        // TODO: handle error PlaceOrder: terjadi perubahan data ketika melakukan checkout.
         if ($request->checkedProductStackCarts_hash != md5(json_encode($checkedProductStackCarts))) {
-            return "Error: terjadi perubahan data ketika melakukan checkout. Silahkan coba lagi.";
+            return redirect()->back()
+                ->with('error', 'Checkout gagal: terjadi perubahan data ketika melakukan checkout. Mohon cek informasi order kembali dan silahkan coba lagi.');
         }
 
         /* validate total_bayar */
@@ -47,10 +47,11 @@ class PlaceOrderController extends Controller
             $product = Product::find($productId);
             $verified_total_bayar += $product->harga * $orderQty;
         }
+
+        // error PlaceOrder: total bayar tidak valid.
         $verified_total_bayar += CourierType::find($request->courier_type_id)->harga;
-        // TODO: handle error PlaceOrder: total bayar tidak valid.
         if ($verified_total_bayar != $request->total_bayar) {
-            return "Error: total bayar tidak valid.";
+            return abort(404);
         }
 
         /* clear $checkedProductStackCarts from user cart */
@@ -102,7 +103,6 @@ class PlaceOrderController extends Controller
             }
         });
 
-        // TODO: handle place order berhasil
         return redirect('/payment/'.$productOrder->id);
     }
 }

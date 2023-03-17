@@ -146,15 +146,13 @@ class ProductController extends Controller
 //        dd([$args["product"][$args["photoColumn"]], $args["product"]->category, $args["product"]->photo_1]);
         $photo = $args["product"][$args["photoColumn"]];
         if (isset($photo) && File::exists($args["product"][$args["photoColumn"]]->path)) {
-//            dd($args["product"][$args["photoColumn"]]->id);
             $destination = $args["product"][$args["photoColumn"]]->path;
             $linkedPhoto = Photo::where('path', $destination)->get();
             if (count($linkedPhoto) <= 1) {
                 File::delete($destination);
             }
 
-            // TODO: delete record on photo table (parent table)
-//            $args["product"][$args["photoColumn"]]->delete();
+            // delete record on photo table (parent table)
             $args['product']['photo_id_'.substr($args['photoColumn'], -1)] = null;
             $args['product']->save();
             Photo::find($args["product"][$args["photoColumn"]]->id)->delete();

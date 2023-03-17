@@ -30,8 +30,8 @@ class ProductOrderController extends Controller
 
         /* productOrder actually owned by this user */
         if ($productOrder->user->id != auth()->user()->id) {
-            // TODO: add error tambah bukti pembayaran order ini bukan milik current user
-            return 'error: this order isn\'t yours';
+            // error tambah bukti pembayaran order ini bukan milik current user
+            return abort(404);
         }
 
         $bukti_pembayaran = $productOrder->bukti_pembayaran;
@@ -56,8 +56,7 @@ class ProductOrderController extends Controller
         $isThisUserProductOrder = $productOrder->user->id == auth()->user()->id;
         $isThisUserAdmin = auth()->user()->user_type == UserType::ADMINISTRATOR;
         if (!$isThisUserProductOrder && !$isThisUserAdmin) {
-            // TODO: add error cancel order order ini bukan milik current user
-            return 'error: this order isn\'t yours';
+            return abort(404);
         }
         $productOrder->update(['status' => ProductOrderStatus::DIBATALKAN]);
         return redirect()->back()
@@ -70,8 +69,7 @@ class ProductOrderController extends Controller
         $isThisUserAdmin = auth()->user()->user_type == UserType::ADMINISTRATOR;
         $isThisProductOrderHasResi = isset($productOrder->nomor_resi);
         if ((!$isThisUserProductOrder && !$isThisUserAdmin) || !$isThisProductOrderHasResi) {
-            // TODO: add 404 page track
-            return "404 (not your order (or) not have nomor_resi)";
+            return abort(404);
         }
         return view('track')
             ->with('nomor_resi', $productOrder->nomor_resi);
@@ -83,8 +81,7 @@ class ProductOrderController extends Controller
         $isThisUserAdmin = auth()->user()->user_type == UserType::ADMINISTRATOR;
         $isThisProductOrderHasResi = isset($productOrder->nomor_resi);
         if ((!$isThisUserProductOrder && !$isThisUserAdmin) || !$isThisProductOrderHasResi) {
-            // TODO: add 404 page track
-            return "404 (not your order (or) not have nomor_resi)";
+            return abort(404);
         }
         $productOrder->update(['status' => ProductOrderStatus::ORDER_SELESAI]);
         return redirect()->back()

@@ -29,33 +29,11 @@
     window.onload = () => {
       /* update stacks qty */
       document.querySelector('#text-count-barang').innerText = `Total: ${stacksTotalQty} barang`;
-      /* show errors */
-      @if ($errors->any())
-      {{--show error validation toast--}}
-      let toastErrorEl = document.getElementById('toast-error');
-      let changeErrorText = (text) => toastErrorEl.querySelector('.toast-body').innerHTML = `${text}`;
-      let toastError = new bootstrap.Toast(toastErrorEl);
-      let message = "Pengisian gagal:";
-      @foreach ($errors->all() as $error)
-        message += "<li>{{ $error }}</li>";
-      @endforeach
-      changeErrorText(message);
-      toastError.show();
-      @endif
     };
   </script>
 
-  {{--toast error--}}
-  <div class="toast-container position-fixed p-3 py-5 bottom-0 start-50 translate-middle-x z-3">
-    <div id="toast-error" class="toast align-items-center bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="300000">
-      <div class="d-flex">
-        <div class="toast-body text-white">
-          Hello, world! This is a toast message.
-        </div>
-        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-    </div>
-  </div>
+  {{-- error/errors/success toast --}}
+  @include('partials.toast-error-success')
 
   <div class="container my-4" style="height: 85vh;">
     <div class="row w-100 justify-content-center">
@@ -84,9 +62,10 @@
               <button type="button" class="btn btn-outline-primary btn-sm fw-bold" data-bs-toggle="modal" data-bs-target="#modal-detail-order">Detail Order</button>
             </div>
           </div>
-          <div class="card-footer bg-transparent">
+          <div class="card-footer bg-transparent text-center">
             {{-- cek status --}}
             <button type="button" class="btn btn-primary w-100 mb-2 fw-bold" data-bs-toggle="modal" data-bs-target="#modal-upload-bukti-pembayaran">Upload Bukti Pembayaran</button>
+            <a href="/order-history-product" class="small text-secondary text-decoration-none fw-bold w-100">Cek Riwayat Order</a>
           </div>
         </div>
       </div>

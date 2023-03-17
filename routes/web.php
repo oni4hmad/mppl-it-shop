@@ -149,8 +149,9 @@ Route::get('/confirm-service-availability', function () {
 
 
 Route::get('/test', function () {
-    return view('playground._test-pg', [
-        "name" => "oni",
-        "email" => "oni@oni.com"
-    ]);
+//    return view('playground._test-pg', [
+//        "name" => "oni",
+//        "email" => "oni@oni.com"
+//    ]);
+    return view('errors.404');
 });

@@ -117,6 +117,9 @@
     }
   </script>
 
+  {{-- error/errors/success toast --}}
+  @include('partials.toast-error-success')
+
   <div class="container mb-4">
     <div class="row">
       <div class="col-lg-8 col-xl-9 py-4">

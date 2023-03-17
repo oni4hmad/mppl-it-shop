@@ -25,7 +25,7 @@
 
 <body>
   <!-- navbar -->
-  @if (\Illuminate\Support\Facades\Auth::check())
+  @if (!isset($exception) && \Illuminate\Support\Facades\Auth::check())
     @if (\Illuminate\Support\Facades\Auth::user()->isAdmin())
       @include('partials.admin-navbar')
     @elseif (\Illuminate\Support\Facades\Auth::user()->isTechnician())
@@ -33,7 +33,7 @@
     @else
       @include('partials.user-navbar')
     @endif
-  @else
+  @elseif (!isset($exception))
     @include('partials.guest-navbar')
   @endif
 
