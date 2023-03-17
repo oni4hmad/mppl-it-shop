@@ -113,7 +113,7 @@
                   <p class="--sticky-table-item mb-0 fw-bold text-warning" style="z-index: 1;">Mencari Teknisi</p>
                   @break
                 @case(ServiceOrderStatus::DALAM_SERVIS)
-                  <p class="--sticky-table-item mb-0 fw-bold text-info" style="z-index: 1;">Diproses</p>
+                  <p class="--sticky-table-item mb-0 fw-bold text-info" style="z-index: 1;">Dalam Servis</p>
                   @break
                 @case(ServiceOrderStatus::SERVIS_SELESAI)
                   <p class="--sticky-table-item mb-0 fw-bold text-primary" style="z-index: 1;">Selesai</p>
