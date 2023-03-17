@@ -15,6 +15,7 @@ use App\Http\Controllers\ProductRatingController;
 use App\Http\Controllers\ProductSearchController;
 use App\Http\Controllers\ProductStackCartController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\ServiceOrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -131,8 +132,9 @@ Route::controller(ProductRatingController::class)->group(function () {
 });
 
 // TODO: route not done yet
-Route::get('/service-order', function () {
-    return view('service-order');
+Route::controller(ServiceOrderController::class)->group(function () {
+    Route::get('/service-order', 'index')->middleware('auth');
+    Route::post('/service-order', 'store')->middleware('auth');
 });
 
 Route::get('/order-history-service', function () {
