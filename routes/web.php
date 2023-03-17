@@ -76,10 +76,6 @@ Route::controller(ProductOrderManagementController::class)->group(function () {
     Route::post('/update-resi/{productOrder:id}', 'updateResi')->middleware('auth.admin');
 });
 
-//Route::get('/manage-product-order', function () {
-//    return view('admin.manage-product-order');
-//});
-
 // TODO: route not done yet
 Route::get('/manage-service-order', function () {
     return view('admin.manage-service-order');
@@ -114,7 +110,6 @@ Route::controller(PlaceOrderController::class)->group(function () {
     Route::post('/place-order', 'store')->middleware('auth');
 });
 
-// TODO: route not done yet
 Route::controller(PaymentController::class)->group(function () {
     Route::get('/payment/{productOrder:id}', 'show')->middleware('auth');
 });
