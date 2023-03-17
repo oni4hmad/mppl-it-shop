@@ -87,7 +87,7 @@
               <div class="--sticky-table-item d-flex flex-row align-items-center">
                 <div class="input-group input-group-sm px-0">
                   <select class="form-select w-100" id="inputGroupSelect01">
-                    <option value="0" selected>ID: 9001</option>
+                    <option value="0" selected>ID: 9002 / Oni Ahmad /  komputer tidak bisa menyala</option>
                     <option value="1">ID: 9002</option>
                     <option value="2">ID: 9003</option>
                   </select>

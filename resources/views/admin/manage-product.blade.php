@@ -32,54 +32,11 @@
       document.querySelectorAll('input[name="harga"]').forEach(e => {
         new AutoNumeric(e, autoNumericOptionsEuro);
       });
-
-      const toastLiveExample = document.getElementById('liveToast');
-      const changeText = (text) => toastLiveExample.querySelector('.toast-body').innerHTML = `${text}`;
-      const toast = new bootstrap.Toast(toastLiveExample);
-      {{--success--}}
-      @if ($message = Session::get('success'))
-      changeText("{{ $message }}");
-      toast.show();
-      @endif
-
-      const toastLiveExample2 = document.getElementById('liveToast2');
-      const changeText2 = (text) => toastLiveExample2.querySelector('.toast-body').innerHTML = `${text}`;
-      const toast2 = new bootstrap.Toast(toastLiveExample2);
-      {{--error validation--}}
-      let message = "Pengisian gagal:";
-      @if ($errors->any())
-        @foreach ($errors->all() as $error)
-        message += "<li>{{ $error }}</li>";
-      @endforeach
-      changeText2(message);
-      toast2.show();
-      @endif
     }
   </script>
 
-  {{--toast success--}}
-  <div class="toast-container position-fixed p-3 py-5 bottom-0 start-50 translate-middle-x z-3">
-    <div id="liveToast" class="toast align-items-center bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="d-flex">
-        <div class="toast-body text-white">
-          Hello, world! This is a toast message.
-        </div>
-        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-    </div>
-  </div>
-
-  {{--toast error validation--}}
-  <div class="toast-container position-fixed p-3 py-5 bottom-0 start-50 translate-middle-x z-3">
-    <div id="liveToast2" class="toast align-items-center bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="300000">
-      <div class="d-flex">
-        <div class="toast-body text-white">
-          Hello, world! This is a toast message.
-        </div>
-        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-    </div>
-  </div>
+  {{-- error/errors/success toast --}}
+  @include('partials.toast-error-success')
 
   <div class="container">
     <div class="row">
@@ -358,7 +315,7 @@
                 <div class="row mb-2">
                   <div class="col">
                     <p class="mb-0 fw-bold">Nama Produk</p>
-                    <input id="" name="nama" type="text" class="form-control" required autocomplete="name" autofocus placeholder="Nama Produk">
+                    <input id="" name="nama" type="text" class="form-control" required autocomplete="name" autofocus placeholder="Nama Produk" value="{{ old('nama') }}">
                   </div>
                 </div>
                 <div class="row mb-2">
@@ -367,30 +324,30 @@
                     <select class="form-select" id="" name="category_id">
 
                       @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->nama }}</option>
+                        <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? "selected" : "" }}>{{ $category->nama }}</option>
                       @endforeach
 
                     </select>
                   </div>
                   <div class="col">
                     <p class="mb-0 fw-bold">Harga</p>
-                    <input id="" type="text" name="harga" class="form-control" required autocomplete="name" autofocus placeholder="Harga">
+                    <input id="" type="text" name="harga" class="form-control" required autocomplete="name" autofocus placeholder="Harga" value="{{ old('harga') }}">
                   </div>
                 </div>
                 <div class="row mb-2">
                   <div class="col">
                     <p class="mb-0 fw-bold">Stok</p>
-                    <input id="" name="stok" min="0" type="number" class="form-control" required autocomplete="name" autofocus placeholder="Stok">
+                    <input id="" name="stok" min="0" type="number" class="form-control" required autocomplete="name" autofocus placeholder="Stok" value="{{ old('stok') }}">
                   </div>
                   <div class="col">
                     <p class="mb-0 fw-bold">Berat (gram)</p>
-                    <input id="" name="berat" min="0" type="number" class="form-control" required autocomplete="name" autofocus placeholder="Berat (gram)">
+                    <input id="" name="berat" min="0" type="number" class="form-control" required autocomplete="name" autofocus placeholder="Berat (gram)" value="{{ old('berat') }}">
                   </div>
                 </div>
                 <div class="row mb-2">
                   <div class="col">
                     <p class="p-0 m-0 fw-bold text-break">Deskripsi</p>
-                    <textarea id="" name="deskripsi" type="text" class="form-control" rows="10" required autocomplete="name" autofocus placeholder="Deskripsi" style="overflow-y:scroll; max-height:100px;"></textarea>
+                    <textarea id="" name="deskripsi" type="text" class="form-control" rows="10" required autocomplete="name" autofocus placeholder="Deskripsi" style="overflow-y:scroll; max-height:100px;">{{ old('deskripsi') }}</textarea>
                   </div>
                 </div>
               </div>

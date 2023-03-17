@@ -24,6 +24,9 @@
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
   <script src="/js/atur-jumlah.js"></script>
 
+  {{-- error/errors/success toast --}}
+  @include('partials.toast-error-success')
+
   {{-- checkbox and quantity changed handler --}}
   <script>
     let productStackCarts = {!! $productStackCartsJson !!};

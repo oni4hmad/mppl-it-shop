@@ -18,9 +18,9 @@ class CheckoutController extends Controller
             ->where('checked', true)
             ->get();
 
-        // TODO: handle error Checkout: No items found
         if (count($checkedProductStackCarts) <= 0) {
-            return "No items found.";
+            return redirect()->back()
+                ->with('error', 'No items selected to checkout.');
         }
         $couriers = Courier::with('courier_types')->get();
         $payment_methods = PaymentMethod::all();
@@ -49,7 +49,7 @@ class CheckoutController extends Controller
 
         // check if this user cart has the current product or not
         $thisProductStackCart = auth()->user()->cart->productStackCarts->where('product_id', $product->id)->first();
-        if ($thisProductStackCart->count() > 0) {
+        if (isset($thisProductStackCart)) {
             $thisProductStackCart->update([
                 'kuantitas' => $request->kuantitas,
                 'checked' => true,
