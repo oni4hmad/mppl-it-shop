@@ -50,7 +50,7 @@
         changeErrorText(message);
         toastError.show();
       @endif
-    }
+    };
   </script>
 
   {{--toast success--}}

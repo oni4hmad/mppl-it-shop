@@ -16,6 +16,16 @@
         <div class="row bg-light border-bottom border-end" id="sticky-header-menu">
           <h5 class="fw-bold text-primary pt-4 pb-2">Riwayat Order</h5>
           <div class="d-flex flex-row align-items-center mb-3">
+            <p class="text-secondary fw-bold me-3 mb-0">Kategori</p>
+            <div class="input-group input-group-sm px-0 me-5" style="width: 150px;">
+              <select class="form-select" id="inputGroupSelect01">
+                <option value="">All Orders</option>
+                <option value="">Mencari Teknisi</option>
+                <option value="">Dalam Servis</option>
+                <option value="">Servis Selesai</option>
+                <option value="">Dibatalkan</option>
+              </select>
+            </div>
             <div class="input-group input-group-sm rounded" style="width: 250px;">
               <a class="btn btn-white bg-white border-end-0 border rounded-end rounded-pill px-3" style="cursor: default !important;">
                 <i class="fas fa-search text-secondary"></i>
