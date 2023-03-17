@@ -250,7 +250,7 @@
                   <h5 class="modal-title" id="staticBackdropLabel">Detail Order </h5>
                 </div>
                 <div class="col-auto px-0">
-                  <p class="small py-0 px-2 m-0 bg-secondary rounded-3 text-white fw-bold">Order ID: 4</p>
+                  <p class="small py-0 px-2 m-0 bg-secondary rounded-3 text-white fw-bold">Order ID: {{ $productOrder->id }}</p>
                 </div>
               </div>
               <div class="row">

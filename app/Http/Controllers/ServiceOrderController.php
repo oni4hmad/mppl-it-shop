@@ -2,14 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ServiceOrderStatus;
+use App\Models\AddressOrder;
+use App\Models\ServiceOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
 class ServiceOrderController extends Controller
 {
-    public function index()
+    public function showForm()
     {
         return view('service-order');
+    }
+
+    public function index()
+    {
+        return view('order-history-service')
+            ->with('serviceOrders', auth()->user()->service_orders);
     }
 
     public function store(Request $request)
@@ -30,10 +39,33 @@ class ServiceOrderController extends Controller
         $datetime = "$tanggal $jam";
         $datetimeParsed = Carbon::createFromFormat('Y-m-d H:i', $datetime, 'Asia/Jakarta');
 //        dd([$datetime, $datetimeParsed, $request->all()]);
-
         $request->request->add(['waktu' => $datetimeParsed]);
+
+        $addressOrder = AddressOrder::create($request->all());
+        $request->request->add(['address_order_id' => $addressOrder->id]);
+
         auth()->user()->service_orders()->create($request->all());
         return redirect()->back()
             ->with('success', 'Pemesanan jasa servis berhasil dibuat.');
     }
+
+    public function cancel(ServiceOrder $serviceOrder)
+    {
+        // making sure that this order is owned by this user
+        $isThisUserServiceOrder = $serviceOrder->user->id == auth()->user()->id;
+        if (!$isThisUserServiceOrder) {
+            return abort(404);
+        }
+
+        // making sure that status still at MENCARI_TEKNISI
+        if ($serviceOrder->status != ServiceOrderStatus::MENCARI_TEKNISI) {
+            return abort(404);
+        }
+
+        $serviceOrder->update(['status' => ServiceOrderStatus::DIBATALKAN]);
+        return redirect()->back()
+            ->with('success', 'Pesanan servis berhasil dibatalkan.');
+    }
+
+
 }

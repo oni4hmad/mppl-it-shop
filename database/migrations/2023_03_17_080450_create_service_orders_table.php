@@ -18,10 +18,12 @@ class CreateServiceOrdersTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('technician_id')->nullable()->constrained();
+            $table->foreignId('address_order_id')->constrained();
             $table->string('nama');
+            $table->string('nomor_hp');
             $table->dateTime('waktu');
             $table->text('deskripsi_masalah');
-            $table->string('alamat');
+            $table->text('rincian_servis')->nullable();
             $table->integer('biaya')->nullable();
             $table->enum('status', ServiceOrderStatus::getValues())
                 ->default(ServiceOrderStatus::MENCARI_TEKNISI);

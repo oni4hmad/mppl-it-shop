@@ -22,4 +22,10 @@ class ServiceOrder extends Model
     {
         return $this->belongsTo(Technician::class);
     }
+
+    public function address_order()
+    {
+        return $this->belongsTo(AddressOrder::class);
+    }
+
 }

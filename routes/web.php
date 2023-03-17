@@ -16,6 +16,7 @@ use App\Http\Controllers\ProductSearchController;
 use App\Http\Controllers\ProductStackCartController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ServiceOrderController;
+use App\Http\Controllers\ServiceOrderManagementController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -128,12 +129,13 @@ Route::controller(ProductRatingController::class)->group(function () {
 
 // TODO: route not done yet
 Route::controller(ServiceOrderController::class)->group(function () {
-    Route::get('/service-order', 'index')->middleware('auth');
+    Route::get('/service-order', 'showForm')->middleware('auth');
     Route::post('/service-order', 'store')->middleware('auth');
+    Route::post('/service-order/{serviceOrder:id}/cancel', 'cancel')->middleware('auth');
 });
 
-Route::get('/order-history-service', function () {
-    return view('order-history-service');
+Route::controller(ServiceOrderManagementController::class)->group(function () {
+    Route::get('/order-history-service', 'index')->middleware('auth');
 });
 
 Route::get('/confirm-service-availability', function () {
