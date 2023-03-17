@@ -63,7 +63,7 @@
                 <p class="card-text mb-0 fw-bold">Masalah Yang Dialami</p>
                 <div class="row">
                   <div class="input-group" style="height: 8rem;">
-                    <textarea class="form-control" aria-label="With textarea">Komputer tidak bisa menyala tapi suara kipas terdengar</textarea>
+                    <textarea class="form-control" aria-label="With textarea" placeholder="Deskripsikan masalah yang komputer kamu alami. (co: komputer tidak bisa menyala tapi suara kipas terdengar)"></textarea>
                   </div>
                 </div>
               </div>
