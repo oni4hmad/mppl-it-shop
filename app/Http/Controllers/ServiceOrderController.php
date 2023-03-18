@@ -18,7 +18,7 @@ class ServiceOrderController extends Controller
     public function index()
     {
         return view('order-history-service')
-            ->with('serviceOrders', auth()->user()->service_orders);
+            ->with('serviceOrders', auth()->user()->service_orders()->latest()->get());
     }
 
     public function store(Request $request)

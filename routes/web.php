@@ -77,16 +77,6 @@ Route::controller(ProductOrderManagementController::class)->group(function () {
     Route::post('/update-resi/{productOrder:id}', 'updateResi')->middleware('auth.admin');
 });
 
-// TODO: route not done yet
-Route::get('/manage-service-order', function () {
-    return view('admin.manage-service-order');
-});
-
-// TODO: route not done yet
-Route::get('/manage-technician', function () {
-    return view('admin.manage-technician');
-});
-
 Route::controller(ProductSearchController::class)->group(function () {
     Route::get('/search', 'index');
     Route::get('/product/{product:slug}', 'show');
@@ -127,22 +117,26 @@ Route::controller(ProductRatingController::class)->group(function () {
     Route::post('/product-rating/{productStackOrder:id}', 'store')->middleware('auth');
 });
 
-// TODO: route not done yet
 Route::controller(ServiceOrderController::class)->group(function () {
     Route::get('/service-order', 'showForm')->middleware('auth');
     Route::post('/service-order', 'store')->middleware('auth');
     Route::post('/service-order/{serviceOrder:id}/cancel', 'cancel')->middleware('auth');
-});
-
-Route::controller(ServiceOrderManagementController::class)->group(function () {
     Route::get('/order-history-service', 'index')->middleware('auth');
 });
 
+Route::controller(ServiceOrderManagementController::class)->group(function () {
+    Route::get('/manage-service-order', 'index')->middleware('auth.admin');
+});
+
+// TODO: route not done yet
+Route::get('/manage-technician', function () {
+    return view('admin.manage-technician');
+});
+
+// TODO: route not done yet
 Route::get('/confirm-service-availability', function () {
     return view('technician.confirm-service-availability');
 });
-
-
 
 
 
