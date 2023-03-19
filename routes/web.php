@@ -127,6 +127,8 @@ Route::controller(ServiceOrderController::class)->group(function () {
 
 Route::controller(ServiceOrderManagementController::class)->group(function () {
     Route::get('/manage-service-order', 'index')->middleware('auth.admin');
+    Route::post('/manage-service-order/request', 'sendServiceRequest')->middleware('auth.admin');
+    Route::post('/manage-service-order/request/cancel', 'cancelRequest')->middleware('auth.admin');
 });
 
 // TODO: route not done yet

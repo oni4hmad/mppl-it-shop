@@ -51,7 +51,11 @@ class ServiceOrderController extends Controller
 
     public function cancel(ServiceOrder $serviceOrder)
     {
-        // making sure that status still at MENCARI_TEKNISI
+        $isThisUserServiceOrder = $serviceOrder->user->id == auth()->user()->id;
+        if (!$isThisUserServiceOrder) {
+            return abort(404);
+        }
+
         if ($serviceOrder->status != ServiceOrderStatus::MENCARI_TEKNISI) {
             return abort(404);
         }

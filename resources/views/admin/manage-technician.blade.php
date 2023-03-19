@@ -19,6 +19,39 @@
   <!-- sticky content fix -->
   <script src="/js/sticky-content-fix.js"></script>
 
+  {{-- select and send service handler --}}
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // const orderSelectGroup = document.querySelectorAll('select[id^="select-group-order-service"]');
+      // const inputTechnicianIds = document.querySelectorAll('input[id^="input-technician-id"]');
+      //
+      // // set initial hidden input value
+      // inputTechnicianId.value = orderSelectGroup.value;
+      //
+      // // handle on change
+      // orderSelectGroup.addEventListener('change', e => {
+      //   console.log(e.target, e.target.value);
+      // });
+
+      const formRequestServices = document.querySelectorAll('form[id^="form-request-service"]');
+      formRequestServices.forEach(formRequestService => {
+        formRequestService.addEventListener('submit', e => {
+          e.preventDefault();
+          const technicianId = e.target.id.split('-').pop();
+          const inputServiceOrderId = e.target.querySelector(`#input-service-order-id-${technicianId}`);
+          const orderSelectGroup = document.querySelector(`#select-group-order-service-${technicianId}`);
+          inputServiceOrderId.value = orderSelectGroup.value;
+          if (technicianId && inputServiceOrderId && orderSelectGroup) {
+            e.target.submit();
+          }
+        });
+      });
+    });
+  </script>
+
+  {{-- error/errors/success toast --}}
+  @include('partials.toast-error-success')
+
   <div class="container">
     <div class="row">
 
@@ -94,19 +127,18 @@
 
             </div>
             {{-- Pesanan --}}
-
             <div class="col-2 py-3">
               @switch($technician->status)
                 @case(TechnicianStatus::TERSEDIA)
                   <div class="input-group input-group-sm px-0">
                     @if($noTechnicianServiceOrders->count() > 0)
-                    <select class="form-select w-100" id="inputGroupSelect01">
+                    <select class="form-select w-100" id="select-group-order-service-{{ $technician->id }}">
                       @foreach($noTechnicianServiceOrders as $serviceOrder)
                         @php
                           $maxLength = 25;
                           $trDeskripsiMasalah = strlen($serviceOrder->deskripsi_masalah) > $maxLength ?substr($serviceOrder->deskripsi_masalah, 0, $maxLength).'...' :$serviceOrder->deskripsi_masalah;
                         @endphp
-                        <option value="{{ $serviceOrder->id }}">ID: {{ $serviceOrder->id }}/ {{ $serviceOrder->user->nama }} / {{ $trDeskripsiMasalah }}</option>
+                        <option value="{{ $serviceOrder->id }}">ID: {{ $serviceOrder->id }} / {{ $serviceOrder->user->nama }} / {{ $trDeskripsiMasalah }}</option>
                       @endforeach
                     </select>
                     @else
@@ -123,7 +155,6 @@
                   </a>
               @endswitch
             </div>
-
             {{-- Nomor HP --}}
             <div class="col-2 py-3">
               <p class="--sticky-table-item mb-0 fw-bold" style="z-index: 1;">{{ addPhoneSeparators($technician->user->nomor_hp) }}</p>
@@ -151,10 +182,15 @@
 
                 @switch($technician->status)
                   @case(TechnicianStatus::TERSEDIA)
-                    <button type="button" class="btn btn-primary btn-sm rounded-3 w-100 fw-bold">Kirim Permintaan</button>
+                    <form action="/manage-service-order/request" method="post" id="form-request-service-{{ $technician->id }}">
+                      @csrf
+                      <input type="hidden" id="input-technician-id-{{ $technician->id }}" name="technician_id" value="{{ $technician->id }}">
+                      <input type="hidden" id="input-service-order-id-{{ $technician->id }}" name="service_order_id" value="">
+                      <button type="submit" class="btn btn-primary btn-sm rounded-3 w-100 fw-bold">Kirim Permintaan</button>
+                    </form>
                     @break
                   @case(TechnicianStatus::MENUNGGU_KONFIRMASI)
-                    <button type="button" class="btn btn-primary btn-sm rounded-3 w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#modal-batalkan-permintaan{{ $technician->id }}">Batalkan Permintaan</button>
+                      <button type="button" class="btn btn-primary btn-sm rounded-3 w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#modal-batalkan-permintaan{{ $technician->id }}">Batalkan Permintaan</button>
                     @break
                   @case(TechnicianStatus::DALAM_SERVIS)
                     <button type="button" class="btn btn-secondary btn-sm rounded-3 w-100 fw-bold" disabled>Kirim Permintaan</button>
@@ -162,7 +198,7 @@
                   @default
                 @endswitch
 
-              </div>
+              </form></div>
             </div>
           </div>
         @endforeach
@@ -221,6 +257,10 @@
     @if($technician->status == TechnicianStatus::MENUNGGU_KONFIRMASI
       || $technician->status == TechnicianStatus::DALAM_SERVIS)
 
+      @php
+        $activeServiceOrder = $technician->service_orders()->active()->first();
+      @endphp
+
       <!-- modal: batalkan permintaan -->
       <div class="modal fade" id="modal-batalkan-permintaan{{ $technician->id }}" data-bs-keyboard="false" tabindex="-1"
            aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -233,18 +273,19 @@
             <div class="modal-body">
               <p class="mb-0 text-center">Apakah kamu yakin ingin membatalkan permintaan servis untuk <b>{{ $technician->user->nama }}</b>?</p>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary btn-sm p-1 fw-bold w-100">Iya</button>
-              <button type="submit" class="btn btn-secondary btn-sm p-1 text-white fw-bold w-100" data-bs-dismiss="modal">Tidak</button>
-            </div>
+            <form action="/manage-service-order/request/cancel" method="post">
+              @csrf
+              <div class="modal-footer">
+                <input type="hidden" name="service_order_id" value="{{ $activeServiceOrder->id }}">
+                <button type="submit" class="btn btn-primary btn-sm p-1 fw-bold w-100">Iya</button>
+                <button type="button" class="btn btn-secondary btn-sm p-1 text-white fw-bold w-100" data-bs-dismiss="modal">Tidak</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
 
       <!-- modal: detail pesanan -->
-      @php
-          $activeServiceOrder = $technician->service_orders()->active()->first();
-      @endphp
 
       <div class="modal fade" id="modal-detail-pesanan{{ $technician->id }}" data-bs-keyboard="false" tabindex="-1"
            aria-labelledby="staticBackdropLabel" aria-hidden="true">
