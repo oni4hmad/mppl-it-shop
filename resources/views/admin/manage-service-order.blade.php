@@ -98,7 +98,7 @@
                     <p class="mb-0 px-0 me-4 fw-bold text-break text-primary">Servis Selesai</p>
                     @break
                   @case(ServiceOrderStatus::DIBATALKAN)
-                    <p class="mb-0 px-0 me-4 fw-bold text-break text-secondary">Servis Selesai</p>
+                    <p class="mb-0 px-0 me-4 fw-bold text-break text-secondary">Dibatalkan</p>
                     @break
                 @endswitch
               </div>
