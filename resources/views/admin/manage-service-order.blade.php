@@ -58,7 +58,8 @@
             <p class="text-secondary fw-bold me-3 mb-0">Kategori</p>
             <div class="input-group input-group-sm px-0 me-5" style="width: 150px;">
               <select class="form-select" id="inputGroupSelect01">
-                <option value="0" selected>All Order</option>
+                <option value="">All Order</option>
+                <option value="0">Menunggu Konfirmasi Teknisi</option>
                 <option value="1">Mencari Teknisi</option>
                 <option value="2">Dalam Servis</option>
                 <option value="3">Servis Selesai</option>
@@ -86,6 +87,9 @@
                 @switch($serviceOrder->status)
                   @case(ServiceOrderStatus::MENCARI_TEKNISI)
                     <p class="mb-0 px-0 me-4 fw-bold text-break text-warning">Mencari Teknisi</p>
+                    @break
+                  @case(ServiceOrderStatus::MENUNGGU_KONFIRMASI_TEKNISI)
+                    <p class="mb-0 px-0 me-4 fw-bold text-break text-warning">Menunggu Konfirmasi Teknisi</p>
                     @break
                   @case(ServiceOrderStatus::DALAM_SERVIS)
                     <p class="mb-0 px-0 me-4 fw-bold text-break text-info">Dalam Servis</p>
@@ -135,14 +139,14 @@
             <div class="row mx-0">
               <div class="col px-3 py-1 rounded-3 border bg-light">
                 <div class="d-flex align-items-center">
-                  <p class="mb-0 me-1 px-0 fw-bold text-break" style="min-width: 350px;">Teknisi:</p>
-                  <p class="mb-0 me-1 px-0 fw-bold text-break">Total Biaya:</p>
+                  <p class="mb-0 me-1 px-0 fw-bold text-break" style="min-width: 350px;">Teknisi: {{ $serviceOrder->technician->user->nama ?? '-' }}</p>
+                  <p class="mb-0 me-1 px-0 fw-bold text-break">Total Biaya: {{ isset($serviceOrder->biaya) ? 'Rp'.number_format($serviceOrder->biaya, 0, ',', '.') : '-' }}</p>
                 </div>
               </div>
               <div class="col-auto ps-2 pe-0">
                 @switch($serviceOrder->status)
                   @case(ServiceOrderStatus::MENCARI_TEKNISI)
-                    <button type="button" class="btn btn-sm btn-primary rounded-3 h-100 fw-bold" style="min-width: 220px;">Cari Teknisi</button>
+                    <a href="/manage-technician" class="btn btn-sm btn-primary rounded-3 h-100 fw-bold" style="min-width: 220px;">Cari Teknisi</a>
                     @break
                   @case(ServiceOrderStatus::DALAM_SERVIS)
                     <button type="button" class="btn btn-sm btn-primary rounded-3 h-100 fw-bold" style="min-width: 220px;" disabled>Cari Teknisi</button>

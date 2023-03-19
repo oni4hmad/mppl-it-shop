@@ -12,6 +12,7 @@ use App\Models\Technician;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,6 +23,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        /* init faker */
+        $faker = Factory::create('id_ID');
+        $generateNumber = fn () => substr(str_shuffle(str_repeat('0123456789', rand(8, 10))), 0, rand(8, 10));
+
         // \App\Models\User::factory(10)->create();
 
         /* User: Customer, Admin, Technician */
@@ -41,7 +46,7 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
             'nama' => 'Mimin',
             'email' => 'admin@gmail.com',
-            'nomor_hp' => '081213838',
+            'nomor_hp' => '0812138383',
             'user_type' => UserType::ADMINISTRATOR,
             'kota' => 'Surabaya',
             'kode_pos' => '60111',
@@ -51,13 +56,43 @@ class DatabaseSeeder extends Seeder
 
         /* create technician */
         DB::table('users')->insert([
-            'nama' => 'Tweknisi',
+            'nama' => 'Mas Teknisi',
             'email' => 'teknisi@gmail.com',
-            'nomor_hp' => '082232873',
+            'nomor_hp' => '08'.$generateNumber(),
             'user_type' => UserType::TECHNICIAN,
-            'kota' => 'Surabaya',
-            'kode_pos' => '60113',
-            'alamat' => 'Jl. Candi Lempung 420GG',
+            'kota' => $faker->city,
+            'kode_pos' => $faker->postcode,
+            'alamat' => $faker->streetAddress,
+            'password' => bcrypt('121212'),
+        ]);
+        DB::table('users')->insert([
+            'nama' => 'Budi Hartono',
+            'email' => 'budi@gmail.com',
+            'nomor_hp' => '08'.$generateNumber(),
+            'user_type' => UserType::TECHNICIAN,
+            'kota' => $faker->city,
+            'kode_pos' => $faker->postcode,
+            'alamat' => $faker->streetAddress,
+            'password' => bcrypt('121212'),
+        ]);
+        DB::table('users')->insert([
+            'nama' => 'Eko Utomo',
+            'email' => 'eko@gmail.com',
+            'nomor_hp' => '08'.$generateNumber(),
+            'user_type' => UserType::TECHNICIAN,
+            'kota' => $faker->city,
+            'kode_pos' => $faker->postcode,
+            'alamat' => $faker->streetAddress,
+            'password' => bcrypt('121212'),
+        ]);
+        DB::table('users')->insert([
+            'nama' => 'Dewi Lestari',
+            'email' => 'dewi@gmail.com',
+            'nomor_hp' => '08'.$generateNumber(),
+            'user_type' => UserType::TECHNICIAN,
+            'kota' => $faker->city,
+            'kode_pos' => $faker->postcode,
+            'alamat' => $faker->streetAddress,
             'password' => bcrypt('121212'),
         ]);
 

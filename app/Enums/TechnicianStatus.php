@@ -13,5 +13,5 @@ final class TechnicianStatus extends Enum
 {
     const TERSEDIA = '0';
     const MENUNGGU_KONFIRMASI = '1';
-    const TIDAK_TERSEDIA = '2';
+    const DALAM_SERVIS = '2';
 }

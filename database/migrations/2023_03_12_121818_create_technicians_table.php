@@ -17,7 +17,7 @@ class CreateTechniciansTable extends Migration
         Schema::create('technicians', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->enum('status', TechnicianStatus::getValues());
+            $table->enum('status', TechnicianStatus::getValues())->default(TechnicianStatus::TERSEDIA);
             $table->timestamps();
         });
     }

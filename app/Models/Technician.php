@@ -9,17 +9,17 @@ class Technician extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
-     */
-    protected $fillable = [
-        'user_id',
+    protected $guarded = [
+        "id",
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function service_orders()
+    {
+        return $this->hasMany(ServiceOrder::class);
     }
 }

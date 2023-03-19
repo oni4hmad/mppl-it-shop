@@ -33,11 +33,12 @@
             <p class="text-secondary fw-bold me-3 mb-0">Kategori</p>
             <div class="input-group input-group-sm px-0 me-5" style="width: 150px;">
               <select class="form-select" id="inputGroupSelect01">
-                <option value="">All Orders</option>
-                <option value="">Mencari Teknisi</option>
-                <option value="">Dalam Servis</option>
-                <option value="">Servis Selesai</option>
-                <option value="">Dibatalkan</option>
+                <option value="">All Order</option>
+                <option value="0">Menunggu Konfirmasi Teknisi</option>
+                <option value="1">Mencari Teknisi</option>
+                <option value="2">Dalam Servis</option>
+                <option value="3">Servis Selesai</option>
+                <option value="4">Dibatalkan</option>
               </select>
             </div>
             <div class="input-group input-group-sm rounded" style="width: 250px;">
@@ -92,7 +93,7 @@
                         <p class="mb-0 fw-bolder text-break">Servis: {{ $serviceOrder->deskripsi_masalah }}</p>
                       </div>
                       <p class="mb-0 px-0 text-break">
-                        Teknisi: {{ $serviceOrder->technician->user->nama ?? $serviceOrder->status == ServiceOrderStatus::MENCARI_TEKNISI ? '(sedang dicari)' : '(dibatalkan)' }}</p>
+                        Teknisi: {{ $serviceOrder->technician->user->nama ?? ($serviceOrder->status == ServiceOrderStatus::MENCARI_TEKNISI ? '(sedang dicari)' : '(dibatalkan)') }}</p>
                       <p class="mb-0 text-secondary text-break">{{ date_format($serviceOrder->created_at,"d M Y") }}</p>
                       <a class="text-decoration-none" href="#" data-bs-toggle="modal"
                          data-bs-target="#modal-detail-pesanan{{ $serviceOrder->id }}">
@@ -111,6 +112,9 @@
               @switch($serviceOrder->status)
                 @case(ServiceOrderStatus::MENCARI_TEKNISI)
                   <p class="--sticky-table-item mb-0 fw-bold text-warning" style="z-index: 1;">Mencari Teknisi</p>
+                  @break
+                @case(ServiceOrderStatus::MENUNGGU_KONFIRMASI_TEKNISI)
+                  <p class="--sticky-table-item mb-0 fw-bold text-warning" style="z-index: 1;">Menunggu Konfirmasi Teknisi</p>
                   @break
                 @case(ServiceOrderStatus::DALAM_SERVIS)
                   <p class="--sticky-table-item mb-0 fw-bold text-info" style="z-index: 1;">Dalam Servis</p>
@@ -140,6 +144,8 @@
                 @switch($serviceOrder->status)
                   @case(ServiceOrderStatus::MENCARI_TEKNISI)
                     <button type="button" class="btn btn-primary btn-sm rounded-pill w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#modal-batalkan-pesanan{{ $serviceOrder->id }}">Batalkan Pesanan</button>
+                    @break
+                  @case(ServiceOrderStatus::MENUNGGU_KONFIRMASI_TEKNISI)
                     @break
                   @case(ServiceOrderStatus::DALAM_SERVIS)
                     @break
@@ -202,7 +208,7 @@
                 </div>
               </div>
               <div class="row">
-                <p class="px-0 mb-0 text-secondary">Diservis oleh: {{ $serviceOrder->technician->user->nama ?? $serviceOrder->status == ServiceOrderStatus::MENCARI_TEKNISI ? '(sedang dicari)' : '(dibatalkan)' }}</p>
+                <p class="px-0 mb-0 text-secondary">Diservis oleh: {{ $serviceOrder->technician->user->nama ?? ($serviceOrder->status == ServiceOrderStatus::MENCARI_TEKNISI ? '(sedang dicari)' : '(dibatalkan)') }}</p>
               </div>
             </div>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -271,26 +277,9 @@
           </div>
         </div>
         @break
+      @case(ServiceOrderStatus::MENUNGGU_KONFIRMASI_TEKNISI)
+        @break
       @case(ServiceOrderStatus::DALAM_SERVIS)
-        <!-- modal: batalkan pesanan -->
-        <div class="modal fade" id="modal-batalkan-pesanan{{ $serviceOrder->id }}" data-bs-keyboard="false" tabindex="-1"
-             aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog modal-sm modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title w-100 text-center" id="staticBackdropLabel">Batalkan Pesanan?</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <p class="mb-0 text-center">Konfirmasi pembatalan pesanan Anda.</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary btn-sm p-1 fw-bold w-100">Ya</button>
-                <button type="button" class="btn btn-secondary btn-sm p-1 text-white fw-bold w-100" data-bs-dismiss="modal">Tidak</button>
-              </div>
-            </div>
-          </div>
-        </div>
         @break
       @case(ServiceOrderStatus::SERVIS_SELESAI)
         <!-- modal: catatan teknisi -->
@@ -309,7 +298,7 @@
                     </div>
                   </div>
                   <div class="row">
-                    <p class="px-0 mb-0 text-secondary">Diservis oleh: {{ $serviceOrder->technician->user->nama ?? $serviceOrder->status == ServiceOrderStatus::MENCARI_TEKNISI ? '(sedang dicari)' : '(dibatalkan)' }}</p>
+                    <p class="px-0 mb-0 text-secondary">Diservis oleh: {{ $serviceOrder->technician->user->nama ?? ($serviceOrder->status == ServiceOrderStatus::MENCARI_TEKNISI ? '(sedang dicari)' : '(dibatalkan)') }}</p>
                   </div>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

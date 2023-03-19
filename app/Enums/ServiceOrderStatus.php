@@ -12,7 +12,8 @@ use BenSampo\Enum\Enum;
 final class ServiceOrderStatus extends Enum
 {
     const MENCARI_TEKNISI = "0";
-    const DALAM_SERVIS = "1";
-    const SERVIS_SELESAI = "2";
-    const DIBATALKAN = "3";
+    const MENUNGGU_KONFIRMASI_TEKNISI = "1";
+    const DALAM_SERVIS = "2";
+    const SERVIS_SELESAI = "3";
+    const DIBATALKAN = "4";
 }

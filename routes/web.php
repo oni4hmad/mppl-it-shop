@@ -17,6 +17,7 @@ use App\Http\Controllers\ProductStackCartController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ServiceOrderController;
 use App\Http\Controllers\ServiceOrderManagementController;
+use App\Http\Controllers\TechnicianController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -129,8 +130,8 @@ Route::controller(ServiceOrderManagementController::class)->group(function () {
 });
 
 // TODO: route not done yet
-Route::get('/manage-technician', function () {
-    return view('admin.manage-technician');
+Route::controller(TechnicianController::class)->group(function () {
+    Route::get('/manage-technician', 'index')->middleware('auth.admin');
 });
 
 // TODO: route not done yet
