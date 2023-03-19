@@ -1,5 +1,5 @@
 
-      <div class="col-auto ps-4 py-4 border-end border-1" style="width: 200px;">
+      <div id="sidebar" class="col-auto ps-4 py-4 border-end border-1" style="width: 200px;">
         <div class="sticky-top" id="sticky-fix">
           {{-- sidebar: profile --}}
           <div class="row border-bottom pb-4 mb-4">
