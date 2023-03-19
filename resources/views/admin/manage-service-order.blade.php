@@ -222,7 +222,7 @@
               </div>
               <div class="modal-body">
                 <p class="mb-0 fw-bold">Total Biaya</p>
-                <input id="" type="text" value="{{ $serviceOrder->biaya }}" class="form-control mb-3" required autocomplete="name" autofocus placeholder="Total biaya" disabled>
+                <input id="" type="text" value="Rp{{ number_format($serviceOrder->biaya, 0, ',', '.') }}" class="form-control mb-3" required autocomplete="name" autofocus placeholder="Total biaya" disabled>
                 <p class="mb-0 fw-bold">Rincian Servis</p>
                 <textarea id="" type="text" class="form-control" name="name" rows="3" required autocomplete="name" autofocus placeholder="Rincian servis" disabled>{{ $serviceOrder->rincian_servis }}</textarea>
               </div>

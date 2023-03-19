@@ -196,7 +196,6 @@
                   @case(ProductOrderStatus::MENUNGGU_PEMBAYARAN)
                     <a href="/payment/{{ $productOrder->id }}" type="button" class="btn btn-primary btn-sm rounded-3 w-100 fw-bold border-white">Cek Kode Pembayaran</a>
                     <button type="button" class="btn btn-primary btn-sm rounded-3 w-100 fw-bold border-white" data-bs-toggle="modal" data-bs-target="#modal-upload-bukti-pembayaran{{ $productOrder->id }}">Upload Bukti Pembayaran</button>
-                    {{-- TODO: btn batalkan pesanan not yet done --}}
                     <a class="btn btn-danger fixed-button btn-sm rounded-3 w-100 fw-bold text-white border-white" data-bs-toggle="modal" data-bs-target="#modal-batalkan-pesanan{{ $productOrder->id }}">Batalkan Pesanan</a>
                     @break
                   @case(ProductOrderStatus::MENUNGGU_VERIFIKASI)

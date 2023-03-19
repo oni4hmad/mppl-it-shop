@@ -57,7 +57,8 @@ class ServiceOrderController extends Controller
         }
 
         if ($serviceOrder->status != ServiceOrderStatus::MENCARI_TEKNISI) {
-            return abort(404);
+            return redirect()->back()
+                ->with('error', 'Tidak dapat membatalkan pesanan: status pesanan mengalami perubahan.');
         }
 
         $serviceOrder->update(['status' => ServiceOrderStatus::DIBATALKAN]);

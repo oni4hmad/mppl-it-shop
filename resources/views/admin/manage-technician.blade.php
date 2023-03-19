@@ -182,12 +182,17 @@
 
                 @switch($technician->status)
                   @case(TechnicianStatus::TERSEDIA)
-                    <form action="/manage-service-order/request" method="post" id="form-request-service-{{ $technician->id }}">
-                      @csrf
-                      <input type="hidden" id="input-technician-id-{{ $technician->id }}" name="technician_id" value="{{ $technician->id }}">
-                      <input type="hidden" id="input-service-order-id-{{ $technician->id }}" name="service_order_id" value="">
-                      <button type="submit" class="btn btn-primary btn-sm rounded-3 w-100 fw-bold">Kirim Permintaan</button>
-                    </form>
+
+                    @if($noTechnicianServiceOrders->count() > 0)
+                      <form action="/manage-service-order/request" method="post" id="form-request-service-{{ $technician->id }}">
+                        @csrf
+                        <input type="hidden" id="input-technician-id-{{ $technician->id }}" name="technician_id" value="{{ $technician->id }}">
+                        <input type="hidden" id="input-service-order-id-{{ $technician->id }}" name="service_order_id" value="">
+                        <button type="submit" class="btn btn-primary btn-sm rounded-3 w-100 fw-bold">Kirim Permintaan</button>
+                      </form>
+                    @else
+                      <button type="button" class="btn btn-secondary btn-sm rounded-3 w-100 fw-bold" disabled>Kirim Permintaan</button>
+                    @endif
                     @break
                   @case(TechnicianStatus::MENUNGGU_KONFIRMASI)
                       <button type="button" class="btn btn-primary btn-sm rounded-3 w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#modal-batalkan-permintaan{{ $technician->id }}">Batalkan Permintaan</button>

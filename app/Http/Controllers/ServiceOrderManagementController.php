@@ -68,7 +68,7 @@ class ServiceOrderManagementController extends Controller
         // cek service order apakah null
         if ($technician == null) {
             return redirect()->back()
-                ->with('error', 'Pesanan tidak mempunyai teknisi.');
+                ->with('error', 'Teknisi tidak memiliki permintaan pesanan servis.');
         }
 
         // cek status teknisi, pastikan masih menunggu konfirmsai
