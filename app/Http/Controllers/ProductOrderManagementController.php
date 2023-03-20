@@ -35,7 +35,7 @@ class ProductOrderManagementController extends Controller
         ]);
 
         /* memastikan product order masih MENUNGG_RESI */
-        if ($productOrder->status != ProductOrderStatus::MENUNGGU_VERIFIKASI) {
+        if ($productOrder->status != ProductOrderStatus::MENUNGGU_RESI) {
             return redirect()->back()
                 ->with('error', 'Gagal menambahkan resi: status mengalami perubahan.');
         }
