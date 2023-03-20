@@ -21,7 +21,7 @@ class ProductOrderController extends Controller
             ->with('productOrders', $thisUserProductOrders);
     }
 
-    public function update(ProductOrder $productOrder, Request $request)
+    public function uploadPaymentEvidence(ProductOrder $productOrder, Request $request)
     {
         $this->validate($request, [
             "nama_pembayar" => ["required"],
@@ -32,6 +32,13 @@ class ProductOrderController extends Controller
         if ($productOrder->user->id != auth()->user()->id) {
             // error tambah bukti pembayaran order ini bukan milik current user
             return abort(404);
+        }
+
+        /* memastikan product order masih MENUNGGU_PEMBAYARAN / MENUNGG_VERIFIKASI */
+        if ($productOrder->status != ProductOrderStatus::MENUNGGU_PEMBAYARAN
+            && $productOrder->status != ProductOrderStatus::MENUNGGU_VERIFIKASI) {
+            return redirect()->back()
+                ->with('error', 'Upload gagal: status tidak sedang menunggu pembayaran.');
         }
 
         $bukti_pembayaran = $productOrder->bukti_pembayaran;
@@ -51,13 +58,58 @@ class ProductOrderController extends Controller
             ->with('success', 'Upload bukti pembayaran berhasil (Order ID: '.$productOrder->id.')');
     }
 
-    public function cancel(ProductOrder $productOrder)
+    // for admin
+    public function rejectOrder(ProductOrder $productOrder)
     {
-        $isThisUserProductOrder = $productOrder->user->id == auth()->user()->id;
+        /* memastikan this user = admin */
         $isThisUserAdmin = auth()->user()->user_type == UserType::ADMINISTRATOR;
-        if (!$isThisUserProductOrder && !$isThisUserAdmin) {
+        if (!$isThisUserAdmin) {
             return abort(404);
         }
+
+        /* memastikan prodcut order masih MENUNGGU_PEMBAYARAN / MENUNGGU_VERIFIKASI */
+        $isOrderWaitingPayment = $productOrder->status == ProductOrderStatus::MENUNGGU_PEMBAYARAN;
+        $isOrderWaitVerification = $productOrder->status == ProductOrderStatus::MENUNGGU_VERIFIKASI;
+        if (!$isOrderWaitingPayment && !$isOrderWaitVerification) {
+            return redirect()->back()
+                ->with('error', 'Gagal membatalkan pesanan produk: status mengalami perubahan.');
+        }
+
+        /* eksekusi penolakan */
+        return $this->cancel($productOrder);
+    }
+
+    // for user
+    public function cancelOrder(ProductOrder $productOrder)
+    {
+        /* memastikan orderan dari this user */
+        $isThisUserProductOrder = $productOrder->user->id == auth()->user()->id;
+        if (!$isThisUserProductOrder) {
+            return abort(404);
+        }
+
+        /* memastikan product order masih MENUNGGU_PEMBAYARAN */
+        $isOrderWaitingPayment = $productOrder->status == ProductOrderStatus::MENUNGGU_PEMBAYARAN;
+        if (!$isOrderWaitingPayment) {
+            return redirect()->back()
+                ->with('error', 'Gagal membatalkan pesanan produk: status mengalami perubahan.');
+        }
+
+        /* eksekusi pembatalan */
+        return $this->cancel($productOrder);
+    }
+
+    private function cancel(ProductOrder $productOrder)
+    {
+        /* jika status MENUNGGU_VERIFIKASI maka hapus bukti_pembayaran (record dan file) */
+        if ($productOrder->status == ProductOrderStatus::MENUNGGU_VERIFIKASI) {
+            if (File::exists($productOrder->bukti_pembayaran->path)) {
+                $destination = $productOrder->bukti_pembayaran->path;
+                File::delete($destination);
+            }
+            $productOrder->bukti_pembayaran->delete();
+        }
+
         $productOrder->update(['status' => ProductOrderStatus::DIBATALKAN]);
         return redirect()->back()
             ->with('success', 'Order berhasil dibatalkan (Order ID: '.$productOrder->id.')');
@@ -83,6 +135,13 @@ class ProductOrderController extends Controller
         if ((!$isThisUserProductOrder && !$isThisUserAdmin) || !$isThisProductOrderHasResi) {
             return abort(404);
         }
+
+        /* memastikan product order masih SEDANG_DIKIRIM */
+        if ($productOrder->status != ProductOrderStatus::SEDANG_DIKIRIM) {
+            return redirect()->back()
+                ->with('error', 'Gagal melakukan konfirmasi selesai: status mengalami perubahan.');
+        }
+
         $productOrder->update(['status' => ProductOrderStatus::ORDER_SELESAI]);
         return redirect()->back()
             ->with('success', 'Berhasil mengonfirmasi produk telah selesai diterima. (Order ID: '.$productOrder->id.')');

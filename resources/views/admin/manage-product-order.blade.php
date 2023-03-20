@@ -295,7 +295,7 @@
               <div class="modal-body">
                 <p class="mb-0 text-center">Apakah kamu yakin ingin menolak pesanan?</p>
               </div>
-              <form action="/cancel-order-product/{{ $productOrder->id }}" method="post">
+              <form action="/order-product/reject/{{ $productOrder->id }}" method="post">
                 @csrf
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary btn-sm p-1 fw-bold w-100">Iya</button>
@@ -354,7 +354,7 @@
               <div class="modal-body">
                 <p class="mb-0 text-center">Apakah kamu yakin ingin menolak pesanan?</p>
               </div>
-              <form action="/cancel-order-product/{{ $productOrder->id }}" method="post">
+              <form action="/order-product/reject/{{ $productOrder->id }}" method="post">
                 @csrf
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary btn-sm p-1 fw-bold w-100">Iya</button>

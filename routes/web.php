@@ -133,10 +133,12 @@ Route::controller(PaymentController::class)->group(function () {
 Route::controller(ProductOrderController::class)->group(function () {
     Route::get('/order-history-product', 'index')
         ->middleware('auth');
-    Route::put('/payment/{productOrder:id}', 'update')
+    Route::put('/payment/{productOrder:id}', 'uploadPaymentEvidence')
         ->middleware('auth');
-    Route::post('/cancel-order-product/{productOrder:id}', 'cancel')
+    Route::post('/order-product/cancel/{productOrder:id}', 'cancelOrder')
         ->middleware('auth');
+    Route::post('/order-product/reject/{productOrder:id}', 'rejectOrder')
+        ->middleware('auth.admin');
     Route::get('/track/{productOrder:id}', 'track')
         ->middleware('auth');
     Route::put('/mark-order-done/{productOrder:id}', 'markDone')
