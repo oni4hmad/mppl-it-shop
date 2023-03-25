@@ -60,11 +60,6 @@ Route::controller(AccountSettingsController::class)->group(function () {
         ->middleware('auth');
 });
 
-Route::controller(CategoryController::class)->group(function () {
-    Route::post('/category', 'store')
-        ->middleware('auth.admin');
-});
-
 // TODO: route not done yet
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
@@ -188,9 +183,16 @@ Route::controller(TechnicianController::class)->group(function () {
 });
 
 // TODO: payment method, courier, category (admin page)
-Route::get('/manage-category', function () {
-//    return "manage category";
-    return view('admin.manage-category');
+
+Route::controller(CategoryController::class)->group(function () {
+    Route::get('/manage-category', 'index')
+        ->middleware('auth.admin');
+    Route::post('/manage-category', 'store')
+        ->middleware('auth.admin');
+    Route::put('/manage-category/{category:id}', 'update')
+        ->middleware('auth.admin');
+    Route::delete('/manage-category/delete/{category:id}', 'delete')
+        ->middleware('auth.admin');
 });
 
 Route::get('/manage-payment-method', function () {

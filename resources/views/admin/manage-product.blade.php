@@ -386,7 +386,7 @@
           <h5 class="modal-title" id="staticBackdropLabel">Tambah Kategori</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form enctype="multipart/form-data" action="/category" method="post">
+        <form enctype="multipart/form-data" action="/manage-category" method="post">
           @csrf
           <div class="modal-body">
             <div class="row mb-2">
