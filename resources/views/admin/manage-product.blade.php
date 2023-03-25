@@ -22,7 +22,7 @@
       document.querySelectorAll('input[name="harga"]').forEach(e => {
         new AutoNumeric(e, autoNumericOptionsEuro);
       });
-    }
+    };
   </script>
 
   {{-- error/errors/success toast --}}

@@ -187,6 +187,22 @@ Route::controller(TechnicianController::class)->group(function () {
         ->middleware('auth.technician');
 });
 
+// TODO: payment method, courier, category (admin page)
+Route::get('/manage-category', function () {
+//    return "manage category";
+    return view('admin.manage-category');
+});
+
+Route::get('/manage-payment-method', function () {
+//    return "manage payment method";
+    return view('admin.manage-payment-method');
+});
+
+Route::get('/manage-courier', function () {
+//    return "manage courier";
+    return view('admin.manage-courier');
+});
+
 
 
 
