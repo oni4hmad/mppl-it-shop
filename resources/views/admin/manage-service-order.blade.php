@@ -3,13 +3,6 @@
 
 @section('content')
 
-  {{-- css --}}
-  <style>
-    #side-nav:hover {
-      background-color: #F2F2F2;
-    }
-  </style>
-
   {{-- sticky content fix --}}
   <script src="/js/sticky-content-fix.js"></script>
 

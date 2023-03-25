@@ -13,8 +13,8 @@
   <!-- customized bootstrap css -->
   <link rel="stylesheet" href="/css/style.css">
 
-  <!-- font awesome -->
-  <script src="https://kit.fontawesome.com/662e3d0d32.js" crossorigin="anonymous"></script>
+  <!-- Font Awesome (Icon) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- navbar fix -->
   <script src="/js/navbar-fix.js"></script>

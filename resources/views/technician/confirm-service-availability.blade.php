@@ -5,9 +5,6 @@
 
   {{-- css --}}
   <style>
-    #side-nav:hover {
-      background-color: #F2F2F2;
-    }
 
     {{-- fix button danger format broken --}}
     .btn-danger {

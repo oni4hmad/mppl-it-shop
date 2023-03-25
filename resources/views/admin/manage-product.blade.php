@@ -2,16 +2,6 @@
 
 @section('content')
 
-  {{-- css --}}
-  <style>
-    #side-nav:hover {
-      background-color: #F2F2F2;
-    }
-    .toast-container {
-      z-index: 1080;
-    }
-  </style>
-
   {{--sticky content fix--}}
   <script src="/js/sticky-content-fix.js"></script>
   {{--autonumeric: currency formatting--}}
