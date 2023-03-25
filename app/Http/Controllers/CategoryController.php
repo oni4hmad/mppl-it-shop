@@ -44,16 +44,17 @@ class CategoryController extends Controller
             "photo" => ["image", "max:1024", "mimes:jpeg,png,jpg"],
         ]);
 
-        // delete + updateOrCreate
+        // photo delete + updateOrCreate
         if ($request->hasFile('photo')) {
             $oldPhotoPath = $category->photo ? $category->photo->path : null;
-            $photoPath = $request->file('photo')->store('photo/category', 'public_direct');
-            $category->photo()->updateOrCreate([], ['path' => $photoPath]);
-            if ($oldPhotoPath && Storage::disk('public_direct')->exists($oldPhotoPath)) {
-                Storage::disk('public_direct')->delete($oldPhotoPath);
+            $newPhotoPath = $request->file('photo')->store('photo/category', 'public_direct');
+            $category->photo()->updateOrCreate([], ['path' => $newPhotoPath]);
+            if ($oldPhotoPath && File::exists($oldPhotoPath)) {
+                File::delete($oldPhotoPath);
             }
         }
 
+        // update name
         $category->update(['nama' => $request->nama]);
 
         return redirect()
@@ -64,10 +65,9 @@ class CategoryController extends Controller
     public function delete(Category $category)
     {
         // delete category photo
-        $categoryPhoto = $category->photo;
-        if (isset($categoryPhoto) && File::exists($categoryPhoto->path)) {
-            $destination = $categoryPhoto->path;
-            File::delete($destination);
+        $oldPhotoPath = $category->photo ? $category->photo->path : null;
+        if (isset($oldPhotoPath) && File::exists($oldPhotoPath)) {
+            File::delete($oldPhotoPath);
         }
         $category->photo()->delete();
         // delete category
