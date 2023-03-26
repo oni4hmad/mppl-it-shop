@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountSettingsController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CourierController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaymentMethodController;
@@ -207,8 +208,21 @@ Route::controller(PaymentMethodController::class)->group(function () {
         ->middleware('auth.admin');
 });
 
-Route::get('/manage-courier', function () {
-    return view('admin.manage-courier');
+Route::controller(CourierController::class)->group(function () {
+    Route::get('/manage-courier', 'index')
+        ->middleware('auth.admin');
+    Route::post('/manage-courier', 'storeCourier')
+        ->middleware('auth.admin');
+    Route::post('/manage-courier/type', 'storeType')
+        ->middleware('auth.admin');
+    Route::put('/manage-courier/{courier:id}', 'updateCourier')
+        ->middleware('auth.admin');
+    Route::put('/manage-courier/type/{courierType:id}', 'updateType')
+        ->middleware('auth.admin');
+    Route::delete('/manage-courier/{courier:id}', 'deleteCourier')
+        ->middleware('auth.admin');
+    Route::delete('/manage-courier/type/{courierType:id}', 'deleteType')
+        ->middleware('auth.admin');
 });
 
 

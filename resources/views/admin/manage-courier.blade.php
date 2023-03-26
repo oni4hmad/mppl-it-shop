@@ -75,50 +75,51 @@
         {{-- table --}}
 
         {{-- table row --}}
-        @for ($i = 0; $i < 3; $i++)
-        <div class="row border-bottom bg-white">
+        @foreach($couriers as $courier)
+          <div class="row border-bottom bg-white">
 
-          {{-- payment name --}}
-          <div class="col-4 d-flex flex-row  py-3">
-            <p class="mb-0 me-4 fw-bolder text-break">JNT</p>
-            {{-- action: edit / delete --}}
-            <a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#modal-edit-kurir">
-              <i class="fas fa-edit"></i>
-            </a>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#modal-delete-payment">
-              <i class="fas fa-trash"></i>
-            </a>
-          </div>
+            {{-- payment name --}}
+            <div class="col-4 d-flex flex-row  py-3">
+              <p class="mb-0 me-4 fw-bolder text-break">{{ $courier->nama }}</p>
+              {{-- action: edit / delete --}}
+              <a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#modal-edit-kurir{{ $courier->id }}">
+                <i class="fas fa-edit"></i>
+              </a>
+              <a href="#" data-bs-toggle="modal" data-bs-target="#modal-delete-payment{{ $courier->id }}">
+                <i class="fas fa-trash"></i>
+              </a>
+            </div>
 
-          <div class="col-8">
-            @for ($j = 0; $j < 3; $j++)
-              <div class="row border-bottom">
-                {{-- tipe pengiriman --}}
-                <div class="col-4 py-3">
-                  <p class="mb-0 fw-bold" style="z-index: 1;">Instant</p>
-                </div>
-                {{-- harga --}}
-                <div class="col-4 py-3">
-                  <p class="mb-0 fw-bold" style="z-index: 1;">Rp10.000</p>
-                </div>
-                {{-- action: edit / delete --}}
-                <div class="col-4 py-3">
-                  <div class="--sticky-table-item" style="z-index: 1;">
-                    <div class="row">
-                      <div class="col-auto">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#modal-edit-tipe-pengiriman"><i class="fas fa-edit"></i></a>
-                      </div>
-                      <div class="col-auto">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#modal-delete-payment"><i class="fas fa-trash"></i></a>
+            <div class="col-8">
+              @foreach($courier->courier_types as $courierType)
+                @php($isLastCourierType = $loop->index == count($courier->courier_types)-1)
+                <div class="row {{ $isLastCourierType ? "" : "border-bottom" }}">
+                  {{-- tipe pengiriman --}}
+                  <div class="col-4 py-3">
+                    <p class="mb-0 fw-bold" style="z-index: 1;">{{ $courierType->nama }}</p>
+                  </div>
+                  {{-- harga --}}
+                  <div class="col-4 py-3">
+                    <p class="mb-0 fw-bold" style="z-index: 1;">Rp{{ number_format($courierType->harga, 0, ',', '.') }}</p>
+                  </div>
+                  {{-- action: edit / delete --}}
+                  <div class="col-4 py-3">
+                    <div class="--sticky-table-item" style="z-index: 1;">
+                      <div class="row">
+                        <div class="col-auto">
+                          <a href="#" data-bs-toggle="modal" data-bs-target="#modal-edit-courier-type{{ $courierType->id }}"><i class="fas fa-edit"></i></a>
+                        </div>
+                        <div class="col-auto">
+                          <a href="#" data-bs-toggle="modal" data-bs-target="#modal-delete-courier-type{{ $courierType->id }}"><i class="fas fa-trash"></i></a>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            @endfor
+              @endforeach
+            </div>
           </div>
-        </div>
-        @endfor
+        @endforeach
 
         {{-- pagination --}}
         <div class="row border-end bg-light py-3">
@@ -148,94 +149,128 @@
   <!--------------------------------------->
   {{-- data-bs-toggle="modal" data-bs-target="#modal-" --}}
 
-  <!-- modal: delete kurir -->
-  <div class="modal fade" id="modal-delete-payment" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title w-100 text-center" id="staticBackdropLabel">Hapus Kurir?</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p class="mb-0 text-center">Konfirmasi penghapusan kurir.</p>
-        </div>
-        <form action="#" method="post">
-          @method('delete')
-          @csrf
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary btn-sm p-1 fw-bold w-100">Hapus</button>
-            <button type="button" class="btn btn-secondary btn-sm p-1 text-white fw-bold w-100" data-bs-dismiss="modal">Batal</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
 
-  <!-- modal: edit kurir -->
-  <div class="modal fade" id="modal-edit-kurir" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Edit Kurir</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form enctype="multipart/form-data" action="/payment" method="post">
-          @csrf
-          <div class="modal-body">
-            <div class="row mb-2">
-              <div class="col">
-                <p class="mb-0 fw-bold">Nama Kurir</p>
-                <input id="nama" name="nama" type="text" class="form-control" autocomplete="name" autofocus placeholder="Nama Kurir" required>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
-            <button type="submit" class="btn btn-primary btn-sm px-3 fw-bold">Simpan</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+  @foreach($couriers as $courier)
 
-  <!-- modal: edit tipe pengiriman -->
-  <div class="modal fade" id="modal-edit-tipe-pengiriman" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Edit Tipe Pengiriman</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form enctype="multipart/form-data" action="/payment" method="post">
-          @csrf
+    <!-- modal: delete kurir -->
+    <div class="modal fade" id="modal-delete-payment{{ $courier->id }}" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title w-100 text-center" id="staticBackdropLabel">Hapus Kurir?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
           <div class="modal-body">
-            <div class="row mb-2">
-              <div class="col">
-                <p class="mb-0 fw-bold">Nama Tipe Pengiriman</p>
-                <input id="nama" name="nama" type="text" class="form-control" autocomplete="name" autofocus placeholder="Nama Tipe Pengiriman" required>
-              </div>
-              <div class="col">
-                <p class="mb-0 fw-bold">Kurir</p>
-                <select class="form-select" id="" name="category_id" disabled>
-                  <option value="">Opsi</option>
-                </select>
-              </div>
-            </div>
-            <div class="row mb-2">
-              <div class="col">
-                <p class="mb-0 fw-bold">Harga</p>
-                <input id="harga" name="harga" type="text" class="form-control" autocomplete="name" autofocus placeholder="Harga" required>
-              </div>
-            </div>
+            <p class="mb-0 text-center">Konfirmasi penghapusan kurir.</p>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
-            <button type="submit" class="btn btn-primary btn-sm px-3 fw-bold">Simpan</button>
-          </div>
-        </form>
+          <form action="/manage-courier/{{ $courier->id }}" method="post">
+            @method('delete')
+            @csrf
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary btn-sm p-1 fw-bold w-100">Hapus</button>
+              <button type="button" class="btn btn-secondary btn-sm p-1 text-white fw-bold w-100" data-bs-dismiss="modal">Batal</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
+
+    <!-- modal: edit kurir -->
+    <div class="modal fade" id="modal-edit-kurir{{ $courier->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Edit Kurir</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="/manage-courier/{{ $courier->id }}" method="post">
+            @method('put')
+            @csrf
+            <div class="modal-body">
+              <div class="row mb-2">
+                <div class="col">
+                  <p class="mb-0 fw-bold">Nama Kurir</p>
+                  <input id="nama" name="nama" type="text" class="form-control" autocomplete="name" autofocus placeholder="Nama Kurir" value="{{ $courier->nama }}" required>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
+              <button type="submit" class="btn btn-primary btn-sm px-3 fw-bold">Simpan</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    @foreach($courier->courier_types as $courierType)
+
+      <!-- modal: delete tipe pengiriman -->
+      <div class="modal fade" id="modal-delete-courier-type{{ $courierType->id }}" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title w-100 text-center" id="staticBackdropLabel">Hapus Tipe Pengiriman?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p class="mb-0 text-center">Konfirmasi penghapusan tipe pengiriman.</p>
+            </div>
+            <form action="/manage-courier/type/{{ $courierType->id }}" method="post">
+              @method('delete')
+              @csrf
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary btn-sm p-1 fw-bold w-100">Hapus</button>
+                <button type="button" class="btn btn-secondary btn-sm p-1 text-white fw-bold w-100" data-bs-dismiss="modal">Batal</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- modal: edit tipe pengiriman -->
+      <div class="modal fade" id="modal-edit-courier-type{{ $courierType->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Edit Tipe Pengiriman</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/manage-courier/type/{{ $courierType->id }}" method="post">
+              @method('put')
+              @csrf
+              <div class="modal-body">
+                <div class="row mb-2">
+                  <div class="col">
+                    <p class="mb-0 fw-bold">Nama Tipe Pengiriman</p>
+                    <input id="nama" name="nama" type="text" class="form-control" autocomplete="name" autofocus placeholder="Nama Tipe Pengiriman" value="{{ $courierType->nama }}" required>
+                  </div>
+                  <div class="col">
+                    <p class="mb-0 fw-bold">Kurir</p>
+                    <select class="form-select" name="courier_id" disabled>
+                      <option value="{{ $courierType->courier->id }}">{{ $courierType->courier->nama }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col">
+                    <p class="mb-0 fw-bold">Harga</p>
+                    <input id="harga" name="harga" type="text" class="form-control" autocomplete="name" autofocus placeholder="Harga" value="{{ $courierType->harga }}" required>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary btn-sm px-3 fw-bold">Simpan</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    @endforeach
+
+  @endforeach
 
   <!-- modal: tambah kurir -->
   <div class="modal fade" id="modal-tambah-payment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -245,7 +280,7 @@
           <h5 class="modal-title" id="staticBackdropLabel">Tambah Kurir</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="/payment" method="post">
+        <form action="/manage-courier" method="post">
           @csrf
           <div class="modal-body">
             <div class="row mb-2">
@@ -272,7 +307,7 @@
           <h5 class="modal-title" id="staticBackdropLabel">Tambah Tipe Pengiriman</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="/payment" method="post">
+        <form action="/manage-courier/type" method="post">
           @csrf
           <div class="modal-body">
             <div class="row mb-2">
@@ -282,10 +317,10 @@
               </div>
               <div class="col">
                 <p class="mb-0 fw-bold">Pilih Kurir</p>
-                <select class="form-select" id="" name="category_id">
-                  <option value="">Opsi</option>
-                  <option value="">Opsi</option>
-                  <option value="">Opsi</option>
+                <select class="form-select" name="courier_id" required>
+                  @foreach($couriers as $courier)
+                  <option value="{{ $courier->id }}">{{ $courier->nama }}</option>
+                  @endforeach
                 </select>
               </div>
             </div>
