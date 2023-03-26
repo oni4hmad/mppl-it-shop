@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\PlaceOrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductManagementController;
@@ -195,13 +196,18 @@ Route::controller(CategoryController::class)->group(function () {
         ->middleware('auth.admin');
 });
 
-Route::get('/manage-payment-method', function () {
-//    return "manage payment method";
-    return view('admin.manage-payment-method');
+Route::controller(PaymentMethodController::class)->group(function () {
+    Route::get('/manage-payment-method', 'index')
+        ->middleware('auth.admin');
+    Route::post('/manage-payment-method', 'store')
+        ->middleware('auth.admin');
+    Route::put('/manage-payment-method/{paymentMethod:id}', 'update')
+        ->middleware('auth.admin');
+    Route::delete('/manage-payment-method/{paymentMethod:id}', 'delete')
+        ->middleware('auth.admin');
 });
 
 Route::get('/manage-courier', function () {
-//    return "manage courier";
     return view('admin.manage-courier');
 });
 

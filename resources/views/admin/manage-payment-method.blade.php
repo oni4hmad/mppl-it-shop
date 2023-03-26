@@ -47,32 +47,34 @@
         {{-- table --}}
 
         {{-- table row --}}
-        <div class="row border-bottom bg-white">
+        @foreach($paymentMethods as $paymentMethod)
+          <div class="row border-bottom bg-white">
 
-          {{-- payment name --}}
-          <div class="col-5 py-3">
-            <p class="mb-0 fw-bolder text-break">BNI (Nomor Rekening)</p>
-          </div>
+            {{-- payment name --}}
+            <div class="col-5 py-3">
+              <p class="mb-0 fw-bolder text-break">{{ $paymentMethod->nama }}</p>
+            </div>
 
-          {{-- metode pembayaran --}}
-          <div class="col-5 py-3">
-            <p class="--sticky-table-item mb-0 fw-bold" style="z-index: 1;">45345-23423-23434</p>
-          </div>
+            {{-- metode pembayaran --}}
+            <div class="col-5 py-3">
+              <p class="--sticky-table-item mb-0 fw-bold" style="z-index: 1;">{{ $paymentMethod->nomor_rekening }}</p>
+            </div>
 
-          {{-- action: edit / delete --}}
-          <div class="col-2 py-3">
-            <div class="--sticky-table-item" style="z-index: 1;">
-              <div class="row">
-                <div class="col-auto">
-                  <a href="#" data-bs-toggle="modal" data-bs-target="#modal-edit-payment"><i class="fas fa-edit"></i></a>
-                </div>
-                <div class="col-auto">
-                  <a href="#" data-bs-toggle="modal" data-bs-target="#modal-delete-payment"><i class="fas fa-trash"></i></a>
+            {{-- action: edit / delete --}}
+            <div class="col-2 py-3">
+              <div class="--sticky-table-item" style="z-index: 1;">
+                <div class="row">
+                  <div class="col-auto">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#modal-edit-payment{{ $paymentMethod->id }}"><i class="fas fa-edit"></i></a>
+                  </div>
+                  <div class="col-auto">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#modal-delete-payment{{ $paymentMethod->id }}"><i class="fas fa-trash"></i></a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        @endforeach
 
         {{-- pagination --}}
         <div class="row border-end bg-light py-3">
@@ -103,62 +105,6 @@
   <!--------------------------------------->
   {{-- data-bs-toggle="modal" data-bs-target="#modal-" --}}
 
-  <!-- modal: delete payment -->
-  <div class="modal fade" id="modal-delete-payment" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title w-100 text-center" id="staticBackdropLabel">Hapus Metode Pembayaran?</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p class="mb-0 text-center">Konfirmasi penghapusan metode pembayaran.</p>
-        </div>
-        <form action="#" method="post">
-          @method('delete')
-          @csrf
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary btn-sm p-1 fw-bold w-100">Hapus</button>
-            <button type="button" class="btn btn-secondary btn-sm p-1 text-white fw-bold w-100" data-bs-dismiss="modal">Batal</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <!-- modal: edit payment -->
-  <div class="modal fade" id="modal-edit-payment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Edit Metode Pembayaran</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form enctype="multipart/form-data" action="/payment" method="post">
-          @csrf
-          <div class="modal-body">
-            <div class="row mb-2">
-              <div class="col">
-                <p class="mb-0 fw-bold">Nama Metode Pembayaran</p>
-                <input id="nama" name="nama" type="text" class="form-control" autocomplete="name" autofocus placeholder="Nama Metode Pembayaran" required>
-              </div>
-            </div>
-            <div class="row mb-2">
-              <div class="col">
-                <p class="mb-0 fw-bold">Nomor Rekening</p>
-                <input id="nama" name="nomor_rekening" type="text" class="form-control" autocomplete="name" autofocus placeholder="Nomor Rekening" required>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
-            <button type="submit" class="btn btn-primary btn-sm px-3 fw-bold">Simpan</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
   <!-- modal: tambah metode pembayaran -->
   <div class="modal fade" id="modal-tambah-payment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -167,19 +113,19 @@
           <h5 class="modal-title" id="staticBackdropLabel">Tambah Metode Pembayaran</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="/payment" method="post">
+        <form action="/manage-payment-method/" method="post">
           @csrf
           <div class="modal-body">
             <div class="row mb-2">
               <div class="col">
                 <p class="mb-0 fw-bold">Nama Metode Pembayaran</p>
-                <input id="nama" name="nama" type="text" class="form-control" autocomplete="name" autofocus placeholder="Nama Metode Pembayaran" required>
+                <input id="nama" name="nama" type="text" class="form-control" autocomplete="name" autofocus placeholder="Nama Metode Pembayaran" value="{{ old("nama") }}" required>
               </div>
             </div>
             <div class="row mb-2">
               <div class="col">
                 <p class="mb-0 fw-bold">Nomor Rekening</p>
-                <input id="nama" name="nomor_rekening" type="text" class="form-control" autocomplete="name" autofocus placeholder="Nomor Rekening" required>
+                <input id="nama" name="nomor_rekening" type="text" class="form-control" autocomplete="name" autofocus placeholder="Nomor Rekening" value="{{ old("nomor_rekening") }}" required>
               </div>
             </div>
           </div>
@@ -191,5 +137,65 @@
       </div>
     </div>
   </div>
+
+
+  @foreach($paymentMethods as $paymentMethod)
+    <!-- modal: edit payment -->
+    <div class="modal fade" id="modal-edit-payment{{ $paymentMethod->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Edit Metode Pembayaran</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="/manage-payment-method/{{ $paymentMethod->id }}" method="post">
+            @method('put')
+            @csrf
+            <div class="modal-body">
+              <div class="row mb-2">
+                <div class="col">
+                  <p class="mb-0 fw-bold">Nama Metode Pembayaran</p>
+                  <input id="nama" name="nama" type="text" class="form-control" autocomplete="name" autofocus placeholder="Nama Metode Pembayaran" value="{{ $paymentMethod->nama }}" required>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col">
+                  <p class="mb-0 fw-bold">Nomor Rekening</p>
+                  <input id="nama" name="nomor_rekening" type="text" class="form-control" autocomplete="name" autofocus placeholder="Nomor Rekening" value="{{ $paymentMethod->nomor_rekening }}" required>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
+              <button type="submit" class="btn btn-primary btn-sm px-3 fw-bold">Simpan</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- modal: delete payment -->
+    <div class="modal fade" id="modal-delete-payment{{ $paymentMethod->id }}" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title w-100 text-center" id="staticBackdropLabel">Hapus Metode Pembayaran?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-0 text-center">Konfirmasi penghapusan metode pembayaran.</p>
+        </div>
+        <form action="/manage-payment-method/{{ $paymentMethod->id }}" method="post">
+          @method('delete')
+          @csrf
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary btn-sm p-1 fw-bold w-100">Hapus</button>
+            <button type="button" class="btn btn-secondary btn-sm p-1 text-white fw-bold w-100" data-bs-dismiss="modal">Batal</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  @endforeach
 
 @endsection
