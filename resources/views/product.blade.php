@@ -176,7 +176,7 @@
                 @endfor
               </div>
 
-              {{-- option dropdown --}}
+              {{-- option dropdown: ulasan --}}
               <div class="col text-end">
                 <div class="btn-group">
                   <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split text-white py-0" data-bs-toggle="dropdown" aria-expanded="false">
@@ -184,7 +184,7 @@
                   </button>
                   <ul class="dropdown-menu dropdown-menu-lg-end">
                     <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-balas-ulasan">Balas</a></li>
-                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-nilai-produk">Ubah</a></li>
+                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-edit-ulasan">Ubah</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-hapus-ulasan">Hapus</a></li>
                   </ul>
@@ -204,8 +204,25 @@
                   </div>
                 </div>
                 <div class="col">
-                  <p class="m-0 p-0 fw-bold text-break">Admin</p>
-                  <p class="m-0 p-0 text-secondary text-break">5 jam yang lalu</p>
+                  <div class="row">
+                    <div class="col">
+                      <p class="mb-0 fw-bold text-break">Admin</p>
+                      <p class="mb-0 text-secondary text-break">5 jam yang lalu</p>
+                    </div>
+                    <div class="col-auto">
+                      {{-- option dropdown: komentar --}}
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split text-white py-0" data-bs-toggle="dropdown" aria-expanded="false">
+                          <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+                          <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-edit-comment">Ubah</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-delete-comment">Hapus</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
                   <div class="row mt-2">
                     <p class="my-0 text-break">Terima kasih telah berbelanja di it-shop.co.id!<br>Selalu cek it-shop supaya tidak ketinggalan promonya ya!</p>
                   </div>
@@ -291,12 +308,12 @@
     </div>
   </div>
 
-  <!-- modal: nilai produk -->
-  <div class="modal fade" id="modal-nilai-produk" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <!-- modal: edit ulasan -->
+  <div class="modal fade" id="modal-edit-ulasan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Nilai Produk</h5>
+          <h5 class="modal-title" id="staticBackdropLabel">Edit Ulasan</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -319,13 +336,13 @@
                   <p class="mb-0 text-secondary text-break">3 Juni 2021</p>
                   <div class="d-flex flex-row align-items-center">
                     <p class="mb-0 me-2 text-primary fw-bold">Rating (1-5):</p>
-                    <input type="number" name="" id="" min="1" max="5" value="4">
+                    <input type="number" name="nilai_rating" id="" min="1" max="5" value="4">
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <textarea id="" type="text" class="form-control" name="name" rows="3" required autocomplete="name" autofocus placeholder="Tambahkan review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo accusantium reprehenderit possimus laborum nemo</textarea>
+          <textarea id="" type="text" class="form-control" name="deskripsi_rating" rows="3" required autocomplete="name" autofocus placeholder="Tambahkan review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo accusantium reprehenderit possimus laborum nemo</textarea>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
@@ -381,7 +398,7 @@
             <p class="p-0 m-0 text-break">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo accusantium reprehenderit possimus laborum nemo, cumque nostrum veniam assumenda! Aut veniam amet quis? Hic fugit cumque sapiente? Tenetur corrupti dignissimos est dolor harum. Debitis sint tenetur incidunt nam molestias ratione illum, aperiam consequuntur adipisci vel rerum autem excepturi?</p>
           </div>
           <p class="p-0 m-0 fw-bold text-break">Balasan:</p>
-          <textarea id="" type="text" class="form-control" name="name" rows="3" required autocomplete="name" autofocus placeholder="Balasan"></textarea>
+          <textarea type="text" class="form-control" name="komentar" rows="3" required autocomplete="name" autofocus placeholder="Balasan"></textarea>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
@@ -410,4 +427,43 @@
     </div>
   </div>
 
+
+
+  <!-- modal: edit comment -->
+  <div class="modal fade" id="modal-edit-comment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Edit Komentar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <textarea type="text" class="form-control" name="komentar" rows="3" required autocomplete="name" autofocus placeholder="Tambahkan komentar">Terima kasih telah berbelanja di it-shop.co.id!&#10;Selalu cek it-shop supaya tidak ketinggalan promonya ya!</textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
+          <button type="button" class="btn btn-primary btn-sm px-3 fw-bold">Ubah</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal: delete comment -->
+  <div class="modal fade" id="modal-delete-comment" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title w-100 text-center" id="staticBackdropLabel">Hapus Komentar?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-0 text-center">Konfirmasi penghapusan komentar.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary btn-sm p-1 fw-bold w-100">Hapus</button>
+          <button type="button" class="btn btn-secondary btn-sm p-1 text-white fw-bold w-100" data-bs-dismiss="modal">Batal</button>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
