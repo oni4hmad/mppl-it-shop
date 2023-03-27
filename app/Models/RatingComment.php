@@ -10,11 +10,16 @@ class RatingComment extends Model
     use HasFactory;
 
     protected $guarded = [
-        "komentar",
+        "id",
     ];
 
-    public function prouduct_rating()
+    public function product_rating()
     {
         return $this->belongsTo(ProductRating::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

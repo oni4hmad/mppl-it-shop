@@ -52,6 +52,11 @@ class Product extends Model
         return $this->hasMany(ProductStackCart::class);
     }
 
+    public function product_ratings()
+    {
+        return $this->hasMany(ProductRating::class);
+    }
+
     public function photo_1()
     {
         return $this->belongsTo(Photo::class, 'photo_id_1');

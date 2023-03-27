@@ -16,6 +16,7 @@ use App\Http\Controllers\ProductOrderManagementController;
 use App\Http\Controllers\ProductRatingController;
 use App\Http\Controllers\ProductSearchController;
 use App\Http\Controllers\ProductStackCartController;
+use App\Http\Controllers\RatingCommentController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ServiceOrderController;
 use App\Http\Controllers\ServiceOrderManagementController;
@@ -142,11 +143,6 @@ Route::controller(ProductOrderController::class)->group(function () {
         ->middleware('auth');
 });
 
-Route::controller(ProductRatingController::class)->group(function () {
-    Route::post('/product-rating/{productStackOrder:id}', 'store')
-        ->middleware('auth');
-});
-
 Route::controller(ServiceOrderController::class)->group(function () {
     Route::get('/service-order', 'showForm')
         ->middleware('auth');
@@ -222,6 +218,24 @@ Route::controller(CourierController::class)->group(function () {
     Route::delete('/manage-courier/{courier:id}', 'deleteCourier')
         ->middleware('auth.admin');
     Route::delete('/manage-courier/type/{courierType:id}', 'deleteType')
+        ->middleware('auth.admin');
+});
+
+Route::controller(ProductRatingController::class)->group(function () {
+    Route::post('/product-rating/{productStackOrder:id}', 'store')
+        ->middleware('auth');
+    Route::put('/product-rating/{productRating:id}', 'update')
+        ->middleware('auth');
+    Route::delete('/product-rating/{productRating:id}', 'delete')
+        ->middleware('auth');
+});
+
+Route::controller(RatingCommentController::class)->group(function () {
+    Route::post('/rating-comment/{productRating:id}', 'store')
+        ->middleware('auth.admin');
+    Route::put('/rating-comment/{ratingComment:id}', 'update')
+        ->middleware('auth.admin');
+    Route::delete('/rating-comment/{ratingComment:id}', 'delete')
         ->middleware('auth.admin');
 });
 

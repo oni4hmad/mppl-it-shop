@@ -1,3 +1,4 @@
+@php use App\Enums\UserType; @endphp
 @extends('layouts.main')
 
 @section('content')
@@ -147,93 +148,116 @@
         </div>
 
         {{-- ulasan pengguna --}}
-        <div class="row pb-3 mb-3 border-bottom">
-          <div class="col" style="max-width: 250px;">
-            <div class="row">
-              <div class="col" style="max-width: 80px;">
-                <div style="width: 60px; height: 60px;">
-                  <div class="w-100 h-100 bg-image rounded-circle border" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
-                </div>
-              </div>
-              <div class="col">
-                <p class="m-0 p-0 fw-bold text-break">OniAhmad</p>
-                <p class="m-0 p-0 text-secondary text-break">5 jam yang lalu</p>
-              </div>
+        @if(!$product->product_ratings()->exists())
+          <div class="row pb-3 mb-3">
+            <div class="col text-center">
+              <h5 class="text-secondary">Belum ada ulasan.</h5>
             </div>
           </div>
+        @endif
 
-          {{-- isi ulasan --}}
-          <div class="col m-0 p-0">
-
-            {{-- bintang --}}
-            <div class="row">
-              <div class="col mb-2">
-                @for ($i = 0; $i < 4; $i++)
-                  <i class="fas fa-star text-warning me-1"></i> {{-- kuning --}}
-                @endfor
-                @for ($i = 0; $i < 1; $i++)
-                  <i class="fas fa-star text-secondary me-1"></i> {{-- abu-abu --}}
-                @endfor
-              </div>
-
-              {{-- option dropdown: ulasan --}}
-              <div class="col text-end">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split text-white py-0" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="visually-hidden">Toggle Dropdown</span>
-                  </button>
-                  <ul class="dropdown-menu dropdown-menu-lg-end">
-                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-balas-ulasan">Balas</a></li>
-                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-edit-ulasan">Ubah</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-hapus-ulasan">Hapus</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {{-- teks ulasan --}}
-            <div class="row ms-1 pe-2">
-              <p class="p-0 pe-3 m-0 text-break">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo accusantium reprehenderit possimus laborum nemo, cumque nostrum veniam assumenda! Aut veniam amet quis? Hic fugit cumque sapiente? Tenetur corrupti dignissimos est dolor harum. Debitis sint tenetur incidunt nam molestias ratione illum, aperiam consequuntur adipisci vel rerum autem excepturi? Cum, et. Quasi accusamus magnam dolorum quisquam alias ut fuga aliquam! Eos doloribus architecto dolores? Iusto ullam omnis adipisci! Deleniti quam provident, atque soluta molestias ullam facere deserunt modi sunt aspernatur. Incidunt, dolor voluptatum provident perspiciatis nulla aspernatur, magnam labore quae adipisci eos ab illo deleniti perferendis asperiores quas. Necessitatibus blanditiis a facere?</p>
-
-              {{-- reply admin --}}
-              <div class="row m-0 mt-3 py-2 rounded-3 bg-light">
+        @foreach($product->product_ratings as $productRating)
+          <div class="row pb-3 mb-3 border-bottom">
+            <div class="col" style="max-width: 250px;">
+              <div class="row">
                 <div class="col" style="max-width: 80px;">
                   <div style="width: 60px; height: 60px;">
-                    <div class="w-100 h-100 bg-image rounded-circle border border-2 border-primary" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
+                    <div class="w-100 h-100 bg-image rounded-circle border" style="background-image: url('/{{ $productRating->productStackOrder->photo->path ?? 'assets/user-icon.svg' }}'); background-size: cover; background-position: center center;"></div>
                   </div>
                 </div>
                 <div class="col">
-                  <div class="row">
-                    <div class="col">
-                      <p class="mb-0 fw-bold text-break">Admin</p>
-                      <p class="mb-0 text-secondary text-break">5 jam yang lalu</p>
+                  <p class="m-0 p-0 fw-bold text-break">{{ $productRating->user->nama }}</p>
+                  <p class="m-0 p-0 text-secondary text-break">5 jam yang lalu</p>
+                </div>
+              </div>
+            </div>
+
+            {{-- isi ulasan --}}
+            <div class="col m-0 p-0">
+
+              {{-- bintang --}}
+              <div class="row">
+                <div class="col mb-2">
+                  @for ($i = 0; $i < $productRating->nilai_rating; $i++)
+                    <i class="fas fa-star text-warning me-1"></i> {{-- kuning --}}
+                  @endfor
+                  @for ($i = 5; $i > $productRating->nilai_rating; $i--)
+                    <i class="fas fa-star text-secondary me-1"></i> {{-- abu-abu --}}
+                  @endfor
+                </div>
+
+                {{-- option dropdown: ulasan --}}
+                @php
+                  $isThisUserAuthor = auth()->check() ? $productRating->user->id == auth()->user()->id : false;
+                  $isThisUserAdmin = auth()->check() ? auth()->user()->user_type == UserType::ADMINISTRATOR : false;
+                @endphp
+
+                @if($isThisUserAuthor || $isThisUserAdmin)
+                  <div class="col text-end">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split text-white py-0" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                      </button>
+                      <ul class="dropdown-menu dropdown-menu-lg-end">
+                        @if($isThisUserAdmin)
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-balas-ulasan{{ $productRating->id }}">Balas</a></li>
+                        @endif
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-edit-ulasan{{ $productRating->id }}">Ubah</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-hapus-ulasan{{ $productRating->id }}">Hapus</a></li>
+                      </ul>
                     </div>
-                    <div class="col-auto">
-                      {{-- option dropdown: komentar --}}
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split text-white py-0" data-bs-toggle="dropdown" aria-expanded="false">
-                          <span class="visually-hidden">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-lg-end">
-                          <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-edit-comment">Ubah</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-delete-comment">Hapus</a></li>
-                        </ul>
+                  </div>
+                @endif
+              </div>
+
+              {{-- teks ulasan --}}
+              <div class="row ms-1 pe-2">
+                <p class="p-0 pe-3 m-0 text-break">{!! nl2br(stripcslashes($productRating->deskripsi_rating)) !!}</p>
+
+                {{-- reply admin --}}
+                @foreach($productRating->rating_comments as $ratingComment)
+                  <div class="row m-0 mt-3 py-2 rounded-3 bg-light">
+                    <div class="col" style="max-width: 80px;">
+                      <div style="width: 60px; height: 60px;">
+                        <div class="w-100 h-100 bg-image rounded-circle border border-2 border-primary" style="background-image: url('/{{ $ratingComment->user->profile_picture->path ?? 'assets/admin-icon.svg' }}'); background-size: cover; background-position: center center;"></div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="row">
+                        <div class="col">
+                          <p class="mb-0 fw-bold text-break">{{ $ratingComment->user->nama }}</p>
+                          <p class="mb-0 text-secondary text-break">5 jam yang lalu</p>
+                        </div>
+
+                        @if($isThisUserAdmin)
+                        <div class="col-auto">
+                          {{-- option dropdown: komentar --}}
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split text-white py-0" data-bs-toggle="dropdown" aria-expanded="false">
+                              <span class="visually-hidden">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-lg-end">
+                              <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-edit-comment{{ $ratingComment->id }}">Ubah</a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-delete-comment{{ $ratingComment->id }}">Hapus</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                        @endif
+                      </div>
+
+                      <div class="row mt-2">
+                        <p class="my-0 text-break">{!! nl2br(stripcslashes($ratingComment->komentar)) !!}</p>
                       </div>
                     </div>
                   </div>
-                  <div class="row mt-2">
-                    <p class="my-0 text-break">Terima kasih telah berbelanja di it-shop.co.id!<br>Selalu cek it-shop supaya tidak ketinggalan promonya ya!</p>
-                  </div>
-                </div>
+                @endforeach
+
               </div>
-
             </div>
-
           </div>
-        </div>
-
+        @endforeach
       </div>
 
       {{-- atur jumlah --}}
@@ -308,162 +332,197 @@
     </div>
   </div>
 
-  <!-- modal: edit ulasan -->
-  <div class="modal fade" id="modal-edit-ulasan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Edit Ulasan</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          {{-- produknya --}}
-          <div class="row mx-0 py-3">
-            {{-- image --}}
-            <div class="col-auto px-0 rounded-3">
-              <div class="p-0 me-1">
-                <div style="width: 6.5rem; height: 6.5rem;">
-                  <div class="w-100 h-100 rounded-3 border border-secondary" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
-                </div>
-              </div>
+  @foreach($product->product_ratings as $productRating)
+
+    @php
+      $isThisUserAuthor = auth()->check() ? $productRating->user->id == auth()->user()->id : false;
+      $isThisUserAdmin = auth()->check() ? auth()->user()->user_type == UserType::ADMINISTRATOR : false;
+    @endphp
+
+    @if($isThisUserAuthor || $isThisUserAdmin)
+      <!-- modal: edit ulasan -->
+      <div class="modal fade" id="modal-edit-ulasan{{ $productRating->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Edit Ulasan</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            {{-- product name --}}
-            <div class="col d-flex flex-column justify-content-between">
-              <div class="row justify-content-between">
-                <div class="col-auto">
-                  <p class="mb-0 fw-bolder text-break">VGA MSI GT1030 AERO ITX 2G OC | GT 1030</p>
-                  <p class="mb-0 px-0 text-break">1 barang x Rp4.000.000</p>
-                  <p class="mb-0 text-secondary text-break">3 Juni 2021</p>
-                  <div class="d-flex flex-row align-items-center">
-                    <p class="mb-0 me-2 text-primary fw-bold">Rating (1-5):</p>
-                    <input type="number" name="nilai_rating" id="" min="1" max="5" value="4">
+            <form action="/product-rating/{{ $productRating->id }}" method="post">
+              @method('put')
+              @csrf
+              <div class="modal-body">
+                {{-- produknya --}}
+                <div class="row mx-0 py-3">
+                  {{-- image --}}
+                  <div class="col-auto px-0 rounded-3">
+                    <div class="p-0 me-1">
+                      <div style="width: 6.5rem; height: 6.5rem;">
+                        <div class="w-100 h-100 rounded-3 border border-secondary" style="background-image: url('/{{ $productRating->productStackOrder->photo->path ?? 'img/default.png' }}'); background-size: cover; background-position: center center;"></div>
+                      </div>
+                    </div>
+                  </div>
+                  {{-- product name --}}
+                  <div class="col d-flex flex-column justify-content-between">
+                    <div class="row justify-content-between">
+                      <div class="col-auto">
+                        <p class="mb-0 fw-bolder text-break">{{ $productRating->productStackOrder->nama }}</p>
+                        <p class="mb-0 px-0 text-break">{{ $productRating->productStackOrder->kuantitas }} barang x Rp{{ number_format($productRating->productStackOrder->harga, 0, ',', '.') }}</p>
+                        <p class="mb-0 text-secondary text-break">{{ date_format($productRating->productStackOrder->created_at,"l, d M Y") }}</p>
+                        <div class="d-flex flex-row align-items-center">
+                          <p class="mb-0 me-2 text-primary fw-bold">Rating (1-5):</p>
+                          <input type="number" name="nilai_rating" id="" min="1" max="5" value="{{ $productRating->nilai_rating }}">
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
+                <textarea type="text" class="form-control" name="deskripsi_rating" rows="3" required autofocus placeholder="Tambahkan review">{{ $productRating->deskripsi_rating }}</textarea>
               </div>
-            </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary btn-sm px-3 fw-bold">Ubah</button>
+              </div>
+            </form>
           </div>
-          <textarea id="" type="text" class="form-control" name="deskripsi_rating" rows="3" required autocomplete="name" autofocus placeholder="Tambahkan review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo accusantium reprehenderit possimus laborum nemo</textarea>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn-primary btn-sm px-3 fw-bold">Ubah</button>
+      </div>
+
+      <!-- modal: hapus ulasan -->
+      <div class="modal fade" id="modal-hapus-ulasan{{ $productRating->id }}" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title w-100 text-center" id="staticBackdropLabel">Hapus Ulasan?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="mb-0 text-center">Konfirmasi penghapusan ulasan.</p>
+          </div>
+          <form action="/product-rating/{{ $productRating->id }}" method="post">
+            @method('delete')
+            @csrf
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary btn-sm p-1 fw-bold w-100">Hapus</button>
+              <button type="button" class="btn btn-secondary btn-sm p-1 text-white fw-bold w-100" data-bs-dismiss="modal">Batal</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- modal: balas ulasan -->
-  <div class="modal fade" id="modal-balas-ulasan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Balas Ulasan</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          {{-- ulasan pengguna --}}
-          <div class="row pb-3 mb-3 border-bottom">
-            {{-- profile --}}
-            <div class="col" style="max-width: 250px;">
-              <div class="row">
-                <div class="col" style="max-width: 80px;">
-                  <div style="width: 60px; height: 60px;">
-                    <div class="w-100 h-100 bg-image rounded-circle border" style="background-image: url('https://picsum.photos/150/510'); background-size: cover; background-position: center center;"></div>
+      @if($isThisUserAdmin)
+      <!-- modal: balas ulasan -->
+      <div class="modal fade" id="modal-balas-ulasan{{ $productRating->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Balas Ulasan</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/rating-comment/{{ $productRating->id }}" method="post">
+              @csrf
+              <div class="modal-body">
+                {{-- ulasan pengguna --}}
+                <div class="row pb-3 mb-3 border-bottom">
+                  {{-- profile --}}
+                  <div class="col" style="max-width: 250px;">
+                    <div class="row">
+                      <div class="col" style="max-width: 80px;">
+                        <div style="width: 60px; height: 60px;">
+                          <div class="w-100 h-100 bg-image rounded-circle border" style="background-image: url('/{{ $productRating->user->profile_picture->path ?? 'assets/user-icon.svg' }}'); background-size: cover; background-position: center center;"></div>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <p class="m-0 p-0 fw-bold text-break">{{ $productRating->user->nama }}</p>
+                        <p class="m-0 p-0 text-secondary text-break">5 jam yang lalu</p>
+                      </div>
+                    </div>
+                  </div>
+                  {{-- isi ulasan --}}
+                  <div class="col m-0 p-0">
+                    {{-- bintang --}}
+                    <div class="row">
+                      <div class="col mb-2">
+                        @for ($i = 0; $i < $productRating->nilai_rating; $i++)
+                          <i class="fas fa-star text-warning me-1"></i> {{-- kuning --}}
+                        @endfor
+                        @for ($i = 5; $i > $productRating->nilai_rating; $i--)
+                          <i class="fas fa-star text-secondary me-1"></i> {{-- abu-abu --}}
+                        @endfor
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="col">
-                  <p class="m-0 p-0 fw-bold text-break">OniAhmad</p>
-                  <p class="m-0 p-0 text-secondary text-break">5 jam yang lalu</p>
+
+                {{-- teks ulasan --}}
+                <div class="row border-bottom px-3 pb-3 mb-3">
+                  <p class="p-0 m-0 text-break">{{ $productRating->deskripsi_rating }}</p>
                 </div>
+                <p class="p-0 m-0 fw-bold text-break">Balasan:</p>
+                <textarea type="text" class="form-control" name="komentar" rows="3" required autocomplete="name" autofocus placeholder="Balasan"></textarea>
               </div>
-            </div>
-            {{-- isi ulasan --}}
-            <div class="col m-0 p-0">
-              {{-- bintang --}}
-              <div class="row">
-                <div class="col mb-2">
-                  @for ($i = 0; $i < 4; $i++)
-                    <i class="fas fa-star text-warning me-1"></i> {{-- kuning --}}
-                  @endfor
-                  @for ($i = 0; $i < 1; $i++)
-                    <i class="fas fa-star text-secondary me-1"></i> {{-- abu-abu --}}
-                  @endfor
-                </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary btn-sm px-3 fw-bold">Kirim</button>
               </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      @endif
+    @endif
+
+    @if($isThisUserAdmin)
+      @foreach($productRating->rating_comments as $ratingComment)
+      <!-- modal: edit comment -->
+      <div class="modal fade" id="modal-edit-comment{{ $ratingComment->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Edit Komentar</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <form action="/rating-comment/{{ $ratingComment->id }}" method="post">
+              @method('put')
+              @csrf
+              <div class="modal-body">
+                <textarea type="text" class="form-control" name="komentar" rows="3" required autofocus placeholder="Tambahkan komentar">{{ $ratingComment->komentar }}</textarea>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary btn-sm px-3 fw-bold">Ubah</button>
+              </div>
+            </form>
           </div>
+        </div>
+      </div>
 
-          {{-- teks ulasan --}}
-          <div class="row border-bottom px-3 pb-3 mb-3">
-            <p class="p-0 m-0 text-break">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo accusantium reprehenderit possimus laborum nemo, cumque nostrum veniam assumenda! Aut veniam amet quis? Hic fugit cumque sapiente? Tenetur corrupti dignissimos est dolor harum. Debitis sint tenetur incidunt nam molestias ratione illum, aperiam consequuntur adipisci vel rerum autem excepturi?</p>
+      <!-- modal: delete comment -->
+      <div class="modal fade" id="modal-delete-comment{{ $ratingComment->id }}" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title w-100 text-center" id="staticBackdropLabel">Hapus Komentar?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p class="mb-0 text-center">Konfirmasi penghapusan komentar.</p>
+            </div>
+            <form action="/rating-comment/{{ $ratingComment->id }}" method="post">
+              @method('delete')
+              @csrf
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary btn-sm p-1 fw-bold w-100">Hapus</button>
+                <button type="button" class="btn btn-secondary btn-sm p-1 text-white fw-bold w-100" data-bs-dismiss="modal">Batal</button>
+              </div>
+            </form>
           </div>
-          <p class="p-0 m-0 fw-bold text-break">Balasan:</p>
-          <textarea type="text" class="form-control" name="komentar" rows="3" required autocomplete="name" autofocus placeholder="Balasan"></textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn-primary btn-sm px-3 fw-bold">Kirim</button>
         </div>
       </div>
-    </div>
-  </div>
+      @endforeach
+    @endif
 
-  <!-- modal: hapus ulasan -->
-  <div class="modal fade" id="modal-hapus-ulasan" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title w-100 text-center" id="staticBackdropLabel">Hapus Ulasan?</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p class="mb-0 text-center">Konfirmasi penghapusan ulasan.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary btn-sm p-1 fw-bold w-100">Hapus</button>
-          <button type="button" class="btn btn-secondary btn-sm p-1 text-white fw-bold w-100" data-bs-dismiss="modal">Batal</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  @endforeach
 
-
-
-  <!-- modal: edit comment -->
-  <div class="modal fade" id="modal-edit-comment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Edit Komentar</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <textarea type="text" class="form-control" name="komentar" rows="3" required autocomplete="name" autofocus placeholder="Tambahkan komentar">Terima kasih telah berbelanja di it-shop.co.id!&#10;Selalu cek it-shop supaya tidak ketinggalan promonya ya!</textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary btn-sm px-3 text-white fw-bold" data-bs-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn-primary btn-sm px-3 fw-bold">Ubah</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- modal: delete comment -->
-  <div class="modal fade" id="modal-delete-comment" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title w-100 text-center" id="staticBackdropLabel">Hapus Komentar?</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p class="mb-0 text-center">Konfirmasi penghapusan komentar.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary btn-sm p-1 fw-bold w-100">Hapus</button>
-          <button type="button" class="btn btn-secondary btn-sm p-1 text-white fw-bold w-100" data-bs-dismiss="modal">Batal</button>
-        </div>
-      </div>
-    </div>
-  </div>
 @endsection

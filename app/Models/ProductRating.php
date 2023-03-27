@@ -15,6 +15,16 @@ class ProductRating extends Model
 
     public function rating_comments()
     {
-        $this->hasMany(RatingComment::class);
+        return $this->hasMany(RatingComment::class);
+    }
+
+    public function productStackOrder()
+    {
+        return $this->belongsTo(ProductStackOrder::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

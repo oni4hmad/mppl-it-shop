@@ -16,6 +16,7 @@ class CreateRatingCommentsTable extends Migration
         Schema::create('rating_comments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_rating_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->text('komentar');
             $table->timestamps();
         });
