@@ -9,9 +9,12 @@ use Tests\DuskTestCase;
 
 class MelakukanPendaftaranAkunTest extends DuskTestCase
 {
+    public $testUser;
+
     protected function setUp(): void
     {
         parent::setUp();
+        $this->testUser = User::where('email', 'user@gmail.com')->first();
         $this->browse(function (Browser $browser) {
             $browser->logout();
         });
@@ -28,6 +31,13 @@ class MelakukanPendaftaranAkunTest extends DuskTestCase
             $user->delete();
         }
         parent::tearDown();
+    }
+
+    private function changeEmailBack() {
+        $user1 = User::where('email', 'oni1@gmail.com')->first();
+        if ($user1) {
+            $user1->update(['email' => 'user@gmail.com']);
+        }
     }
 
     public function testMelakukanPendaftaranAkunBaru_A03_DataLengkap()
@@ -149,6 +159,80 @@ class MelakukanPendaftaranAkunTest extends DuskTestCase
                 ->press('Login')
                 ->pause(1500)
                 ->assertValue('.modal.fade.show input[name=password]', '');
+
+            // wait and close
+            //$browser->pause(5000);
+        });
+    }
+
+    public function testMengubahDataAkun_A09_DataLengkap()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->loginAs($this->testUser)
+                ->visit('/')
+                //Klik nama user dipojok kanan navbar, akan muncul dropdown menu
+                ->click('#navbarDropdown')
+                //Klik menu dropdown “Pengaturan Akun”
+                ->clickLink("Pengaturan Akun")
+                //Klik edit pada field email yang terdapat pada card “Pengaturan Akun”
+                ->click('[data-bs-target="#modal-edit-email"]')
+                ->waitFor('.modal.fade.show')
+                //Masukkan data test berupa email baru pada field tersebut
+                ->type('input[name=email]', 'oni1@gmail.com')
+                //Klik tombol “Simpan”
+                ->press('Simpan')
+                ->waitFor('#navbarDropdown')
+                ->assertSee('Email berhasil diubah.');
+
+            $this->changeEmailBack();
+
+            // wait and close
+            //$browser->pause(5000);
+        });
+    }
+
+    public function testMengubahDataAkun_A08_DataSalah()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->loginAs($this->testUser)
+                ->visit('/')
+                //Klik nama user dipojok kanan navbar, akan muncul dropdown menu
+                ->click('#navbarDropdown')
+                //Klik menu dropdown “Pengaturan Akun”
+                ->clickLink("Pengaturan Akun")
+                //Klik edit pada field email yang terdapat pada card “Pengaturan Akun”
+                ->click('[data-bs-target="#modal-edit-email"]')
+                ->waitFor('.modal.fade.show')
+                //Masukkan data test berupa email baru pada field tersebut
+                ->type('input[name=email]', 'oni1@gmail')
+                //Klik tombol “Simpan”
+                ->press('Simpan')
+                ->click('#navbarDropdown')
+                ->assertSee('Update Gagal');
+
+            // wait and close
+            //$browser->pause(5000);
+        });
+    }
+
+    public function testMengubahDataAkun_A07_DataKosong()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->loginAs($this->testUser)
+                ->visit('/')
+                //Klik nama user dipojok kanan navbar, akan muncul dropdown menu
+                ->click('#navbarDropdown')
+                //Klik menu dropdown “Pengaturan Akun”
+                ->clickLink("Pengaturan Akun")
+                //Klik edit pada field email yang terdapat pada card “Pengaturan Akun”
+                ->click('[data-bs-target="#modal-edit-email"]')
+                ->waitFor('.modal.fade.show')
+                //Masukkan data test berupa email baru pada field tersebut
+                ->type('input[name=email]', '')
+                //Klik tombol “Simpan”
+                ->press('Simpan')
+                ->pause(1500)
+                ->assertValue('input[name=email]', '');
 
             // wait and close
             //$browser->pause(5000);
