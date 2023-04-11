@@ -12,7 +12,7 @@ class CourierController extends Controller
     public function index()
     {
         return view('admin.manage-courier')
-            ->with('couriers', Courier::all());
+            ->with('couriers', Courier::latest()->get());
     }
 
     public function storeCourier(Request $request)

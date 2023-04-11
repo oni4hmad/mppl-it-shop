@@ -11,7 +11,7 @@ class PaymentMethodController extends Controller
     public function index()
     {
         return view('admin.manage-payment-method')
-            ->with('paymentMethods', PaymentMethod::all());
+            ->with('paymentMethods', PaymentMethod::latest()->get());
     }
 
     public function store(Request $request)

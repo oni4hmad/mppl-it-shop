@@ -14,7 +14,7 @@ class CategoryController extends Controller
     public function index()
     {
         return view('admin.manage-category')
-            ->with('categories', Category::all());
+            ->with('categories', Category::latest()->get());
     }
 
     public function store(Request $request)
