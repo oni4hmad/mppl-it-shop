@@ -46,7 +46,7 @@
                 </button>
                 <input type="search" name="search" class="form-control rounded-start rounded-pill border-start-0" placeholder="Cari kurir" aria-label="Search" aria-describedby="search-addon" value="" />
               </div>
-              <button type="button" class="btn btn-sm btn-primary ms-3 rounded-pill fw-bold" data-bs-toggle="modal" data-bs-target="#modal-tambah-payment">+ Kurir</button>
+              <button type="button" class="btn btn-sm btn-primary ms-3 rounded-pill fw-bold" data-bs-toggle="modal" data-bs-target="#modal-tambah-courier">+ Kurir</button>
               <button type="button" class="btn btn-sm btn-primary ms-3 rounded-pill fw-bold" data-bs-toggle="modal" data-bs-target="#modal-tambah-tipe-pengiriman">+ Tipe Pengiriman</button>
             </div>
           </form>
@@ -85,7 +85,7 @@
               <a href="#" class="me-2" data-bs-toggle="modal" data-bs-target="#modal-edit-kurir{{ $courier->id }}">
                 <i class="fas fa-edit"></i>
               </a>
-              <a href="#" data-bs-toggle="modal" data-bs-target="#modal-delete-payment{{ $courier->id }}">
+              <a href="#" data-bs-toggle="modal" data-bs-target="#modal-delete-courier{{ $courier->id }}">
                 <i class="fas fa-trash"></i>
               </a>
             </div>
@@ -153,7 +153,7 @@
   @foreach($couriers as $courier)
 
     <!-- modal: delete kurir -->
-    <div class="modal fade" id="modal-delete-payment{{ $courier->id }}" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="modal-delete-courier{{ $courier->id }}" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog modal-sm modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
@@ -273,7 +273,7 @@
   @endforeach
 
   <!-- modal: tambah kurir -->
-  <div class="modal fade" id="modal-tambah-payment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal fade" id="modal-tambah-courier" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
