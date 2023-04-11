@@ -27,7 +27,9 @@ class Product extends Model
     {
         return [
             'slug' => [
-                'source' => 'nama'
+                'source' => 'nama',
+                'firstUniqueSuffix' => 1,
+                'includeTrashed' => true
             ]
         ];
     }
